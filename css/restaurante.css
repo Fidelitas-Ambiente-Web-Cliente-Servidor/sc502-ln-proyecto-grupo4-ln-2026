@@ -376,6 +376,78 @@ textarea.campo-input {
     border-color: #3d2518;
 }
 
+/* Pagina de donaciones*/
+.donaciones-filtros {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.buscar-input {
+    width: 180px;
+}
+
+.filtro-select {
+    width: 150px;
+}
+
+.btn-tabla {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    padding: 0 3px;
+    text-decoration: none;
+}
+
+.celda-estado {
+    white-space: nowrap;
+}
+
+.paginacion {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.paginacion-info {
+    font-size: 0.85rem;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.btn-pagina {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 0.95rem;
+    padding: 2px 8px;
+}
+
+.btn-pagina.activo {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.btn-tabla i {
+    color: #5c3d2e;
+    font-size: 1.2rem;
+}
+
+.buscar-input {
+    width: 450px;
+    margin-right: 10px;
+}
+
+.filtro-select {
+    width: 280px;
+}
+
+.donaciones-filtrar div {
+    display: flex;
+    gap: 20px;
+}
+
 /* Celular*/
 @media (max-width: 576px) {
 
@@ -452,7 +524,24 @@ textarea.campo-input {
     .col-izquierda{
         padding-bottom: 10px;
     }
+
+    .tabla-panel th:nth-child(2),
+    .tabla-panel td:nth-child(2),
+    .tabla-panel th:nth-child(4),
+    .tabla-panel td:nth-child(4) {
+        display: none;
+    }
+
+    .buscar-input {
+    width: 220px;
+    margin-right: 10px;
+    }
+
+    .filtro-select {
+    width: 140px;
+    }
 }
+
 
 
 
