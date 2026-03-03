@@ -107,3 +107,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+ document.addEventListener("DOMContentLoaded", function () {
+    let btnSidebar = document.getElementById("btnSidebar");
+    let btnCerrar = document.getElementById("btnCerrarSidebar");
+    let sidebar = document.getElementById("sidebar");
+
+    if (btnSidebar) {
+        btnSidebar.addEventListener("click", function () {
+            sidebar.classList.add("abierto");
+        });
+    }
+
+    if (btnCerrar) {
+        btnCerrar.addEventListener("click", function () {
+            sidebar.classList.remove("abierto");
+        });
+    }
+});

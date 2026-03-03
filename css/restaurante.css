@@ -82,6 +82,10 @@ body {
     margin-bottom: 15px;
 }
 
+.seccion-titulo-mt {
+    margin-top: 20px;
+}
+
 /* Labels */
 .label-campo {
     display: block;
@@ -117,6 +121,15 @@ textarea.campo-input {
     resize: none;
 }
 
+.campo-texto {
+    border-radius: 12px;
+    min-height: 60px;
+}
+
+.boton-accion {
+    margin-top: 10px;
+}
+
 /* Botones de Cancelar y de Confirmar */
 .botones {
     display: flex;
@@ -149,9 +162,196 @@ textarea.campo-input {
     font-size: 0.9rem;
 }
 
+
+/*Panel con sidebar */
+
+/* Sidebar y contenido lado a lado */
+.layout {
+    display: flex;
+}
+
+/* Sidebar*/
+.sidebar {
+    width: 230px;
+    background-color: #5c3d2e;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar .logo-texto {
+    display: block;
+    padding: 15px;
+}
+
+.sidebar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.sidebar-link {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-top: 1px solid #3d2518;
+}
+
+.sidebar-link:hover {
+    background-color: #3d2518;
+    color: white;
+}
+
+.sidebar-link.activo {
+    background-color: #3d2518;
+}
+
+/* Boton del sidebarsolo se ve en celular */
+.btn-sidebar {
+    display: none;
+}
+
+/* Boton de cerrar del sidebar, esta oculto por defecto */
+.btn-cerrar-sidebar {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 10px 15px;
+    float: right;
+}
+
+/* Cuando el sidebar esta abierto tambien muestra el boton de la X */
+.sidebar.abierto .btn-cerrar-sidebar {
+    display: block;
+}
+
+/* Contenido del panel */
+.panel-contenido {
+    flex: 1;
+    padding: 30px;
+}
+
+.titulo-panel {
+    color: #F2C191;
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.seccion-titulo{
+    color: #F2C191;
+
+}
+
+/* Tarjetas de estadisticas*/
+.estadisticas {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.estadistica-card {
+    border: 2px solid white;
+    border-radius: 12px;
+    padding: 15px 20px;
+    text-align: center;
+    min-width: 130px;
+    flex: 1;
+}
+
+.estadistica-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.estadistica-card strong {
+    font-size: 1.8rem;
+    color: white;
+}
+
+/* Titulo de seccion con boton al lado */
+.seccion-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.seccion-header .seccion-titulo {
+    margin: 0;
+}
+
+/* Tabla del panel*/
+.tabla-panel {
+    margin-bottom: 25px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Actividad reciente*/
+.actividad-lista {
+    margin-bottom: 30px;
+}
+
+.actividad-item {
+    background-color: #da954cb7;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: white;
+    margin-bottom: 8px;
+}
+
 /* Celular*/
 @media (max-width: 576px) {
+
+    .titulo-panel{
+        font-size: 2.5rem;
+    }
     .titulo-pagina {
         font-size: 2.5rem;
+    }
+
+    .btn-sidebar {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 200;
+        background-color: #c07d38;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        border-radius: 8px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .sidebar {
+        width: 270px;
+        position: fixed;
+        top: 0;
+        left: -270px;
+        z-index: 100;
+        transition: left 0.3s;
+    }
+
+    .sidebar.abierto {
+        left: 0;
+        z-index: 300;
+    }
+
+    .panel-contenido {
+        padding: 60px 15px 20px 15px;
     }
 }

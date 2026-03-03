@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlimentTICO - Panel Principal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/restaurante.css">
+    <script src="../js/restaurante.js"></script>
+</head>
+
+<body>
+
+    <!-- Boton del sidebar solo para celular -->
+    <button class="btn-sidebar" id="btnSidebar">☰</button>
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px"></h2>
+                <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="restaurante-panel.html" class="sidebar-link activo">Panel Principal</a>
+                <a href="restaurante-donaciones.html" class="sidebar-link">Donaciones</a>
+                <a href="restaurante-perfil.html" class="sidebar-link">Perfil</a>
+                <a href="../login.html" class="sidebar-link">Cerrar Sesión</a>
+            </nav>
+        </aside>
+
+
+
+        <!-- Contenido principal-->
+        <main class="panel-contenido">
+
+            <h1 class="titulo-panel">Resumen de tus donaciones</h1>
+
+            <a href="restaurante-nueva-donacion.html" class="btn-volver">+ Donar</a>
+
+
+
+            <h5 class="seccion-titulo seccion-titulo-mt">ESTADÍSTICAS:</h5>
+
+            <div class="estadisticas">
+                <div class="estadistica-card">
+                    <p>Donaciones Activas</p>
+                    <strong>45</strong>
+                </div>
+                <div class="estadistica-card">
+                    <p>Donaciones Reservadas</p>
+                    <strong>15</strong>
+                </div>
+                <div class="estadistica-card">
+                    <p>Donaciones Completadas</p>
+                    <strong>225</strong>
+                </div>
+                <div class="estadistica-card">
+                    <p>Personas Beneficiadas</p>
+                    <strong>178</strong>
+                </div>
+            </div>
+
+            <div class="seccion-header">
+                <h5 class="seccion-titulo">DONACIONES ACTIVAS HOY</h5>
+                <a href="restaurante-donaciones.html" class="btn-volver">+ Ver</a>
+            </div>
+
+            <table class="table table-bordered tabla-panel">
+                <thead>
+                    <tr>
+                        <th>Alimento</th>
+                        <th>Cantidad</th>
+                        <th>Hora Límite</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pizza</td>
+                        <td>6 porciones</td>
+                        <td>8:00 PM</td>
+                        <td>Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Pan Dulce</td>
+                        <td>10 Unidades</td>
+                        <td>7:30 PM</td>
+                        <td>Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Ensalada</td>
+                        <td>8 unidades</td>
+                        <td>7:30 PM</td>
+                        <td>Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Pollo</td>
+                        <td>4 kg</td>
+                        <td>9:00 PM</td>
+                        <td>Agotado</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <h5 class="seccion-titulo">ACTIVIDAD RECIENTE:</h5>
+
+            <div class="actividad-lista">
+                <div class="actividad-item">Juan Pérez reservó "Pizza Margherita" Hace 15 minutos</div>
+                <div class="actividad-item">María González recogió "Casado del día" Hace 2 horas</div>
+                <div class="actividad-item">Juan González recogió "Casado del día" Hace 4 horas</div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+
+</html>
