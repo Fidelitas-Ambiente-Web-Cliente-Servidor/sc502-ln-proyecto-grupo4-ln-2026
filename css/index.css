@@ -159,9 +159,10 @@ footer {
 
 .footer-contenedor {
     display: flex;
-    gap: 40px;
+    gap: 240px;
     margin-bottom: 25px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .footer-bloque {
@@ -170,7 +171,7 @@ footer {
     gap: 6px;
     border: 2px solid white;
     border-radius: 12px;
-    padding: 20px 25px;
+    padding: 20px 80px;
 }
 
 .footer-titulo {
