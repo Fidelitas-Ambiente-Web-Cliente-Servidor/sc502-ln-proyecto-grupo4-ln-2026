@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlimentTICO - Nueva Donación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/autentificacion.css">
+    <script src="../js/restaurante.js"></script>
+</head>
+
+<body>
+    <header class="header">
+    
+        <nav class="navegador"> 
+            <ul>
+                <li class="menu">
+                    <a href="index.html">Inicio</a>
+                    <a href="">Sobre nosotros</a>
+                    <a href="">Contribuir</a>
+                </li>
+                <li><h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo-alimentico" height="50px"></h2></li>
+                <li><a href="login.html" class="btn-accion">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+    
+        
+    </header>
+
+    <main class="pagina-contenedor">
+
+        <h1 class="titulo-pagina">FORMULARIO DE REGISTRO</h1>
+        <p class="subtitulo-pagina">Registro de Beneficios, accede a alimentos disponibles cerca de ti</p>
+
+        <form>
+            <div class="formulario-card">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <h5 class="seccion-titulo">INFORMACIÓN PERSONAL</h5>
+
+                        <div class="campo">
+                            <label for="nombreCompleto" class="label-campo">Nombre Completo</label>
+                            <input type="text" class="campo-input" id="nombreCompleto" name="nombreCompleto" placeholder="Ej: Juan Gutierrez Gomez">
+                        </div>
+
+                        <div class="campo">
+                            <label for="cedula" class="label-campo">Cedula de identidad</label>
+                            <input type="text" class="campo-input" id="cedula" name="cedula" placeholder="Ej: 118181818">
+                        </div>
+
+                        <div class="campo">
+                            <label for="telefono" class="label-campo">Telefono</label>
+                            <input type="text" class="campo-input" id="telefono" name="telefono" placeholder="Ej: 88888888">
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5 class="seccion-titulo">DATOS DE ACCESO</h5>
+
+                        <div class="campo">
+                            <label for="correo" class="label-campo">Correo Electrónico</label>
+                            <input type="text" class="campo-input" id="correo" name="corre">
+                        </div>
+
+                        <div class="campo">
+                            <label for="contrasena" class="label-campo">Contraseña</label>
+                            <input type="password" class="campo-input" id="contrasena" name="contrasena">
+                        </div>
+
+                        <div class="campo">
+                            <label for="confirmarContrasena" class="label-campo">Confirmar Contraseña</label>
+                            <input type="password" class="campo-input" id="confirmarContrasena" name="confirmarContrasena">
+                        </div>
+
+                       
+                        
+
+                    </div>
+                  
+                </div>
+                <div class="botones">
+                        
+                    <button type="submit" class="btn-accion">REGISTRAR</button>
+                </div>
+
+                <div id="mensaje"></div>
+                <hr>
+                <div class="iniciar-sesion">
+                    <label class="label-campo">¿Ya tienes cuenta?</label>
+                    <a href="login.html" class="iniciar-sesion-link">Iniciar Sesión</a>
+                </div>
+                
+            </div>
+
+        </form>
+
+    </main>
+
+</body>
+
+</html>
