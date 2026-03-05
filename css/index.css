@@ -237,4 +237,8 @@ footer {
     .footer-contenedor {
         flex-direction: column;
     }
+
+    .footer-contenedor {
+    gap: 40px;
+}
 }
