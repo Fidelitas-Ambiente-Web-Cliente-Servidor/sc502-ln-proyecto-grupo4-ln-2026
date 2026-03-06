@@ -82,6 +82,10 @@ body {
     margin-bottom: 15px;
 }
 
+.seccion-titulo-mt {
+    margin-top: 20px;
+}
+
 /* Labels */
 .label-campo {
     display: block;
@@ -117,6 +121,15 @@ textarea.campo-input {
     resize: none;
 }
 
+.campo-texto {
+    border-radius: 12px;
+    min-height: 60px;
+}
+
+.boton-accion {
+    margin-top: 10px;
+}
+
 /* Botones de Cancelar y de Confirmar */
 .botones {
     display: flex;
@@ -149,9 +162,437 @@ textarea.campo-input {
     font-size: 0.9rem;
 }
 
+
+/*Panel con sidebar */
+
+/* Sidebar y contenido lado a lado */
+.layout {
+    display: flex;
+}
+
+/* Sidebar*/
+.sidebar {
+    width: 230px;
+    background-color: #5c3d2e;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar .logo-texto {
+    display: block;
+    padding: 15px;
+}
+
+.sidebar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.sidebar-link {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-top: 1px solid #3d2518;
+}
+
+.sidebar-link:hover {
+    background-color: #3d2518;
+    color: white;
+}
+
+.sidebar-link.activo {
+    background-color: #3d2518;
+}
+
+/* Boton del sidebarsolo se ve en celular */
+.btn-sidebar {
+    display: none;
+}
+
+/* Boton de cerrar del sidebar, esta oculto por defecto */
+.btn-cerrar-sidebar {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 10px 15px;
+    float: right;
+}
+
+/* Cuando el sidebar esta abierto tambien muestra el boton de la X */
+.sidebar.abierto .btn-cerrar-sidebar {
+    display: block;
+}
+
+/* Contenido del panel */
+.panel-contenido {
+    flex: 1;
+    padding: 30px;
+}
+
+.titulo-panel {
+    color: #F2C191;
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.seccion-titulo{
+    color: #F2C191;
+
+}
+
+/* Tarjetas de estadisticas*/
+.estadisticas {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.estadistica-card {
+    border: 2px solid white;
+    border-radius: 12px;
+    padding: 15px 20px;
+    text-align: center;
+    min-width: 130px;
+    flex: 1;
+}
+
+.estadistica-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.estadistica-card strong {
+    font-size: 1.8rem;
+    color: white;
+}
+
+/* Titulo de seccion con boton al lado */
+.seccion-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.seccion-header .seccion-titulo {
+    margin: 0;
+}
+
+/* Tabla del panel*/
+.tabla-panel {
+    margin-bottom: 25px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Actividad reciente*/
+.actividad-lista {
+    margin-bottom: 30px;
+}
+
+.actividad-item {
+    background-color: #da954cb7;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.botones-izquierda {
+    justify-content: flex-start;
+}
+
+.botones {
+    margin-bottom: 20px;
+}
+
+/* Filas del horario */
+.fila-horario {
+    margin-bottom: 12px;
+}
+
+.fila-horario-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.fila-horario-horas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 10px;
+}
+
+.dia-label {
+    font-size: 0.9rem;
+    color: #F2C191;
+}
+
+.label-estado {
+    font-size: 0.85rem;
+    color: #F2C191;
+    width: 55px;
+}
+
+.input-hora {
+    width: 200px ;
+    padding: 5px 8px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.input-hora:disabled {
+    background-color: #d0c9c9;
+    color: #999;
+}
+
+.form-check-input {
+    width: 50px !important;
+    height: 25px;
+    border: 2px solid #c07d38;
+    margin-top: 0;
+    margin-right: 5px;
+}
+
+.form-check-input:checked {
+    background-color: #c07d38;
+    border-color: #3d2518;
+}
+
+/* Pagina de donaciones*/
+.donaciones-filtros {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.buscar-input {
+    width: 180px;
+}
+
+.filtro-select {
+    width: 150px;
+}
+
+.btn-tabla {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    padding: 0 3px;
+    text-decoration: none;
+}
+
+.celda-estado {
+    white-space: nowrap;
+}
+
+.paginacion {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.paginacion-info {
+    font-size: 0.85rem;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.btn-pagina {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 0.95rem;
+    padding: 2px 8px;
+}
+
+.btn-pagina.activo {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.btn-tabla i {
+    color: #5c3d2e;
+    font-size: 1.2rem;
+}
+
+.buscar-input {
+    width: 450px;
+    margin-right: 10px;
+}
+
+.filtro-select {
+    width: 280px;
+}
+
+.donaciones-filtrar div {
+    display: flex;
+    gap: 20px;
+}
+
 /* Celular*/
 @media (max-width: 576px) {
+
+    .titulo-panel{
+        font-size: 2.5rem;
+    }
     .titulo-pagina {
         font-size: 2.5rem;
     }
+
+    .btn-sidebar {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 200;
+        background-color: #c07d38;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        border-radius: 8px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .sidebar {
+        width: 270px;
+        position: fixed;
+        top: 0;
+        left: -270px;
+        z-index: 100;
+        transition: left 0.3s;
+    }
+
+    .sidebar.abierto {
+        left: 0;
+        z-index: 300;
+    }
+
+    .panel-contenido {
+        padding: 60px 15px 20px 15px;
+    }
+
+    .label-estado {
+        width: 45px;
+        min-width: 45px;
+        font-size: 0.75rem;
+    }
+
+    .input-hora {
+        width: 80px !important;
+        font-size: 0.75rem;
+        padding: 4px 4px;
+    }
+
+    .dia-label {
+        width: 70px;
+        min-width: 70px;
+        font-size: 0.78rem;
+    }
+
+    .label-estado {
+        width: 45px;
+        min-width: 45px;
+        font-size: 0.75rem;
+    }
+
+    .input-hora {
+        width: 150px !important;
+        font-size: 0.75rem;
+        padding: 4px 4px;
+    }
+
+    .col-izquierda{
+        padding-bottom: 10px;
+    }
+
+    .tabla-panel th:nth-child(2),
+    .tabla-panel td:nth-child(2),
+    .tabla-panel th:nth-child(4),
+    .tabla-panel td:nth-child(4) {
+        display: none;
+    }
+
+    .buscar-input {
+    width: 220px;
+    margin-right: 10px;
+    }
+
+    .filtro-select {
+    width: 140px;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

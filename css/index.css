@@ -1,0 +1,244 @@
+body {
+    background-color: #3d3333;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin: 0;
+    padding-top: 70px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 15px 40px;
+    background-color: #5c3d2e;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.img-logo {
+    height: 45px;
+}
+
+.logo-texto {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #F2C191;
+}
+
+.logo-tico {
+    color: white;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a:hover {
+    color: #F2C191;
+}
+
+.btn-header {
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-header:hover {
+    background-color: white;
+    color: #3d3333;
+}
+
+.contenedor {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    padding: 60px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.texto-contenedor {
+    flex: 1;
+}
+
+.img-contenedor {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.img-seccion {
+    width: 420px;
+}
+
+#inicio {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+#inicio h1 {
+    font-size: 6rem;
+    font-weight: 900;
+    color: #F2C191;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.subtitulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.botones {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-size: 0.95rem;
+}
+
+.btn:hover {
+    background-color: white;
+    color: #3d3333;
+}
+
+#nosotros {
+    background-color: #5c3d2e;
+}
+
+#nosotros h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #F2C191;
+    margin-bottom: 15px;
+}
+
+#nosotros h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #F2C191;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+#nosotros p {
+    color: #d4c4b0;
+    line-height: 1.6;
+}
+
+footer {
+    background-color: #3d2518;
+    padding: 40px 80px 20px 80px;
+}
+
+.footer-contenedor {
+    display: flex;
+    gap: 240px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-bloque {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 2px solid white;
+    border-radius: 12px;
+    padding: 20px 80px;
+}
+
+.footer-titulo {
+    font-weight: 700;
+    color: #F2C191;
+    margin-bottom: 4px;
+}
+
+.footer-bloque a {
+    color: #d4c4b0;
+    font-size: 0.9rem;
+}
+
+.footer-bloque a:hover {
+    color: white;
+}
+
+.footer-bloque p {
+    color: #d4c4b0;
+    font-size: 0.9rem;
+}
+
+.footer-creditos {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #a89080;
+    border-top: 1px solid #5c3d2e;
+    padding-top: 15px;
+}
+
+@media (max-width: 768px) {
+
+    nav {
+        display: none;
+    }
+
+    header {
+        padding: 12px 20px;
+    }
+
+    .contenedor {
+        flex-direction: column;
+        padding: 50px 25px;
+        text-align: center;
+    }
+
+    #inicio h1 {
+        font-size: 3.5rem;
+    }
+
+    .img-seccion {
+        width: 260px;
+    }
+
+    .botones {
+        justify-content: center;
+    }
+
+    footer {
+        padding: 30px 25px 15px 25px;
+    }
+
+    .footer-contenedor {
+        flex-direction: column;
+    }
+
+    .footer-contenedor {
+    gap: 40px;
+}
+}
