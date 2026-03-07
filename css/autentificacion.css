@@ -23,6 +23,7 @@ header {
     left: 0;
     width: 100%;
     z-index: 100;
+    
 }
 
 .header-logo {
@@ -97,9 +98,7 @@ nav a:hover {
 /* Contenido principal*/
 .pagina-contenedor {
     max-width: 1000px;
-    display: flex;
-    align-items: center;
-    gap: 60px;
+   
     padding: 60px 80px;
     max-width: 1200px;
     margin: 0 auto;
@@ -113,6 +112,7 @@ nav a:hover {
     font-size: 5rem;
     font-weight: bold;
     margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 .subtitulo-pagina {
@@ -228,5 +228,12 @@ textarea.campo-input {
 @media (max-width: 576px) {
     .titulo-pagina {
         font-size: 2.5rem;
+    }
+    nav {
+        display: none;
+    }
+
+    header {
+        padding: 12px 20px;
     }
 }
