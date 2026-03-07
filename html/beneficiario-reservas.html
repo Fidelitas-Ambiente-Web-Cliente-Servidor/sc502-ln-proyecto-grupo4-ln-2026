@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlimenTICO - Mis Reservas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/beneficiario.css">
+</head>
+
+<body>
+
+    <button class="btn-sidebar" id="btnSidebar">☰</button>
+
+    <div class="layout">
+    
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <h2 class="logo-texto">Alimen<span style="color: white;">TICO</span> 
+                    <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px">
+                </h2>
+                <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="beneficiario-panel.html" class="sidebar-link">
+                    <i class="fas fa-home"></i> Donaciones Disponibles
+                </a>
+                <a href="beneficiario-reservas.html" class="sidebar-link activo">
+                    <i class="fas fa-calendar-check"></i> Mis Reservas
+                </a>
+                <a href="beneficiario-perfil.html" class="sidebar-link">
+                    <i class="fas fa-user"></i> Mi Perfil
+                </a>
+                <a href="../login.html" class="sidebar-link logout">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+            </nav>
+        </aside>
+
+     
+        <main class="panel-contenido">
+            <header class="top-bar">
+                <h1>Mis Reservas</h1>
+                <div class="user-info">
+                    <span>Bienvenido, María</span>
+                    <div class="avatar">
+                        <img src="https://via.placeholder.com/40" alt="Avatar">
+                    </div>
+                </div>
+            </header>
+
+  
+            <div class="tabs-container">
+                <button class="tab active" onclick="filtrarReservas('activas')">Activas</button>
+                <button class="tab" onclick="filtrarReservas('confirmadas')">Confirmadas</button>
+                <button class="tab" onclick="filtrarReservas('canceladas')">Canceladas</button>
+            </div>
+
+  
+            <section class="reservas-list" id="reservasList">
+
+                <div class="reserva-card activa" data-estado="activa">
+                    <div class="reserva-header">
+                        <div class="reserva-info">
+                            <h3>Arroz con pollo</h3>
+                            <span class="estado estado-activa">Pendiente de confirmación</span>
+                        </div>
+                        <span class="codigo-reserva">
+                            <i class="fas fa-qrcode"></i> ALM-2026-001
+                        </span>
+                    </div>
+                    <div class="reserva-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fas fa-store"></i>
+                                <div>
+                                    <small>Negocio</small>
+                                    <p>Restaurante La Casa</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-calendar"></i>
+                                <div>
+                                    <small>Fecha de retiro</small>
+                                    <p>19/03/2026</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <div>
+                                    <small>Hora límite</small>
+                                    <p>8:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <small>Ubicación</small>
+                                    <p>San José, Centro</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reserva-footer">
+                        <button class="btn-confirmar" onclick="confirmarReserva('ALM-2026-001')">
+                            <i class="fas fa-check"></i> Confirmar retiro
+                        </button>
+                        <button class="btn-cancelar" onclick="cancelarReserva('ALM-2026-001')">
+                            <i class="fas fa-times"></i> Cancelar reserva
+                        </button>
+                    </div>
+                </div>
+
+  
+                <div class="reserva-card activa" data-estado="activa">
+                    <div class="reserva-header">
+                        <div class="reserva-info">
+                            <h3>Ensalada de frutas</h3>
+                            <span class="estado estado-activa">Pendiente de confirmación</span>
+                        </div>
+                        <span class="codigo-reserva">
+                            <i class="fas fa-qrcode"></i> ALM-2026-002
+                        </span>
+                    </div>
+                    <div class="reserva-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fas fa-store"></i>
+                                <div>
+                                    <small>Negocio</small>
+                                    <p>Supermercado La Económica</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-calendar"></i>
+                                <div>
+                                    <small>Fecha de retiro</small>
+                                    <p>19/03/2026</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <div>
+                                    <small>Hora límite</small>
+                                    <p>6:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <small>Ubicación</small>
+                                    <p>Alajuela, Centro</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reserva-footer">
+                        <button class="btn-confirmar" onclick="confirmarReserva('ALM-2026-002')">
+                            <i class="fas fa-check"></i> Confirmar retiro
+                        </button>
+                        <button class="btn-cancelar" onclick="cancelarReserva('ALM-2026-002')">
+                            <i class="fas fa-times"></i> Cancelar reserva
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="reserva-card confirmada" data-estado="confirmada">
+                    <div class="reserva-header">
+                        <div class="reserva-info">
+                            <h3>Panadería variada</h3>
+                            <span class="estado estado-confirmada">Confirmada</span>
+                        </div>
+                        <span class="codigo-reserva">
+                            <i class="fas fa-qrcode"></i> ALM-2026-003
+                        </span>
+                    </div>
+                    <div class="reserva-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fas fa-store"></i>
+                                <div>
+                                    <small>Negocio</small>
+                                    <p>Panadería San José</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-calendar"></i>
+                                <div>
+                                    <small>Fecha de retiro</small>
+                                    <p>18/03/2026</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <div>
+                                    <small>Hora de retiro</small>
+                                    <p>5:30 PM</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <small>Ubicación</small>
+                                    <p>San José, Escazú</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reserva-footer">
+                        <div class="mensaje-confirmacion">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Retiro confirmado ayer a las 5:30 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+ 
+                <div class="reserva-card cancelada" data-estado="cancelada" style="display: none;">
+                    <div class="reserva-header">
+                        <div class="reserva-info">
+                            <h3>Pizza</h3>
+                            <span class="estado estado-cancelada">Cancelada</span>
+                        </div>
+                        <span class="codigo-reserva">
+                            <i class="fas fa-qrcode"></i> ALM-2026-004
+                        </span>
+                    </div>
+                    <div class="reserva-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fas fa-store"></i>
+                                <div>
+                                    <small>Negocio</small>
+                                    <p>Pizzería Don José</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-calendar"></i>
+                                <div>
+                                    <small>Fecha de retiro</small>
+                                    <p>17/03/2026</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <div>
+                                    <small>Hora límite</small>
+                                    <p>8:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <small>Ubicación</small>
+                                    <p>San José, Desamparados</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+  
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar retiro</h2>
+            <p>¿Estás seguro de que ya retiraste esta donación?</p>
+            <p class="codigo-confirmacion" id="modalCodigo">Código: <strong>ALM-2026-001</strong></p>
+            <div class="modal-actions">
+                <button onclick="cerrarModal()" class="btn-cancelar-modal">Cancelar</button>
+                <button onclick="procesarConfirmacion()" class="btn-confirmar-modal">Sí, confirmar retiro</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let codigoActual = '';
+
+        function filtrarReservas(estado) {
+   
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+
+            const tarjetas = document.querySelectorAll('.reserva-card');
+            tarjetas.forEach(tarjeta => {
+                if (estado === 'activas') {
+                    tarjeta.style.display = tarjeta.dataset.estado === 'activa' ? 'block' : 'none';
+                } else if (estado === 'confirmadas') {
+                    tarjeta.style.display = tarjeta.dataset.estado === 'confirmada' ? 'block' : 'none';
+                } else if (estado === 'canceladas') {
+                    tarjeta.style.display = tarjeta.dataset.estado === 'cancelada' ? 'block' : 'none';
+                }
+            });
+        }
+
+        function confirmarReserva(codigo) {
+            codigoActual = codigo;
+            document.getElementById('modalCodigo').innerHTML = `Código: <strong>${codigo}</strong>`;
+            document.getElementById('confirmModal').style.display = 'flex';
+        }
+
+        function cancelarReserva(codigo) {
+            if (confirm('¿Estás seguro de que deseas cancelar esta reserva?')) {
+                alert('Reserva cancelada exitosamente');
+
+            }
+        }
+
+        function cerrarModal() {
+            document.getElementById('confirmModal').style.display = 'none';
+        }
+
+        function procesarConfirmacion() {
+            alert(`¡Retiro confirmado! Gracias por usar AlimenTICO`);
+            cerrarModal();
+        }
+
+        document.getElementById('btnSidebar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('mostrar');
+        });
+
+        document.getElementById('btnCerrarSidebar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('mostrar');
+        });
+
+        window.onload = function() {
+            filtrarReservas('activas');
+        };
+    </script>
+
+</body>
+</html>
