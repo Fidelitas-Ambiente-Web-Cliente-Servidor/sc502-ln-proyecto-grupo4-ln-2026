@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlimentTICO - Panel Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/admin.css">
+    <script src="../js/admin.js"></script>
+</head>
+
+<body>
+
+    <!-- Boton del sidebar solo para celular -->
+    <button class="btn-sidebar" id="btnSidebar">☰</button>
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px"></h2>
+                <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin-panel.html" class="sidebar-link activo">Panel Principal</a>
+                <a href="admin-beneficiarios.html" class="sidebar-link">Donaciones</a>
+                <a href="admin-restaurantes.html" class="sidebar-link">Restaurantes</a>
+                <a href="admin-perfil.html" class="sidebar-link">Perfil</a>
+                <a href="../login.html" class="sidebar-link">Cerrar Sesión</a>
+            </nav>
+        </aside>
+
+         <!-- Contenido principal-->
+        <main class="panel-contenido">
+
+            <h1 class="titulo-panel">Resumen General de la Plataforma</h1>
+
+            <h5 class="seccion-titulo seccion-titulo-mt">ESTADÍSTICAS PRINCIPALES:</h5>
+
+            <div class="estadisticas">
+                <div class="estadistica-card">
+                    <p>Restaurantes Registrados</p>
+                    <strong>56</strong>
+                </div>
+                <div class="estadistica-card">
+                    <p>Beneficiarios Registrados</p>
+                    <strong>343</strong>
+                </div>
+                <div class="estadistica-card">
+                    <p>Donaciones Totales</p>
+                    <strong>1225</strong>
+                </div>
+
+            <div>
+            <img id="imagen" src="./img/donacion-de-alimentos.jpg">
+            </div>
+
+</body>
+
+</html>
