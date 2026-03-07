@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlimenTICO - Detalle de Donación</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/beneficiario.css">
+    <script src="../js/beneficiario.js"></script>
 </head>
 
 <body>
@@ -18,175 +19,102 @@
 
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-top">
-                <h2 class="logo-texto">Alimen<span style="color: white;">TICO</span> 
-                    <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px">
-                </h2>
+                <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px"></h2>
                 <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
             </div>
             <nav class="sidebar-nav">
-                <a href="beneficiario-panel.html" class="sidebar-link">
-                    <i class="fas fa-home"></i> Donaciones Disponibles
-                </a>
-                <a href="beneficiario-reservas.html" class="sidebar-link">
-                    <i class="fas fa-calendar-check"></i> Mis Reservas
-                </a>
-                <a href="beneficiario-perfil.html" class="sidebar-link">
-                    <i class="fas fa-user"></i> Mi Perfil
-                </a>
-                <a href="../login.html" class="sidebar-link logout">
-                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                </a>
+                <a href="beneficiario-panel.html" class="sidebar-link">Donaciones Disponibles</a>
+                <a href="beneficiario-reservas.html" class="sidebar-link">Mis Reservas</a>
+                <a href="beneficiario-perfil.html" class="sidebar-link">Mi Perfil</a>
+                <a href="../login.html" class="sidebar-link">Cerrar Sesión</a>
             </nav>
         </aside>
 
-   
         <main class="panel-contenido">
-            <a href="beneficiario-panel.html" class="btn-volver">
-                <i class="fas fa-arrow-left"></i> Volver a donaciones
-            </a>
 
-   
-            <section class="detalle-donacion">
-                <div class="detalle-container">
-                    <div class="detalle-imagen">
-                        <img src="https://via.placeholder.com/600x400" alt="Arroz con pollo">
-                        <span class="badge-disponible">Disponible</span>
+            <a href="beneficiario-panel.html" class="btn-volver">← Volver a donaciones</a>
+
+            <div class="formulario-card" style="margin-top: 20px;">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <h1 class="titulo-detalle">Arroz con pollo</h1>
+
+                        <h5 class="seccion-titulo">INFORMACIÓN DE LA DONACIÓN</h5>
+
+                        <div class="campo">
+                            <label class="label-campo">Donado por</label>
+                            <input type="text" class="campo-input" value="Restaurante La Casa" disabled>
+                        </div>
+
+                        <div class="campo">
+                            <label class="label-campo">Tipo de alimento</label>
+                            <input type="text" class="campo-input" value="Comida preparada" disabled>
+                        </div>
+
+                        <div class="campo">
+                            <label class="label-campo">Cantidad</label>
+                            <input type="text" class="campo-input" value="10 porciones" disabled>
+                        </div>
+
+                        <div class="campo">
+                            <label class="label-campo">Disponible hasta</label>
+                            <input type="text" class="campo-input" value="19/03/2026" disabled>
+                        </div>
+
+                        <div class="campo">
+                            <label class="label-campo">Hora límite</label>
+                            <input type="text" class="campo-input" value="8:00 PM" disabled>
+                        </div>
+
+                        <div class="campo">
+                            <label class="label-campo">Estado</label>
+                            <input type="text" class="campo-input" value="Disponible" disabled>
+                        </div>
                     </div>
-                    
-                    <div class="detalle-info">
-                        <h1>Arroz con pollo</h1>
-                        
-                        <div class="info-negocio">
-                            <i class="fas fa-store"></i>
-                            <div>
-                                <small>Donado por</small>
-                                <p>Restaurante La Casa</p>
-                            </div>
+
+                    <div class="col-md-6">
+
+                        <h5 class="seccion-titulo">UBICACIÓN</h5>
+
+                        <div class="campo">
+                            <label class="label-campo">Dirección</label>
+                            <input type="text" class="campo-input" value="San José, Calle Central, Avenida 2" disabled>
                         </div>
 
-                        <div class="info-detalles-grid">
-                            <div class="info-item">
-                                <i class="fas fa-utensils"></i>
-                                <div>
-                                    <small>Tipo</small>
-                                    <p>Comida preparada</p>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <i class="fas fa-weight-hanging"></i>
-                                <div>
-                                    <small>Cantidad</small>
-                                    <p>10 porciones</p>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <i class="far fa-calendar"></i>
-                                <div>
-                                    <small>Disponible hasta</small>
-                                    <p>19/03/2026</p>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <i class="far fa-clock"></i>
-                                <div>
-                                    <small>Hora límite</small>
-                                    <p>8:00 PM</p>
-                                </div>
-                            </div>
+                        <div class="campo">
+                            <label class="label-campo">Referencia</label>
+                            <input type="text" class="campo-input" value="Frente al parque central, edificio azul" disabled>
                         </div>
 
-                        <div class="info-ubicacion">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <small>Ubicación para retirar</small>
-                                <p>San José, Calle Central, Avenida 2</p>
-                                <p class="referencia">Frente al parque central, edificio azul</p>
-                            </div>
+                        <h5 class="seccion-titulo seccion-titulo-mt">DESCRIPCIÓN</h5>
+
+                        <div class="campo">
+                            <label class="label-campo">Descripción del alimento</label>
+                            <textarea class="campo-input" rows="3" disabled>Delicioso arroz con pollo preparado hoy, incluye papas fritas y ensalada de lechuga, tomate, pepino, limón, zanahoria y aguacate.</textarea>
                         </div>
 
-                        <div class="info-descripcion">
-                            <h3>Descripción</h3>
-                            <p>Delicioso arroz con pollo preparado hoy, incluye papas fritas y la ensalada incluye: lechuga, tomate, pepino,limon, zanahoria y aguacate.</p>
+                        <div class="campo">
+                            <label class="label-campo">Información de alérgenos</label>
+                            <textarea class="campo-input" rows="2" disabled>Sin gluten. Contiene lactosa. Contiene huevo. Sin frutos secos.</textarea>
                         </div>
 
-                        <div class="info-alergenos">
-                            <h3>Información de alérgenos</h3>
-                            <div class="alergenos-tags">
-                                <span class="alergeno">✔️ Sin gluten</span>
-                                <span class="alergeno">❌ Contiene lactosa</span>
-                                <span class="alergeno">❌ Contiene huevo</span>
-                                <span class="alergeno">✔️ Sin frutos secos</span>
-                            </div>
+                        <div class="botones botones-izquierda">
+                            <button type="button" class="btn-accion" id="btnReservar">Reservar Donación</button>
                         </div>
 
-                        <div class="detalle-actions">
-                            <button class="btn-reservar" onclick="reservarDonacion()">
-                                <i class="fas fa-check-circle"></i> Reservar donación
-                            </button>
-                            <p class="disclaimer">
-                                <i class="fas fa-info-circle"></i>
-                                Al reservar, tienes hasta la hora límite para retirar. Presenta el código QR en el negocio.
-                            </p>
-                        </div>
+                        <div id="mensaje"></div>
+
                     </div>
                 </div>
-            </section>
+            </div>
+
+
         </main>
     </div>
 
-  
-    <div id="reservaModal" class="modal">
-        <div class="modal-content success-modal">
-            <i class="fas fa-check-circle success-icon"></i>
-            <h2>¡Reserva exitosa!</h2>
-            <p>Has reservado: <strong>Arroz con pollo</strong></p>
-            <div class="codigo-qr">
-                <i class="fas fa-qrcode qr-icon"></i>
-                <div class="codigo-texto">
-                    <small>Código de confirmación</small>
-                    <h3>ALM-2026-001-01</h3>
-                </div>
-            </div>
-            <p class="modal-info">
-                <i class="fas fa-info-circle"></i>
-                Presenta este código en el negocio al retirar tu donación.
-            </p>
-            <div class="modal-actions">
-                <a href="beneficiario-reservas.html" class="btn-ver-reservas">
-                    Ver mis reservas
-                </a>
-                <button onclick="cerrarModal()" class="btn-seguir">
-                    Seguir viendo donaciones
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function reservarDonacion() {
-            document.getElementById('reservaModal').style.display = 'flex';
-        }
-
-        function cerrarModal() {
-            document.getElementById('reservaModal').style.display = 'none';
-        }
-
-
-        document.getElementById('btnSidebar').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('mostrar');
-        });
-
-        document.getElementById('btnCerrarSidebar').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.remove('mostrar');
-        });
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('reservaModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        };
-    </script>
 
 </body>
+
 </html>
