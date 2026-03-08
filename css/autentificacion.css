@@ -1,0 +1,309 @@
+body {
+    background: #3d3333;
+    min-height: 100vh;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 15px 40px;
+    background-color: #5c3d2e;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.img-logo {
+    height: 45px;
+}
+
+.logo-texto {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #F2C191;
+}
+
+.logo-tico {
+    color: white;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a:hover {
+    color: #F2C191;
+}
+
+.btn-header {
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-header:hover {
+    background-color: white;
+    color: #3d3333;
+}
+
+
+
+.pagina-contenedor {
+    max-width: 800px;
+    padding: 80px 80px 60px 80px;
+    margin: 0 auto;
+}
+
+/* Ancho: registro restaurante y beneficiario */
+.pagina-contenedor-ancho {
+    max-width: 1200px;
+    padding: 80px 80px 60px 80px;
+    margin: 0 auto;
+}
+
+/* Titulos de la pagina */
+.titulo-pagina {
+    text-align: center;
+    color: #F2C191;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.subtitulo-pagina {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+/* cuadro cafe claro del formulario */
+.formulario-card {
+    background-color: #da954cb7;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
+}
+
+/*Titulos dentro del formulario*/
+.seccion-titulo {
+    color: #3d3333;
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.seccion-titulo-mt {
+    margin-top: 20px;
+}
+
+.label-campo {
+    display: block;
+    color: #F2C191;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+/* Grupos de campo*/
+.campo {
+    margin-bottom: 15px;
+}
+
+/* Inputs, textareas y selects*/
+.campo-input {
+    width: 100%;
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    color: #3d3333;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+.campo-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #3d3333;
+}
+
+textarea.campo-input {
+    border-radius: 12px;
+    resize: none;
+}
+
+
+.fila-horario {
+    margin-bottom: 12px;
+}
+
+.fila-horario-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.fila-horario-horas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 10px;
+}
+
+.dia-label {
+    font-size: 0.9rem;
+    color: #F2C191;
+}
+
+.label-estado {
+    font-size: 0.85rem;
+    color: #F2C191;
+    width: 55px;
+}
+
+.input-hora {
+    width: 200px;
+    padding: 5px 8px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.input-hora:disabled {
+    background-color: #d0c9c9;
+    color: #999;
+}
+
+.form-check-input {
+    width: 50px !important;
+    height: 25px;
+    border: 2px solid #c07d38;
+    margin-top: 0;
+    margin-right: 5px;
+}
+
+.form-check-input:checked {
+    background-color: #c07d38;
+    border-color: #3d2518;
+}
+
+
+
+/* Botonesr */
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-accion {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 5px 18px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-accion:hover {
+    background-color: white;
+    color: #2b2b2b;
+}
+
+#mensaje {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: #ededed;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+hr {
+    border-color: rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+}
+
+.iniciar-sesion {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+}
+
+.iniciar-sesion .label-campo {
+    display: inline; 
+    margin-bottom: 0;
+    color: #3d3333;
+}
+
+.iniciar-sesion-link {
+    color: #F2C191; /* Color crema similar a tus títulos */
+    text-decoration: none; /* Quita el subrayado por defecto */
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.iniciar-sesion-link:hover {
+    color: white;
+}
+
+/* Celular*/
+@media (max-width: 576px) {
+    nav {
+        display: none;
+    }
+
+    header {
+        padding: 12px 20px;
+    }
+
+    .titulo-pagina {
+        font-size: 2rem;
+    }
+
+    .pagina-contenedor,
+    .pagina-contenedor-ancho {
+        padding: 80px 20px 40px 20px;
+    }
+
+    .dia-label {
+        width: 70px;
+        min-width: 70px;
+        font-size: 0.78rem;
+    }
+
+    .iniciar-sesion {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
