@@ -26,10 +26,10 @@
                 <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
             </div>
             <nav class="sidebar-nav">
-                <a href="admin-panel.html" class="sidebar-link activo">Panel Principal</a>
+                <a href="admin-panel.html" class="sidebar-link">Panel Principal</a>
                 <a href="admin-beneficiarios.html" class="sidebar-link">Donaciones</a>
                 <a href="admin-restaurantes.html" class="sidebar-link">Restaurantes</a>
-                <a href="admin-perfil.html" class="sidebar-link">Perfil</a>
+                <a href="admin-perfil.html" class="sidebar-link activo">Perfil</a>
                 <a href="../login.html" class="sidebar-link">Cerrar Sesión</a>
             </nav>
         </aside>
@@ -48,12 +48,14 @@
 
                             <div class="campo">
                                 <label for="nombreCompleto" class="label-campo">Nombre Completo</label>
-                                <input type="text" class="campo-input" id="nombreCompleto" name="nombreCompleto" value="Juan Carlos Ramirez">
+                                <input type="text" class="campo-input" id="nombreCompleto" name="nombreCompleto"
+                                    value="Juan Carlos Ramirez">
                             </div>
 
                             <div class="campo">
                                 <label for="cedulaIdentidad" class="label-campo">Cedula de Identidad</label>
-                                <input type="text" class="campo-input" id="cedulaIdentidad" name="cedulaIdentidad" value="1-2003-2392">
+                                <input type="text" class="campo-input" id="cedulaIdentidad" name="cedulaIdentidad"
+                                    value="1-2003-2392">
                             </div>
 
                             <div class="campo">
@@ -61,29 +63,26 @@
                                 <input type="text" class="campo-input" id="telefono" name="telefono" value="7387-3930">
                             </div>
 
-                            <h5 class="seccion-titulo">INFORMACIÓN PERSONAL</h5>
+                            <h5 class="seccion-titulo">DATOS DE ACCESO</h5>
 
                             <div class="campo">
                                 <label for="correo" class="label-campo">Correo Electrónico</label>
-                                <input type="email" class="campo-input" id="correo" name="correo" value="macdonald@gmail.com">
+                                <input type="email" class="campo-input" id="correo" name="correo"
+                                    value="macdonald@gmail.com">
                             </div>
 
                             <div class="campo">
                                 <label for="contrasena" class="label-campo">Contraseña</label>
-                                <input type="password" class="campo-input" id="contrasena" name="contrasena" placeholder="Dejar vacío para no cambiar">
+                                <input type="password" class="campo-input" id="contrasena" name="contrasena"
+                                    placeholder="Dejar vacío para no cambiar">
                             </div>
 
-                             <div class="boton-accion">
-                                <button type="button" class="btn-accion" id="btnCambiarContrasena">Cambiar Contraseña</button>
-                            </div>
+                            <button type="button" class="btn-accion" id="btnCambiarContrasena">CambiarContraseña</button>
+                            <button type="button" class="btn-accion" id="btnEliminarPerfil">Eliminar Perfil</button>
 
-                            <div class="boton-accion">
-                                <button type="button" class="btn-accion" id="btnGuardarCambios">Guardar Cambios</button>
-                            </div>
+                            <button type="submit" class="btn-accion" id="btnGuardarAdmin">Guardar Cambios</button>
 
-                            <div class="boton-accion">
-                                <button type="button" class="btn-accion" id="btnEliminarPerfil">Eliminar Perfil</button>
-                            </div>
+                            <div id="mensaje"></div>
 
                         </div>
                     </div>
