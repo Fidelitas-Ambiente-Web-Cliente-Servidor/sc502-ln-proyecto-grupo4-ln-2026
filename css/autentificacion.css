@@ -68,39 +68,17 @@ nav a:hover {
 }
 
 
-.btn-volver {
-    margin-right: auto;
-}
 
-.logo-texto {
-    color: #da954cb7;
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin: 0;
-}
-
-/* Boton de volver */
-.btn-volver {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-    border-radius: 20px;
-    padding: 5px 18px;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.btn-volver:hover {
-    background-color: white;
-    color: #2b2b2b;
-}
-
-/* Contenido principal*/
 .pagina-contenedor {
-    max-width: 1000px;
-   
-    padding: 60px 80px;
+    max-width: 800px;
+    padding: 80px 80px 60px 80px;
+    margin: 0 auto;
+}
+
+/* Ancho: registro restaurante y beneficiario */
+.pagina-contenedor-ancho {
     max-width: 1200px;
+    padding: 80px 80px 60px 80px;
     margin: 0 auto;
 }
 
@@ -108,8 +86,7 @@ nav a:hover {
 .titulo-pagina {
     text-align: center;
     color: #F2C191;
-    
-    font-size: 5rem;
+    font-size: 3rem;
     font-weight: bold;
     margin-bottom: 5px;
     margin-top: 10px;
@@ -140,6 +117,10 @@ nav a:hover {
 }
 
 /* Labels */
+.seccion-titulo-mt {
+    margin-top: 20px;
+}
+
 .label-campo {
     display: block;
     color: #F2C191;
@@ -174,6 +155,64 @@ textarea.campo-input {
     resize: none;
 }
 
+
+.fila-horario {
+    margin-bottom: 12px;
+}
+
+.fila-horario-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.fila-horario-horas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 10px;
+}
+
+.dia-label {
+    font-size: 0.9rem;
+    color: #F2C191;
+}
+
+.label-estado {
+    font-size: 0.85rem;
+    color: #F2C191;
+    width: 55px;
+}
+
+.input-hora {
+    width: 200px;
+    padding: 5px 8px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.input-hora:disabled {
+    background-color: #d0c9c9;
+    color: #999;
+}
+
+.form-check-input {
+    width: 50px !important;
+    height: 25px;
+    border: 2px solid #c07d38;
+    margin-top: 0;
+    margin-right: 5px;
+}
+
+.form-check-input:checked {
+    background-color: #c07d38;
+    border-color: #3d2518;
+}
+
+
+
 /* Botonesr */
 .botones {
     display: flex;
@@ -190,6 +229,7 @@ textarea.campo-input {
     padding: 5px 18px;
     font-size: 0.9rem;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .btn-accion:hover {
@@ -201,22 +241,30 @@ textarea.campo-input {
     margin-top: 15px;
     padding: 10px 15px;
     border-radius: 10px;
-    color: #ededed !important;
+    color: #ededed;
     font-weight: bold;
     font-size: 0.9rem;
 }
 
-.iniciar-sesion{
+hr {
+    border-color: rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+}
+
+.iniciar-sesion {
     display: flex;
-    align-items: start;
-    gap: 10px;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
     margin-bottom: 4px;
 }
+
 .iniciar-sesion .label-campo {
     display: inline; 
     margin-bottom: 0;
     color: #3d3333;
 }
+
 .iniciar-sesion-link {
     color: #F2C191; /* Color crema similar a tus títulos */
     text-decoration: none; /* Quita el subrayado por defecto */
@@ -224,16 +272,38 @@ textarea.campo-input {
     font-size: 0.85rem;
 }
 
+.iniciar-sesion-link:hover {
+    color: white;
+}
+
 /* Celular*/
 @media (max-width: 576px) {
-    .titulo-pagina {
-        font-size: 2.5rem;
-    }
     nav {
         display: none;
     }
 
     header {
         padding: 12px 20px;
+    }
+
+    .titulo-pagina {
+        font-size: 2rem;
+    }
+
+    .pagina-contenedor,
+    .pagina-contenedor-ancho {
+        padding: 80px 20px 40px 20px;
+    }
+
+    .dia-label {
+        width: 70px;
+        min-width: 70px;
+        font-size: 0.78rem;
+    }
+
+    .iniciar-sesion {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
 }
