@@ -4,183 +4,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlimenTICO - Donaciones Disponibles</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>AlimentTICO - Donaciones Disponibles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/beneficiario.css">
+    <script src="../js/beneficiario.js"></script>
 </head>
 
 <body>
 
     <button class="btn-sidebar" id="btnSidebar">☰</button>
 
+    <div class="layout">
 
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-top">
-                <h2 class="logo-texto">Alimen<span style="color: white;">TICO</span> 
-                    <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px">
-                </h2>
+                <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px"></h2>
                 <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
             </div>
             <nav class="sidebar-nav">
-                <a href="beneficiario-panel.html" class="sidebar-link activo">
-                    <i class="fas fa-home"></i> Donaciones Disponibles
-                </a>
-                <a href="beneficiario-reservas.html" class="sidebar-link">
-                    <i class="fas fa-calendar-check"></i> Mis Reservas
-                </a>
-                <a href="beneficiario-perfil.html" class="sidebar-link">
-                    <i class="fas fa-user"></i> Mi Perfil
-                </a>
-                <a href="../login.html" class="sidebar-link logout">
-                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                </a>
+                <a href="beneficiario-panel.html" class="sidebar-link activo">Donaciones Disponibles</a>
+                <a href="beneficiario-reservas.html" class="sidebar-link">Mis Reservas</a>
+                <a href="beneficiario-perfil.html" class="sidebar-link">Mi Perfil</a>
+                <a href="../login.html" class="sidebar-link">Cerrar Sesión</a>
             </nav>
         </aside>
 
         <main class="panel-contenido">
-            <header class="top-bar">
-                <h1>Donaciones Disponibles</h1>
-                <div class="user-info">
-                    <span>Bienvenido, María</span>
-                    <div class="avatar">
-                        <img src="https://via.placeholder.com/40" alt="Avatar">
+
+            <h1 class="titulo-panel">Donaciones Disponibles</h1>
+
+            <div class="donaciones-filtros">
+                <div class="donaciones-buscar">
+                    <label class="label-campo">Buscar:</label>
+                    <div class="buscar-input-contenedor">
+                        <input type="text" class="campo-input buscar-input" id="inputBuscar" placeholder="Buscar donación...">
+                        <span class="buscar-icono"><i class="bi bi-search"></i></span>
                     </div>
                 </div>
-            </header>
-
-
-            <section class="filters-section">
-                <div class="filter-container">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Buscar donaciones...">
-                    </div>
-                    <div class="filter-group">
-                        <select class="filter-select">
+                <div class="donaciones-filtrar">
+                    <label class="label-campo">Filtrar:</label>
+                    <div>
+                        <select class="campo-input filtro-select" id="filtroTipo">
                             <option value="">Tipo de alimento</option>
-                            <option value="preparado">Comida Preparada</option>
-                            <option value="empaquetado">Empaquetado</option>
-                            <option value="fresco">Fresco</option>
-                            <option value="panaderia">Panadería</option>
+                            <option value="Comida Preparada">Comida Preparada</option>
+                            <option value="Panadería">Panadería</option>
+                            <option value="Frutas">Frutas</option>
+                            <option value="Verduras">Verduras</option>
+                            <option value="Lácteos">Lácteos</option>
+                            <option value="Otro">Otro</option>
                         </select>
-                        <input type="date" class="filter-date" placeholder="Fecha">
-                        <select class="filter-select">
+                        <select class="campo-input filtro-select" id="filtroProvincia">
                             <option value="">Provincia</option>
-                            <option value="san-jose">San José</option>
-                            <option value="alajuela">Alajuela</option>
-                            <option value="heredia">Heredia</option>
-                            <option value="cartago">Cartago</option>
-                            <option value="guanacaste">Guanacaste</option>
-                            <option value="puntarenas">Puntarenas</option>
-                            <option value="limon">Limón</option>
+                            <option value="San José">San José</option>
+                            <option value="Alajuela">Alajuela</option>
+                            <option value="Heredia">Heredia</option>
+                            <option value="Cartago">Cartago</option>
+                            <option value="Guanacaste">Guanacaste</option>
+                            <option value="Puntarenas">Puntarenas</option>
+                            <option value="Limón">Limón</option>
                         </select>
                     </div>
                 </div>
-            </section>
+            </div>
 
-  
-            <section class="donaciones-grid">
+            <h5 class="seccion-titulo">PUBLICACIONES DISPONIBLES:</h5>
 
-                <div class="donacion-card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Comida">
-                        <span class="badge">Disponible</span>
-                    </div>
-                    <div class="card-content">
-                        <h3>Arroz con pollo</h3>
-                        <p><i class="fas fa-store"></i> Restaurante La Casa</p>
-                        <p><i class="far fa-calendar"></i> Disponible: 19/03/2026</p>
-                        <p><i class="far fa-clock"></i> Hasta: 8:00 PM</p>
-                        <p><i class="fas fa-map-marker-alt"></i> San José, Centro</p>
-                        <p class="descripcion">Arroz con pollo, vegetales y ensalada fresca.</p>
-                        <div class="card-footer">
-                            <span class="cantidad">10 porciones</span>
-                            <a href="beneficiario-detalle.html?id=1" class="btn-ver">
-                                + Ver <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="donaciones-grid" id="donacionesGrid">
 
                 <div class="donacion-card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Comida">
-                        <span class="badge">Disponible</span>
-                    </div>
                     <div class="card-content">
-                        <h3>Ensalada de frutas</h3>
-                        <p><i class="fas fa-store"></i> Supermercado La Económica</p>
-                        <p><i class="far fa-calendar"></i> Disponible: 19/03/2026</p>
-                        <p><i class="far fa-clock"></i> Hasta: 6:00 PM</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Alajuela, Centro</p>
-                        <p class="descripcion">Frutas frescas: piña, sandía, melón y papaya.</p>
-                        <div class="card-footer">
-                            <span class="cantidad">5 porciones</span>
-                            <a href="beneficiario-detalle.html?id=2" class="btn-ver">
-                                + Ver <i class="fas fa-arrow-right"></i>
-                            </a>
+                        <h5 class="donacion-nombre">Arroz con pollo</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Restaurante La Casa</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> San José, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 8:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Arroz con pollo, vegetales y ensalada fresca.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">10 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="donacion-card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Comida">
-                        <span class="badge">Disponible</span>
-                    </div>
                     <div class="card-content">
-                        <h3>Panadería variada</h3>
-                        <p><i class="fas fa-store"></i> Panadería San José</p>
-                        <p><i class="far fa-calendar"></i> Disponible: 19/03/2026</p>
-                        <p><i class="far fa-clock"></i> Hasta: 7:00 PM</p>
-                        <p><i class="fas fa-map-marker-alt"></i> San José, Escazú</p>
-                        <p class="descripcion">Pan baguette, croissants y pan dulce.</p>
-                        <div class="card-footer">
-                            <span class="cantidad">8 unidades</span>
-                            <a href="beneficiario-detalle.html?id=3" class="btn-ver">
-                                + Ver <i class="fas fa-arrow-right"></i>
-                            </a>
+                        <h5 class="donacion-nombre">Ensalada de frutas</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Supermercado La Económica</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> Alajuela, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 6:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Frutas frescas: piña, sandía, melón y papaya.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">5 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="donacion-card">
-                    <div class="card-image">
-                        <img src="https://via.placeholder.com/300x200" alt="Comida">
-                        <span class="badge">Disponible</span>
-                    </div>
                     <div class="card-content">
-                        <h3>Casado del día</h3>
-                        <p><i class="fas fa-store"></i> Soda Pantre</p>
-                        <p><i class="far fa-calendar"></i> Disponible: 19/03/2026</p>
-                        <p><i class="far fa-clock"></i> Hasta: 5:00 PM</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Heredia, Santo Domingo</p>
-                        <p class="descripcion">Arroz, frijoles, ensalada, plátano maduro y carne de res.</p>
-                        <div class="card-footer">
-                            <span class="cantidad">4 porciones</span>
-                            <a href="beneficiario-detalle.html?id=4" class="btn-ver">
-                                + Ver <i class="fas fa-arrow-right"></i>
-                            </a>
+                        <h5 class="donacion-nombre">Arroz con pollo</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Restaurante La Casa</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> San José, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 8:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Arroz con pollo, vegetales y ensalada fresca.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">10 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
                         </div>
                     </div>
                 </div>
-            </section>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Ensalada de frutas</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Supermercado La Económica</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> Alajuela, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 6:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Frutas frescas: piña, sandía, melón y papaya.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">5 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Arroz con pollo</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Restaurante La Casa</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> San José, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 8:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Arroz con pollo, vegetales y ensalada fresca.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">10 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Ensalada de frutas</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Supermercado La Económica</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> Alajuela, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 6:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Frutas frescas: piña, sandía, melón y papaya.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">5 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Arroz con pollo</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Restaurante La Casa</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> San José, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 8:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Arroz con pollo, vegetales y ensalada fresca.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">10 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Ensalada de frutas</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Supermercado La Económica</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> Alajuela, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 6:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Frutas frescas: piña, sandía, melón y papaya.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">5 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Arroz con pollo</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Restaurante La Casa</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> San José, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 8:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Arroz con pollo, vegetales y ensalada fresca.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">10 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Ensalada de frutas</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Supermercado La Económica</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> Alajuela, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 6:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Frutas frescas: piña, sandía, melón y papaya.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">5 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Arroz con pollo</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Restaurante La Casa</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> San José, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 8:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Arroz con pollo, vegetales y ensalada fresca.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">10 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Ensalada de frutas</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Supermercado La Económica</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> Alajuela, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 6:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Frutas frescas: piña, sandía, melón y papaya.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">5 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Arroz con pollo</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Restaurante La Casa</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> San José, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 8:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Arroz con pollo, vegetales y ensalada fresca.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">10 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donacion-card">
+                    <div class="card-content">
+                        <h5 class="donacion-nombre">Ensalada de frutas</h5>
+                        <p class="donacion-info"><i class="bi bi-shop"></i> Supermercado La Económica</p>
+                        <p class="donacion-info"><i class="bi bi-geo-alt"></i> Alajuela, Centro</p>
+                        <p class="donacion-info"><i class="bi bi-clock"></i> Hasta: 6:00 PM | 19/03/2026</p>
+                        <p class="donacion-desc">Frutas frescas: piña, sandía, melón y papaya.</p>
+                        <div class="donacion-footer">
+                            <span class="donacion-cantidad">5 porciones</span>
+                            <a href="beneficiario-detalle.html" class="btn-accion">+ Ver</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="paginacion" id="paginacion">
+                <p class="paginacion-info" id="paginacionInfo"></p>
+                <div id="contenedorBotones"></div>
+            </div>
+
         </main>
     </div>
 
-    <script>
-
-        document.getElementById('btnSidebar').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('mostrar');
-        });
-
-        document.getElementById('btnCerrarSidebar').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.remove('mostrar');
-        });
-    </script>
-
 </body>
+
 </html>
