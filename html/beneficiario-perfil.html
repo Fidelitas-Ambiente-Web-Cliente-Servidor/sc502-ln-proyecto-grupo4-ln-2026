@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlimenTICO - Mi Perfil</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/beneficiario.css">
+    <script src="../js/beneficiario.js"></script>
 </head>
 
 <body>
@@ -15,7 +16,7 @@
     <button class="btn-sidebar" id="btnSidebar">☰</button>
 
     <div class="layout">
-    
+
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-top">
                 <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px">
@@ -30,166 +31,100 @@
             </nav>
         </aside>
 
-  
         <main class="panel-contenido">
-            <header class="top-bar">
-                <h1>Mi Perfil</h1>
-                <div class="user-info">
-                    <span>Bienvenido, María</span>
-                    
-                </div>
-            </header>
 
-            <div class="perfil-container">
+            <h1 class="titulo-panel">MI PERFIL</h1>
 
-                <div class="perfil-card">
-                    <div class="perfil-header">
-                        <div class="perfil-avatar">
-                            <img src="https://via.placeholder.com/120" alt="Avatar">
-                            <button class="cambiar-foto" onclick="cambiarFoto()">
-                                <i class="fas fa-camera"></i>
-                            </button>
-                        </div>
-                        <h2>María Salas Hernández</h2>
-                        <p class="miembro-desde">Miembro desde: Enero 2026</p>
+            <form id="formPerfil">
+                <div class="formulario-card">
+
+                    <h5 class="seccion-titulo">INFORMACIÓN PERSONAL</h5>
+
+                    <div class="campo">
+                        <label for="nombreCompleto" class="label-campo">Nombre completo</label>
+                        <input type="text" class="campo-input" id="nombreCompleto" name="nombreCompleto" value="María Salas Hernández">
                     </div>
 
-                    <div class="perfil-stats">
-                        <div class="stat-item">
-                            <span class="stat-value">12</span>
-                            <span class="stat-label">Donaciones recibidas</span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="correo" class="label-campo">Correo electrónico</label>
+                                <input type="email" class="campo-input" id="correo" name="correo" value="maria.salas@email.com">
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-value">5</span>
-                            <span class="stat-label">Reservas activas</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value">100%</span>
-                            <span class="stat-label">Cumplimiento</span>
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="telefono" class="label-campo">Teléfono</label>
+                                <input type="tel" class="campo-input" id="telefono" name="telefono" value="8888-7777">
+                            </div>
                         </div>
                     </div>
 
-                    <form id="perfilForm" class="perfil-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label><i class="fas fa-user"></i> Nombre completo</label>
-                                <input type="text" value="María Salas Hernández" disabled>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="provincia" class="label-campo">Provincia</label>
+                                <select class="campo-input" id="provincia" name="provincia">
+                                    <option value="San José" selected>San José</option>
+                                    <option value="Alajuela">Alajuela</option>
+                                    <option value="Cartago">Cartago</option>
+                                    <option value="Heredia">Heredia</option>
+                                    <option value="Guanacaste">Guanacaste</option>
+                                    <option value="Puntarenas">Puntarenas</option>
+                                    <option value="Limón">Limón</option>
+                                </select>
                             </div>
                         </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label><i class="fas fa-envelope"></i> Correo electrónico</label>
-                                <input type="email" value="maria.salas@email.com" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-phone"></i> Teléfono</label>
-                                <input type="tel" value="8888-7777" disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label><i class="fas fa-map-marker-alt"></i> Provincia</label>
-                                <input type="text" value="San José" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Cantón</label>
-                                <input type="text" value="Central" disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label><i class="fas fa-map-pin"></i> Dirección exacta</label>
-                                <textarea rows="2" disabled>Barrio Escalante, 75 metros este de la Iglesia</textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label><i class="fas fa-id-card"></i> Identificación</label>
-                                <input type="text" value="1-1234-5678" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-calendar-alt"></i> Fecha de nacimiento</label>
-                                <input type="text" value="15/05/1985" disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-actions">
-                            <button type="button" class="btn-editar" onclick="editarPerfil()">
-                                <i class="fas fa-edit"></i> Editar perfil
-                            </button>
-                            <button type="button" class="btn-cambiar-password" onclick="cambiarPassword()">
-                                <i class="fas fa-key"></i> Cambiar contraseña
-                            </button>
-                            <button type="button" class="btn-eliminar-cuenta" onclick="eliminarCuenta()">
-                                <i class="fas fa-trash"></i> Eliminar cuenta
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-  
-                <div class="historial-card">
-                    <h3>Actividad reciente</h3>
-                    <div class="actividad-list">
-                        <div class="actividad-item">
-                            <i class="fas fa-check-circle actividad-icon confirmada"></i>
-                            <div class="actividad-info">
-                                <p><strong>Confirmaste</strong> el retiro de Panadería variada</p>
-                                <small>Hace 2 horas</small>
-                            </div>
-                        </div>
-                        <div class="actividad-item">
-                            <i class="fas fa-calendar-check actividad-icon reserva"></i>
-                            <div>
-                                <p><strong>Reservaste</strong> Ensalada de frutas</p>
-                                <small>Ayer, 3:45 PM</small>
-                            </div>
-                        </div>
-                        <div class="actividad-item">
-                            <i class="fas fa-star actividad-icon logro"></i>
-                            <div>
-                                <p>¡Alcanzaste <strong>10 donaciones recibidas</strong>!</p>
-                                <small>Hace 3 días</small>
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="canton" class="label-campo">Cantón</label>
+                                <input type="text" class="campo-input" id="canton" name="canton" value="Central">
                             </div>
                         </div>
                     </div>
+
+                    <div class="campo">
+                        <label for="direccion" class="label-campo">Dirección exacta</label>
+                        <textarea class="campo-input" id="direccion" name="direccion" rows="3">Barrio Escalante, 75 metros este de la Iglesia</textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="identificacion" class="label-campo">Identificación</label>
+                                <input type="text" class="campo-input" id="identificacion" name="identificacion" value="1-1234-5678">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="fechaNacimiento" class="label-campo">Fecha de nacimiento</label>
+                                <input type="date" class="campo-input" id="fechaNacimiento" name="fechaNacimiento" value="2003-05-15">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="seccion-titulo seccion-titulo-mt">DATOS DE ACCESO</h5>
+
+                    <div class="campo">
+                        <label for="contrasena" class="label-campo">Contraseña</label>
+                        <input type="password" class="campo-input" id="contrasena" name="contrasena" placeholder="Dejar vacío para no cambiar">
+                    </div>
+
+
+                    <div class="botones botones-izquierda">
+                        <button type="button" class="btn-accion" id="btnEliminarPerfil">Eliminar Cuenta</button>
+                        <button type="submit" class="btn-accion">Guardar Cambios</button>
+                    </div>
+
+                    <div id="mensaje"></div>
+
                 </div>
-            </div>
+            </form>
+
+
         </main>
     </div>
 
-    <script>
-
-        function cambiarFoto() {
-            alert('Funcionalidad para cambiar foto');
-        }
-
-        function editarPerfil() {
-            alert('Funcionalidad para editar perfil');
-        }
-
-        function cambiarPassword() {
-            alert('Funcionalidad para cambiar contraseña');
-        }
-
-        function eliminarCuenta() {
-            if (confirm('¿Estás seguro de que deseas eliminar tu cuenta?')) {
-                alert('Cuenta eliminada');
-            }
-        }
-
-        document.getElementById('btnSidebar').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('mostrar');
-        });
-
-        document.getElementById('btnCerrarSidebar').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.remove('mostrar');
-        });
-    </script>
 
 </body>
 </html>
