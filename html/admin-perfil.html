@@ -27,7 +27,7 @@
             </div>
             <nav class="sidebar-nav">
                 <a href="admin-panel.html" class="sidebar-link">Panel Principal</a>
-                <a href="admin-beneficiarios.html" class="sidebar-link">Donaciones</a>
+                <a href="admin-beneficiarios.html" class="sidebar-link">Beneficiarios</a>
                 <a href="admin-restaurantes.html" class="sidebar-link">Restaurantes</a>
                 <a href="admin-perfil.html" class="sidebar-link activo">Perfil</a>
                 <a href="../html/login.html" class="sidebar-link">Cerrar Sesión</a>
@@ -39,10 +39,7 @@
             <h1 class="titulo-panel">MI PERFIL</h1>
 
             <form id="formPerfil">
-                <div class="formulario-card">
-                    <div class="row">
-
-                        <div class="col-md-6 col-izquierda">
+                <div class="formulario-card" style="max-width: 550px;">
 
                             <h5 class="seccion-titulo">INFORMACIÓN PERSONAL</h5>
 
@@ -63,7 +60,7 @@
                                 <input type="text" class="campo-input" id="telefono" name="telefono" value="7387-3930">
                             </div>
 
-                            <h5 class="seccion-titulo">DATOS DE ACCESO</h5>
+                            <h5 class="seccion-titulo seccion-titulo-mt">DATOS DE ACCESO</h5>
 
                             <div class="campo">
                                 <label for="correo" class="label-campo">Correo Electrónico</label>
@@ -77,17 +74,15 @@
                                     placeholder="Dejar vacío para no cambiar">
                             </div>
 
-                            <button type="button" class="btn-accion" id="btnCambiarContrasena">CambiarContraseña</button>
+                            <div class="botones botones-izquierda" style="margin-top: 20px;">
                             <button type="button" class="btn-accion" id="btnEliminarPerfil">Eliminar Perfil</button>
 
                             <button type="submit" class="btn-accion" id="btnGuardarAdmin">Guardar Cambios</button>
 
                             <div id="mensaje"></div>
+                            </div>
 
                         </div>
-                    </div>
-                </div>
-
             </form>
 
         </main>
