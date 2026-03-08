@@ -452,11 +452,20 @@ textarea.campo-input {
 @media (max-width: 576px) {
 
     .titulo-panel {
-        font-size: 2.5rem;
+        font-size: 1.4rem;
+        margin-top: 55px;
     }
 
     .titulo-pagina {
-        font-size: 2.5rem;
+        font-size: 2rem;
+    }
+
+    .estadisticas {
+        flex-direction: column;
+    }
+
+    .img-panel img {
+        width: 120px;
     }
 
     .btn-sidebar {
@@ -549,3 +558,5 @@ textarea.campo-input {
     justify-content: center;
     align-items: center;
 }
+/*Imagen del panel*/
+.img-panel img { width: 350px;}
