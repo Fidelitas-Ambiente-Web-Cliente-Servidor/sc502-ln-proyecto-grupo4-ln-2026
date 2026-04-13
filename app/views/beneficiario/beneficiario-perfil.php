@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlimenTICO - Mi Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/sc502-ln-proyecto-grupo4-ln-2026/public/css/beneficiario.css">
+    <script src="public/js/beneficiario.js"></script>
+</head>
+
+<body>
+
+    <button class="btn-sidebar" id="btnSidebar">☰</button>
+
+    <div class="layout">
+
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px">
+                </h2>
+                <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="beneficiario-panel.html" class="sidebar-link">Donaciones Disponibles</a>
+                <a href="beneficiario-reservas.html" class="sidebar-link">Mis Reservas</a>
+                <a href="beneficiario-perfil.html" class="sidebar-link activo">Mi Perfil</a>
+                <a href="../login.html" class="sidebar-link">Cerrar Sesión</a>
+            </nav>
+        </aside>
+
+        <main class="panel-contenido">
+
+            <h1 class="titulo-panel">MI PERFIL</h1>
+
+            <form id="formPerfil">
+                <div class="formulario-card">
+
+                    <h5 class="seccion-titulo">INFORMACIÓN PERSONAL</h5>
+
+                    <div class="campo">
+                        <label for="nombreCompleto" class="label-campo">Nombre completo</label>
+                        <input type="text" class="campo-input" id="nombreCompleto" name="nombreCompleto" value="María Salas Hernández">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="correo" class="label-campo">Correo electrónico</label>
+                                <input type="email" class="campo-input" id="correo" name="correo" value="maria.salas@email.com">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="telefono" class="label-campo">Teléfono</label>
+                                <input type="tel" class="campo-input" id="telefono" name="telefono" value="8888-7777">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="provincia" class="label-campo">Provincia</label>
+                                <select class="campo-input" id="provincia" name="provincia">
+                                    <option value="San José" selected>San José</option>
+                                    <option value="Alajuela">Alajuela</option>
+                                    <option value="Cartago">Cartago</option>
+                                    <option value="Heredia">Heredia</option>
+                                    <option value="Guanacaste">Guanacaste</option>
+                                    <option value="Puntarenas">Puntarenas</option>
+                                    <option value="Limón">Limón</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="canton" class="label-campo">Cantón</label>
+                                <input type="text" class="campo-input" id="canton" name="canton" value="Central">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="direccion" class="label-campo">Dirección exacta</label>
+                        <textarea class="campo-input" id="direccion" name="direccion" rows="3">Barrio Escalante, 75 metros este de la Iglesia</textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="identificacion" class="label-campo">Identificación</label>
+                                <input type="text" class="campo-input" id="identificacion" name="identificacion" value="1-1234-5678">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="campo">
+                                <label for="fechaNacimiento" class="label-campo">Fecha de nacimiento</label>
+                                <input type="date" class="campo-input" id="fechaNacimiento" name="fechaNacimiento" value="2003-05-15">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="seccion-titulo seccion-titulo-mt">DATOS DE ACCESO</h5>
+
+                    <div class="campo">
+                        <label for="contrasena" class="label-campo">Contraseña</label>
+                        <input type="password" class="campo-input" id="contrasena" name="contrasena" placeholder="Dejar vacío para no cambiar">
+                    </div>
+
+
+                    <div class="botones botones-izquierda">
+                        <button type="button" class="btn-accion" id="btnEliminarPerfil">Eliminar Cuenta</button>
+                        <button type="submit" class="btn-accion">Guardar Cambios</button>
+                    </div>
+
+                    <div id="mensaje"></div>
+
+                </div>
+            </form>
+
+
+        </main>
+    </div>
+
+
+</body>
+</html>
