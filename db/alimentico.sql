@@ -85,3 +85,27 @@ CREATE TABLE notificacionProyecto (
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarioProyecto(id_usuario)
 );
+
+ALTER TABLE usuarioProyecto 
+ADD COLUMN token_recuperacion VARCHAR(64) NULL,
+ADD COLUMN token_expira DATETIME NULL;
+
+-- Roles
+INSERT INTO rolProyecto (id_rol, nombre) VALUES
+(1, 'admin'),
+(2, 'restaurante'),
+(3, 'beneficiario');
+
+-- (password: 12345)
+INSERT INTO usuarioProyecto (id_usuario, id_rol, correo, contrasena) VALUES
+(1, 1, 'admin@alimentico.com', '$2y$10$0wkl2VjqQFNw2X5e.f3Lj.fliI7Etwk8r7bNW.OkqtGi31E8M6nRC'),
+(2, 2, 'restaurante@alimentico.com', '$2y$10$0wkl2VjqQFNw2X5e.f3Lj.fliI7Etwk8r7bNW.OkqtGi31E8M6nRC'),
+(3, 3, 'beneficiario@alimentico.com', '$2y$10$0wkl2VjqQFNw2X5e.f3Lj.fliI7Etwk8r7bNW.OkqtGi31E8M6nRC');
+
+-- Perfil restaurante de prueba
+INSERT INTO restauranteProyecto (id_usuario, nombre_negocio, tipo_establecimiento, cedula_juridica, telefono, provincia, canton, distrito, direccion_exacta)
+VALUES (2, 'La Esquina', 'Restaurante', '3-101-123456', '22221111', 'San José', 'San José', 'Carmen', 'Frente al parque central');
+
+-- Perfil beneficiario de prueba 
+INSERT INTO beneficiarioProyecto (id_usuario, nombre_completo, cedula_identidad, telefono, provincia, canton)
+VALUES (3, 'Juan Pérez', '1-1234-5678', '88881111', 'San José', 'Desamparados');

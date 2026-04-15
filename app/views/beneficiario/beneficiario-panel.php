@@ -27,7 +27,7 @@
                 <a href="beneficiario-panel.html" class="sidebar-link activo">Donaciones Disponibles</a>
                 <a href="beneficiario-reservas.html" class="sidebar-link">Mis Reservas</a>
                 <a href="beneficiario-perfil.html" class="sidebar-link">Mi Perfil</a>
-                <a href="../login.html" class="sidebar-link">Cerrar Sesión</a>
+                <a href="index.php?page=logout" class="sidebar-link">Cerrar Sesión</a>
             </nav>
         </aside>
 

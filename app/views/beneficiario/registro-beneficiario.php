@@ -1,33 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlimentTICO - Registro Beneficiario</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/sc502-ln-proyecto-grupo4-ln-2026/public/css/autentificacion.css">
-    <script src="public/js/autentificacion.js"></script>
+    <script src="/sc502-ln-proyecto-grupo4-ln-2026/public/js/autentificacion.js" defer></script>
 </head>
-
 <body>
     <header>
         <div class="header-logo">
-            <img src="../img/donacion-de-alimentos.png" alt="logo" class="img-logo">
+            <img src="/sc502-ln-proyecto-grupo4-ln-2026/public/img/donacion-de-alimentos.png" alt="logo" class="img-logo">
             <span class="logo-texto">Alimen<span class="logo-tico">TICO</span></span>
         </div>
         <nav>
-            <a href="index.html">Inicio</a>
-            <a href="index.html#nosotros">Sobre Nosotros</a>
+            <a href="/sc502-ln-proyecto-grupo4-ln-2026/public/index.php">Inicio</a>
+            <a href="/sc502-ln-proyecto-grupo4-ln-2026/public/index.php#nosotros">Sobre Nosotros</a>
         </nav>
-        <a href="login.html" class="btn-header">Iniciar Sesión</a>
+        <a href="index.php?page=login" class="btn-header">Iniciar Sesión</a>
     </header>
 
     <main class="pagina-contenedor-ancho">
-
         <h1 class="titulo-pagina">FORMULARIO DE REGISTRO</h1>
-        <p class="subtitulo-pagina">Registro de Beneficios, accede a alimentos disponibles cerca de ti</p>
+        <p class="subtitulo-pagina">Registro de Beneficiario, accede a alimentos disponibles cerca de ti</p>
 
         <form id="formRegistroBeneficiario">
             <div class="formulario-card">
@@ -42,15 +38,14 @@
                         </div>
 
                         <div class="campo">
-                            <label for="cedula" class="label-campo">Cedula de identidad</label>
+                            <label for="cedula" class="label-campo">Cédula de identidad</label>
                             <input type="text" class="campo-input" id="cedula" name="cedula" placeholder="Ej: 118181818">
                         </div>
 
                         <div class="campo">
-                            <label for="telefono" class="label-campo">Telefono</label>
+                            <label for="telefono" class="label-campo">Teléfono</label>
                             <input type="text" class="campo-input" id="telefono" name="telefono" placeholder="Ej: 88888888">
                         </div>
-
                     </div>
 
                     <div class="col-md-6">
@@ -71,11 +66,6 @@
                             <input type="password" class="campo-input" id="confirmarContrasena" name="confirmarContrasena">
                         </div>
                     </div>
-
-                       
-                        
-
-
                 </div>
                 <div class="botones">
                     <button type="submit" class="btn-accion" id="btnRegistrar">REGISTRAR</button>
@@ -85,15 +75,10 @@
                 <hr>
                 <div class="iniciar-sesion">
                     <label class="label-campo">¿Ya tienes cuenta?</label>
-                    <a href="login.html" class="iniciar-sesion-link">Iniciar Sesión</a>
+                    <a href="index.php?page=login" class="iniciar-sesion-link">Iniciar Sesión</a>
                 </div>
-                
             </div>
-
         </form>
-
     </main>
-
 </body>
-
 </html>
