@@ -28,7 +28,7 @@
                 <a href="restaurante-panel.html" class="sidebar-link activo">Panel Principal</a>
                 <a href="restaurante-donaciones.html" class="sidebar-link">Donaciones</a>
                 <a href="restaurante-perfil.html" class="sidebar-link">Perfil</a>
-                <a href="../html/login.html" class="sidebar-link">Cerrar Sesión</a>
+                <a href="index.php?page=logout" class="sidebar-link">Cerrar Sesión</a>
             </nav>
         </aside>
 

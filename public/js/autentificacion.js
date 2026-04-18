@@ -1,226 +1,178 @@
-// login
-document.addEventListener("DOMContentLoaded", function () {
+const URL_BASE = "/sc502-ln-proyecto-grupo4-ln-2026/index.php";
 
+// Helpers
+
+function mostrarError(mensaje) {
+    var el = document.getElementById("mensaje");
+    el.innerHTML = mensaje;
+    el.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
+    el.style.display = "block";
+}
+
+function mostrarExito(mensaje) {
+    var el = document.getElementById("mensaje");
+    el.innerHTML = mensaje;
+    el.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
+    el.style.display = "block";
+}
+
+function postData(body) {
+    return fetch(URL_BASE, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(body).toString()
+    }).then(function (r) { return r.json(); });
+}
+
+// LOGIN
+
+document.addEventListener("DOMContentLoaded", function () {
     var formLogin = document.getElementById("formLogin");
     if (!formLogin) { return; }
 
-    var mensaje = document.getElementById("mensaje");
-    mensaje.style.display = "none";
+    document.getElementById("mensaje").style.display = "none";
 
     formLogin.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        var correo = document.getElementById("correo");
-        var contrasena = document.getElementById("contrasena");
+        var correo     = document.getElementById("correo").value.trim();
+        var contrasena = document.getElementById("contrasena").value;
 
-        if (correo.value == "") {
-            mensaje.innerHTML = "El correo electrónico es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
+        if (correo === "") { mostrarError("El correo electronico es obligatorio" ); return; }
+        if (!correo.includes("@") || !correo.includes(".")) { mostrarError("El correo no tiene es valido"); return; }
+        if (contrasena === "") { mostrarError("La contraseña es obligatoria"); return; }
 
-        if (!correo.value.includes("@") || !correo.value.includes(".")) {
-            mensaje.innerHTML = "El correo no tiene un formato válido";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (contrasena.value == "") {
-            mensaje.innerHTML = "La contraseña es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        mensaje.innerHTML = "Iniciando sesión...";
-        mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-        mensaje.style.display = "block";
-        console.log("Login correcto");
-
-        setTimeout(function () {
-            window.location.href = "admin-panel.html";
-        }, 1500);
+        postData({ option: "login", correo: correo, contrasena: contrasena })
+            .then(function (data) {
+                if (data.response === "00") {
+                    mostrarExito("Iniciando sesión ");
+                    var rutas = {
+                        "admin":        URL_BASE + "?page=admin_panel",
+                        "restaurante":  URL_BASE + "?page=restaurante_panel",
+                        "beneficiario": URL_BASE + "?page=beneficiario_panel"
+                    };
+                    setTimeout(function () {
+                        window.location.href = rutas[data.rol] || URL_BASE;
+                    }, 1200);
+                } else {
+                    mostrarError(data.message);
+                }
+            })
+            .catch(function () { mostrarError("Error de conexión con el servidor"); });
     });
 });
 
-//recuperar la contraseña
-document.addEventListener("DOMContentLoaded", function () {
+// RECUPERAR CONTRASEÑA
 
+document.addEventListener("DOMContentLoaded", function () {
     var formRecuperar = document.getElementById("formRecuperar");
     if (!formRecuperar) { return; }
 
-    var mensaje = document.getElementById("mensaje");
-    mensaje.style.display = "none";
+    document.getElementById("mensaje").style.display = "none";
 
     formRecuperar.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        var correo = document.getElementById("correo");
+        var correo = document.getElementById("correo").value.trim();
 
-        if (correo.value == "") {
-            mensaje.innerHTML = "El correo electrónico es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
+        if (correo === "") { mostrarError("El correo electronico es obligatorio"); return; }
+        if (!correo.includes("@") || !correo.includes(".")) { mostrarError("El correo no tiene un formato valido"); return; }
 
-        if (!correo.value.includes("@") || !correo.value.includes(".")) {
-            mensaje.innerHTML = "El correo no tiene un formato válido";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        mensaje.innerHTML = "Se envió un correo de recuperación a " + correo.value;
-        mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-        mensaje.style.display = "block";
-        console.log("Correo de recuperación enviado");
+        postData({ option: "recuperar_contrasena", correo: correo })
+            .then(function (data) {
+                if (data.response === "00") {
+                    mostrarExito(data.message);
+                } else {
+                    mostrarError(data.message);
+                }
+            })
+            .catch(function () { mostrarError("Error de conexión"); });
     });
 });
 
-// registro del beneficiario
-document.addEventListener("DOMContentLoaded", function () {
+// REGISTRO BENEFICIARIO 
 
+document.addEventListener("DOMContentLoaded", function () {
     var formBeneficiario = document.getElementById("formRegistroBeneficiario");
     if (!formBeneficiario) { return; }
 
-    var mensaje = document.getElementById("mensaje");
-    mensaje.style.display = "none";
+    document.getElementById("mensaje").style.display = "none";
 
     formBeneficiario.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        var nombreCompleto = document.getElementById("nombreCompleto");
-        var cedula = document.getElementById("cedula");
-        var telefono = document.getElementById("telefono");
-        var correo = document.getElementById("correo");
-        var contrasena = document.getElementById("contrasena");
-        var confirmarContrasena = document.getElementById("confirmarContrasena");
+        var nombreCompleto     = document.getElementById("nombreCompleto").value.trim();
+        var cedula             = document.getElementById("cedula").value.trim();
+        var telefono           = document.getElementById("telefono").value.trim();
+        var correo             = document.getElementById("correo").value.trim();
+        var contrasena         = document.getElementById("contrasena").value;
+        var confirmarContrasena = document.getElementById("confirmarContrasena").value;
 
-        if (nombreCompleto.value == "") {
-            mensaje.innerHTML = "El nombre completo es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (cedula.value == "") {
-            mensaje.innerHTML = "La cédula de identidad es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (telefono.value == "") {
-            mensaje.innerHTML = "El teléfono es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (correo.value == "") {
-            mensaje.innerHTML = "El correo electrónico es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (!correo.value.includes("@") || !correo.value.includes(".")) {
-            mensaje.innerHTML = "El correo no tiene un formato válido";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (contrasena.value == "") {
-            mensaje.innerHTML = "La contraseña es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (contrasena.value.length < 8) {
-            mensaje.innerHTML = "La contraseña debe tener al menos 8 caracteres";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (contrasena.value == contrasena.value.toLowerCase()) {
-            mensaje.innerHTML = "La contraseña debe tener al menos una letra mayúscula";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
+        if (nombreCompleto === "")  { mostrarError("El nombre completo es obligatorio"); return; }
+        if (cedula === "")          { mostrarError("La cédula de identidad es obligatoria"); return; }
+        if (telefono === "")        { mostrarError("El teléfono es obligatorio"); return; }
+        if (correo === "")          { mostrarError("El correo electronico es obligatorio"); return; }
+        if (!correo.includes("@") || !correo.includes(".")) { mostrarError("El correo no tiene un formato valido"); return; }
+        if (contrasena === "")      { mostrarError("La contraseña es obligatoria"); return; }
+        if (contrasena.length < 8)  { mostrarError("La contraseña ocupa al menos 8 caracteres"); return; }
+        if (contrasena === contrasena.toLowerCase()) { mostrarError("La contraseña ocupa al menos una letra mayuscula"); return; }
 
         var tieneNumero = false;
-        for (var i = 0; i < contrasena.value.length; i++) {
-            if (contrasena.value[i] >= "0" && contrasena.value[i] <= "9") {
-                tieneNumero = true;
+        for (var i = 0; i < contrasena.length; i++) {
+            if (contrasena[i] >= "0" && contrasena[i] <= "9") { tieneNumero = true; break; }
+        }
+        if (!tieneNumero)               { mostrarError("La contraseña ocupa al menos un número"); return; }
+        if (confirmarContrasena === "")  { mostrarError("Tiene que confirmar tu contraseña"); return; }
+        if (contrasena !== confirmarContrasena) { mostrarError("Las contraseñas no son iguales"); return; }
+
+        postData({
+            option:           "registro_beneficiario",
+            nombreCompleto:   nombreCompleto,
+            cedula:           cedula,
+            telefono:         telefono,
+            correo:           correo,
+            contrasena:       contrasena
+        })
+        .then(function (data) {
+            if (data.response === "00") {
+                mostrarExito("Registro exitoso, bienvenido a AlimenTICO");
+                setTimeout(function () {
+                    window.location.href = URL_BASE + "?page=beneficiario_panel";
+                }, 2000);
+            } else {
+                mostrarError(data.message);
             }
-        }
-        if (tieneNumero == false) {
-            mensaje.innerHTML = "La contraseña debe tener al menos un número";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (confirmarContrasena.value == "") {
-            mensaje.innerHTML = "Debes confirmar tu contraseña";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (contrasena.value != confirmarContrasena.value) {
-            mensaje.innerHTML = "Las contraseñas no coinciden";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        mensaje.innerHTML = "Registro exitoso, bienvenido a AlimentTICO";
-        mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-        mensaje.style.display = "block";
-        console.log("Registro beneficiario correcto");
-
-        setTimeout(function () {
-            window.location.href = "beneficiario-panel.html";
-        }, 2000);
+        })
+        .catch(function () { mostrarError("Error de conexión con el servidor"); });
     });
 });
 
-// registro del restaurante
-document.addEventListener("DOMContentLoaded", function () {
+// REGISTRO RESTAURANTE
 
+document.addEventListener("DOMContentLoaded", function () {
     var formRestaurante = document.getElementById("formRegistroRestaurante");
     if (!formRestaurante) { return; }
 
-    var mensaje = document.getElementById("mensaje");
-    mensaje.style.display = "none";
+    document.getElementById("mensaje").style.display = "none";
 
     // Switches de horario
     var switches = document.querySelectorAll(".switch-dia");
     for (var i = 0; i < switches.length; i++) {
-        var sw = switches[i];
-        sw.addEventListener("change", function () {
-            var dia = this.id.replace("switch", "");
-            var inputAbre = document.getElementById("abre" + dia);
+        switches[i].addEventListener("change", function () {
+            var dia        = this.id.replace("switch", "");
+            var inputAbre  = document.getElementById("abre"   + dia);
             var inputCierra = document.getElementById("cierra" + dia);
             var labelEstado = document.getElementById("estado" + dia);
 
             if (this.checked) {
-                inputAbre.disabled = false;
+                inputAbre.disabled  = false;
                 inputCierra.disabled = false;
                 labelEstado.innerHTML = "Abierto";
             } else {
-                inputAbre.disabled = true;
-                inputAbre.value = "";
+                inputAbre.disabled  = true;
+                inputAbre.value     = "";
                 inputCierra.disabled = true;
-                inputCierra.value = "";
+                inputCierra.value   = "";
                 labelEstado.innerHTML = "Cerrado";
             }
         });
@@ -229,145 +181,123 @@ document.addEventListener("DOMContentLoaded", function () {
     formRestaurante.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        var nombreNegocio = document.getElementById("nombreNegocio");
-        var cedulaJuridica = document.getElementById("cedulaJuridica");
-        var telefono = document.getElementById("telefono");
-        var canton = document.getElementById("canton");
-        var distrito = document.getElementById("distrito");
-        var direccion = document.getElementById("direccion");
-        var correo = document.getElementById("correo");
-        var contrasena = document.getElementById("contrasena");
-        var confirmarContrasena = document.getElementById("confirmarContrasena");
+        var nombreNegocio       = document.getElementById("nombreNegocio").value.trim();
+        var cedulaJuridica      = document.getElementById("cedulaJuridica").value.trim();
+        var telefono            = document.getElementById("telefono").value.trim();
+        var canton              = document.getElementById("canton").value.trim();
+        var distrito            = document.getElementById("distrito").value.trim();
+        var direccion           = document.getElementById("direccion").value.trim();
+        var correo              = document.getElementById("correo").value.trim();
+        var contrasena          = document.getElementById("contrasena").value;
+        var confirmarContrasena  = document.getElementById("confirmarContrasena").value;
 
-        if (nombreNegocio.value == "") {
-            mensaje.innerHTML = "El nombre del negocio es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (cedulaJuridica.value == "") {
-            mensaje.innerHTML = "La cédula jurídica es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (telefono.value == "") {
-            mensaje.innerHTML = "El teléfono es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (canton.value == "") {
-            mensaje.innerHTML = "El cantón es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (distrito.value == "") {
-            mensaje.innerHTML = "El distrito es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (direccion.value == "") {
-            mensaje.innerHTML = "La dirección exacta es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (correo.value == "") {
-            mensaje.innerHTML = "El correo electrónico es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (!correo.value.includes("@") || !correo.value.includes(".")) {
-            mensaje.innerHTML = "El correo no tiene un formato válido";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (contrasena.value == "") {
-            mensaje.innerHTML = "La contraseña es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (contrasena.value.length < 8) {
-            mensaje.innerHTML = "La contraseña debe tener al menos 8 caracteres";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (contrasena.value == contrasena.value.toLowerCase()) {
-            mensaje.innerHTML = "La contraseña debe tener al menos una letra mayúscula";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
+        if (nombreNegocio === "")  { mostrarError("El nombre del negocio es obligatorio"); return; }
+        if (cedulaJuridica === "") { mostrarError("La cédula jurídica es obligatoria"); return; }
+        if (telefono === "")       { mostrarError("El teléfono es obligatorio"); return; }
+        if (canton === "")         { mostrarError("El cantón es obligatorio"); return; }
+        if (distrito === "")       { mostrarError("El distrito es obligatorio"); return; }
+        if (direccion === "")      { mostrarError("La dirección exacta es obligatoria"); return; }
+        if (correo === "")         { mostrarError("El correo electronico es obligatorio"); return; }
+        if (!correo.includes("@") || !correo.includes(".")) { mostrarError("El correo no tiene un formato valido"); return; }
+        if (contrasena === "")     { mostrarError("La contraseña es obligatoria"); return; }
+        if (contrasena.length < 8) { mostrarError("La contraseña ocupa al menos 8 caracteres"); return; }
+        if (contrasena === contrasena.toLowerCase()) { mostrarError("La contraseña ocupa al menos una letra mayúscula"); return; }
 
         var tieneNumero = false;
-        for (var i = 0; i < contrasena.value.length; i++) {
-            if (contrasena.value[i] >= "0" && contrasena.value[i] <= "9") {
-                tieneNumero = true;
-            }
+        for (var i = 0; i < contrasena.length; i++) {
+            if (contrasena[i] >= "0" && contrasena[i] <= "9") { tieneNumero = true; break; }
         }
-        if (tieneNumero == false) {
-            mensaje.innerHTML = "La contraseña debe tener al menos un número";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
+        if (!tieneNumero)                { mostrarError("La contraseña ocupa al menos un número"); return; }
+        if (confirmarContrasena === "")  { mostrarError("Debes confirmar tu contraseña"); return; }
+        if (contrasena !== confirmarContrasena) { mostrarError("Las contraseñas no coinciden"); return; }
 
-        if (confirmarContrasena.value == "") {
-            mensaje.innerHTML = "Debes confirmar tu contraseña";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (contrasena.value != confirmarContrasena.value) {
-            mensaje.innerHTML = "Las contraseñas no coinciden";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        // Validar horarios: hora de entrada no puede ser después de hora de salida
-        var diasSwitches = document.querySelectorAll(".switch-dia");
-        for (var i = 0; i < diasSwitches.length; i++) {
-            var swVal = diasSwitches[i];
-            var dia = swVal.id.replace("switch", "");
-            var inputAbre = document.getElementById("abre" + dia);
-            var inputCierra = document.getElementById("cierra" + dia);
-
-            if (swVal.checked && inputAbre.value != "" && inputCierra.value != "") {
-                if (inputAbre.value >= inputCierra.value) {
-                    mensaje.innerHTML = "El horario del " + dia + " no es válido, la hora de apertura debe ser antes que la de cierre";
-                    mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                    mensaje.style.display = "block";
+        // Validar horarios
+        var dias = ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"];
+        for (var d = 0; d < dias.length; d++) {
+            var sw      = document.getElementById("switch" + dias[d]);
+            var abre    = document.getElementById("abre"   + dias[d]);
+            var cierra  = document.getElementById("cierra" + dias[d]);
+            if (sw.checked && abre.value !== "" && cierra.value !== "") {
+                if (abre.value >= cierra.value) {
+                    mostrarError("El horario del " + dias[d] + " no es valido, la apertura debe tiene que ser antes de cerrar");
                     return;
                 }
             }
         }
 
-        mensaje.innerHTML = "Registro exitoso, bienvenido a AlimentTICO";
-        mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-        mensaje.style.display = "block";
-        console.log("Registro restaurante correcto");
+        // Construir body con horarios incluidos
+        var body = {
+            option:              "registro_restaurante",
+            nombreNegocio:       nombreNegocio,
+            tipoEstablecimiento: document.getElementById("tipoEstablecimiento").value,
+            cedulaJuridica:      cedulaJuridica,
+            telefono:            telefono,
+            provincia:           document.getElementById("provincia").value,
+            canton:              canton,
+            distrito:            distrito,
+            direccion:           direccion,
+            linkMaps:            document.getElementById("googleMaps").value.trim(),
+            correo:              correo,
+            contrasena:          contrasena
+        };
 
-        setTimeout(function () {
-            window.location.href = "restaurante-panel.html";
-        }, 2000);
+        // Agregar estado de cada switch de horario
+        for (var d = 0; d < dias.length; d++) {
+            var sw     = document.getElementById("switch" + dias[d]);
+            var abre   = document.getElementById("abre"   + dias[d]);
+            var cierra = document.getElementById("cierra" + dias[d]);
+            if (sw.checked) {
+                body["switch" + dias[d]] = "on";
+                body["abre"   + dias[d]] = abre.value;
+                body["cierra" + dias[d]] = cierra.value;
+            }
+        }
+
+        postData(body)
+            .then(function (data) {
+                if (data.response === "00") {
+                    mostrarExito("Registro exitoso, bienvenido a AlimenTICO");
+                    setTimeout(function () {
+                        window.location.href = URL_BASE + "?page=restaurante_panel";
+                    }, 2000);
+                } else {
+                    mostrarError(data.message);
+                }
+            })
+            .catch(function () { mostrarError("Error de conexión con el servidor"); });
+    });
+});
+
+// NUEVA CONTRASEÑA
+document.addEventListener("DOMContentLoaded", function () {
+    var formNueva = document.getElementById("formNuevaContrasena");
+    if (!formNueva) { return; }
+
+    document.getElementById("mensaje").style.display = "none";
+
+    formNueva.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var token      = document.getElementById("token").value;
+        var contrasena = document.getElementById("nuevaContrasena").value;
+        var confirmar  = document.getElementById("confirmarNuevaContrasena").value;
+
+        if (contrasena === "")     { mostrarError("La contraseña es obligatoria"); return; }
+        if (contrasena.length < 8) { mostrarError("La contraseña ocupa al menos 8 caracteres"); return; }
+        if (contrasena === contrasena.toLowerCase()) { mostrarError("Ocupa al menos una mayúscula"); return; }
+        if (contrasena !== confirmar) { mostrarError("Las contraseñas no coinciden"); return; }
+
+        postData({ option: "cambiar_contrasena", token: token, contrasena: contrasena })
+            .then(function (data) {
+                if (data.response === "00") {
+                    mostrarExito("Contraseña actualizada. Redirigiendo...");
+                    setTimeout(function () {
+                        window.location.href = URL_BASE + "?page=login";
+                    }, 2000);
+                } else {
+                    mostrarError(data.message);
+                }
+            })
+            .catch(function () { mostrarError("Error de conexión"); });
     });
 });
