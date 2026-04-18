@@ -101,6 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // RUTAS GET / VISTAS
 switch ($page) {
 
+    case 'inicio':
+        require __DIR__ . '/app/views/sesion/index.php';
+        break;
+
     case 'registro_beneficiario':
         $ctrl = new SesionController();
         $ctrl->showRegistroBeneficiario();
