@@ -15,8 +15,8 @@
             <span class="logo-texto">Alimen<span class="logo-tico">TICO</span></span>
         </div>
         <nav>
-            <a href="/sc502-ln-proyecto-grupo4-ln-2026/public/index.php">Inicio</a>
-            <a href="/sc502-ln-proyecto-grupo4-ln-2026/public/index.php#nosotros">Sobre Nosotros</a>
+            <a href="/sc502-ln-proyecto-grupo4-ln-2026/index.php?page=inicio">Inicio</a>
+            <a href="/sc502-ln-proyecto-grupo4-ln-2026/index.php?page=inicio#nosotros">Sobre Nosotros</a>
         </nav>
         <a href="index.php?page=login" class="btn-header">Iniciar Sesión</a>
     </header>
