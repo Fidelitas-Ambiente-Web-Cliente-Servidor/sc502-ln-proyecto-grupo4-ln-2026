@@ -8,7 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/sc502-ln-proyecto-grupo4-ln-2026/public/css/beneficiario.css">
-    <script src="public/js/beneficiario.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/sc502-ln-proyecto-grupo4-ln-2026/public/js/beneficiario.js" defer></script>
 </head>
 
 <body>
@@ -19,14 +20,14 @@
 
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-top">
-                <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px"></h2>
+                <h2 class="logo-texto">AlimenTICO <img src="/sc502-ln-proyecto-grupo4-ln-2026/public/img/donacion-de-alimentos.png" alt="logo" height="40px"></h2>
                 <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
             </div>
             <nav class="sidebar-nav">
-                <a href="beneficiario-panel.html" class="sidebar-link">Donaciones Disponibles</a>
-                <a href="beneficiario-reservas.html" class="sidebar-link activo">Mis Reservas</a>
-                <a href="beneficiario-perfil.html" class="sidebar-link">Mi Perfil</a>
-                <a href="../login.html" class="sidebar-link">Cerrar Sesión</a>
+                <a href="index.php?page=beneficiario_panel" class="sidebar-link activo">Donaciones Disponibles</a>
+                <a href="index.php?page=beneficiario_reservas" class="sidebar-link">Mis Reservas</a>
+                <a href="index.php?page=beneficiario_perfil" class="sidebar-link">Mi Perfil</a>
+                <a href="index.php?page=logout" class="sidebar-link">Cerrar Sesión</a>
             </nav>
         </aside>
 
@@ -43,166 +44,113 @@
             </div>
 
             <div id="seccionActivas">
-
-                <div class="reserva-card" data-estado="activa">
-                    <div class="reserva-card-header">
-                        <div>
-                            <h5 class="reserva-nombre">Arroz con pollo</h5>
-                            <span class="reserva-estado estado-activa">Pendiente</span>
+                <?php if (empty($activas)): ?>
+                    <p class="label-campo">No tenés reservas activas.</p>
+                <?php else: ?>
+                    <?php foreach ($activas as $r): ?>
+                        <div class="reserva-card" data-estado="activa">
+                            <div class="reserva-card-header">
+                                <div>
+                                    <h5 class="reserva-nombre"><?= htmlspecialchars($r['nombre_descripcion']) ?></h5>
+                                    <span class="reserva-estado estado-activa">Pendiente</span>
+                                </div>
+                                <span class="reserva-codigo"><?= htmlspecialchars($r['codigo_reserva']) ?></span>
+                            </div>
+                            <div class="reserva-card-body">
+                                <div class="reserva-campo">
+                                    <span class="reserva-label">Negocio</span>
+                                    <span><?= htmlspecialchars($r['nombre_negocio']) ?></span>
+                                </div>
+                                <div class="reserva-campo">
+                                    <span class="reserva-label">Fecha</span>
+                                    <span><?= date('d/m/Y', strtotime($r['fecha_disponible'])) ?></span>
+                                </div>
+                                <div class="reserva-campo">
+                                    <span class="reserva-label">Hora límite</span>
+                                    <span><?= date('g:i A', strtotime($r['hora_limite'])) ?></span>
+                                </div>
+                                <div class="reserva-campo">
+                                    <span class="reserva-label">Ubicación</span>
+                                    <span><?= htmlspecialchars($r['provincia']) ?>, <?= htmlspecialchars($r['canton']) ?></span>
+                                </div>
+                            </div>
+                            <div class="reserva-card-footer">
+                                <button class="btn-accion btnConfirmar" data-id="<?= $r['id_reserva'] ?>"
+                                    data-nombre="<?= htmlspecialchars($r['nombre_descripcion']) ?>">
+                                    Confirmar retiro
+                                </button>
+                                <button class="btn-accion btnCancelar" data-id="<?= $r['id_reserva'] ?>"
+                                    data-nombre="<?= htmlspecialchars($r['nombre_descripcion']) ?>">
+                                    Cancelar reserva
+                                </button>
+                            </div>
                         </div>
-                        <span class="reserva-codigo">ALM-2026-001</span>
-                    </div>
-                    <div class="reserva-card-body">
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Negocio</span>
-                            <span>Restaurante La Casa</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Fecha</span>
-                            <span>19/03/2026</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Hora límite</span>
-                            <span>8:00 PM</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Ubicación</span>
-                            <span>San José, Centro</span>
-                        </div>
-                    </div>
-                    <div class="reserva-card-footer">
-                        <button class="btn-accion" id="btnConfirmar1">Confirmar retiro</button>
-                        <button class="btn-accion" id="btnCancelar1">Cancelar reserva</button>
-                    </div>
-                </div>
-
-                <div class="reserva-card" data-estado="activa">
-                    <div class="reserva-card-header">
-                        <div>
-                            <h5 class="reserva-nombre">Ensalada de frutas</h5>
-                            <span class="reserva-estado estado-activa">Pendiente</span>
-                        </div>
-                        <span class="reserva-codigo">ALM-2026-002</span>
-                    </div>
-                    <div class="reserva-card-body">
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Negocio</span>
-                            <span>Supermercado La Económica</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Fecha</span>
-                            <span>19/03/2026</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Hora límite</span>
-                            <span>6:00 PM</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Ubicación</span>
-                            <span>Alajuela, Centro</span>
-                        </div>
-                    </div>
-                    <div class="reserva-card-footer">
-                        <button class="btn-accion" id="btnConfirmar2">Confirmar retiro</button>
-                        <button class="btn-accion" id="btnCancelar2">Cancelar reserva</button>
-                    </div>
-                </div>
-
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
 
             <div id="seccionConfirmadas">
-
-                <div class="reserva-card" data-estado="confirmada">
-                    <div class="reserva-card-header">
-                        <div>
-                            <h5 class="reserva-nombre">Panadería variada</h5>
-                            <span class="reserva-estado estado-confirmada">Confirmada</span>
+                <?php if (empty($confirmadas)): ?>
+                    <p class="label-campo">No tenés reservas confirmadas.</p>
+                <?php else: ?>
+                    <?php foreach ($confirmadas as $r): ?>
+                        <div class="reserva-card" data-estado="confirmada">
+                            <div class="reserva-card-header">
+                                <div>
+                                    <h5 class="reserva-nombre"><?= htmlspecialchars($r['nombre_descripcion']) ?></h5>
+                                    <span class="reserva-estado estado-confirmada">Confirmada</span>
+                                </div>
+                                <span class="reserva-codigo"><?= htmlspecialchars($r['codigo_reserva']) ?></span>
+                            </div>
+                            <div class="reserva-card-body">
+                                <div class="reserva-campo">
+                                    <span class="reserva-label">Negocio</span>
+                                    <span><?= htmlspecialchars($r['nombre_negocio']) ?></span>
+                                </div>
+                                <div class="reserva-campo">
+                                    <span class="reserva-label">Fecha</span>
+                                    <span><?= date('d/m/Y', strtotime($r['fecha_disponible'])) ?></span>
+                                </div>
+                                <div class="reserva-campo">
+                                    <span class="reserva-label">Ubicación</span>
+                                    <span><?= htmlspecialchars($r['provincia']) ?>, <?= htmlspecialchars($r['canton']) ?></span>
+                                </div>
+                            </div>
                         </div>
-                        <span class="reserva-codigo">ALM-2026-003</span>
-                    </div>
-                    <div class="reserva-card-body">
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Negocio</span>
-                            <span>Panadería San José</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Fecha</span>
-                            <span>18/03/2026</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Hora de retiro</span>
-                            <span>5:30 PM</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Ubicación</span>
-                            <span>San José, Escazú</span>
-                        </div>
-                    </div>
-                </div>
-
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
 
-            
-
             <div id="seccionCanceladas">
-
-                <div class="reserva-card" data-estado="cancelada">
-                    <div class="reserva-card-header">
-                        <div>
-                            <h5 class="reserva-nombre">Pizza</h5>
-                            <span class="reserva-estado estado-cancelada">Cancelada</span>
+                <?php if (empty($canceladas)): ?>
+                    <p class="label-campo">No tenés reservas canceladas.</p>
+                <?php else: ?>
+                    <?php foreach ($canceladas as $r): ?>
+                        <div class="reserva-card" data-estado="cancelada">
+                            <div class="reserva-card-header">
+                                <div>
+                                    <h5 class="reserva-nombre"><?= htmlspecialchars($r['nombre_descripcion']) ?></h5>
+                                    <span class="reserva-estado estado-cancelada">Cancelada</span>
+                                </div>
+                                <span class="reserva-codigo"><?= htmlspecialchars($r['codigo_reserva']) ?></span>
+                            </div>
+                            <div class="reserva-card-body">
+                                <div class="reserva-campo">
+                                    <span class="reserva-label">Negocio</span>
+                                    <span><?= htmlspecialchars($r['nombre_negocio']) ?></span>
+                                </div>
+                                <div class="reserva-campo">
+                                    <span class="reserva-label">Fecha</span>
+                                    <span><?= date('d/m/Y', strtotime($r['fecha_disponible'])) ?></span>
+                                </div>
+                                <div class="reserva-campo">
+                                    <span class="reserva-label">Ubicación</span>
+                                    <span><?= htmlspecialchars($r['provincia']) ?>, <?= htmlspecialchars($r['canton']) ?></span>
+                                </div>
+                            </div>
                         </div>
-                        <span class="reserva-codigo">ALM-2026-004</span>
-                    </div>
-                    <div class="reserva-card-body">
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Negocio</span>
-                            <span>Pizzería Don José</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Fecha</span>
-                            <span>17/03/2026</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Hora límite</span>
-                            <span>8:00 PM</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Ubicación</span>
-                            <span>San José, Desamparados</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reserva-card" data-estado="cancelada">
-                    <div class="reserva-card-header">
-                        <div>
-                            <h5 class="reserva-nombre">Pizza</h5>
-                            <span class="reserva-estado estado-cancelada">Cancelada</span>
-                        </div>
-                        <span class="reserva-codigo">ALM-2026-004</span>
-                    </div>
-                    <div class="reserva-card-body">
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Negocio</span>
-                            <span>Pizzería Don José</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Fecha</span>
-                            <span>17/03/2026</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Hora límite</span>
-                            <span>8:00 PM</span>
-                        </div>
-                        <div class="reserva-campo">
-                            <span class="reserva-label">Ubicación</span>
-                            <span>San José, Desamparados</span>
-                        </div>
-                    </div>
-                </div>
-                               
-
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
 
         </main>
