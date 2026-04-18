@@ -26,4 +26,13 @@ class Beneficiario {
         $stmt->execute();
         return $stmt->affected_rows > 0;
     }
+
+    public function getByIdUsuario($id_usuario) {
+        $query = "SELECT * FROM beneficiarioProyecto WHERE id_usuario = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $id_usuario);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+}
 }

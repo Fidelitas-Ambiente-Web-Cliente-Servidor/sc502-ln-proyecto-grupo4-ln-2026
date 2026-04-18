@@ -1,311 +1,243 @@
+const URL_BASE = "/sc502-ln-proyecto-grupo4-ln-2026/index.php";
+
 console.log("Bienvenidos a AlimentTICO - Beneficiario");
 
 // Sidebar
-document.addEventListener("DOMContentLoaded", function () {
-    let btnSidebar = document.getElementById("btnSidebar");
-    let btnCerrar = document.getElementById("btnCerrarSidebar");
-    let sidebar = document.getElementById("sidebar");
+$(function () {
+    let btnSidebar = $("#btnSidebar");
+    let btnCerrar = $("#btnCerrarSidebar");
+    let sidebar = $("#sidebar");
 
-    if (btnSidebar) {
-        btnSidebar.addEventListener("click", function () {
-            sidebar.classList.add("abierto");
+    if (btnSidebar.length) {
+        btnSidebar.on("click", function () {
+            sidebar.addClass("abierto");
         });
     }
 
-    if (btnCerrar) {
-        btnCerrar.addEventListener("click", function () {
-            sidebar.classList.remove("abierto");
+    if (btnCerrar.length) {
+        btnCerrar.on("click", function () {
+            sidebar.removeClass("abierto");
         });
     }
 });
 
 // Perfil del beneficiario
-document.addEventListener("DOMContentLoaded", function () {
+$(function () {
+    let formPerfil = $("#formPerfil");
+    if (!formPerfil.length) { return; }
 
-    let formPerfil = document.getElementById("formPerfil");
-    if (!formPerfil) { return; }
+    let mensaje = $("#mensaje");
+    mensaje.hide();
 
-    let mensaje = document.getElementById("mensaje");
-    mensaje.style.display = "none";
-
-    formPerfil.addEventListener("submit", function (event) {
+    formPerfil.on("submit", function (event) {
         event.preventDefault();
 
-        let nombreCompleto = document.getElementById("nombreCompleto");
-        let correo = document.getElementById("correo");
-        let telefono = document.getElementById("telefono");
-        let canton = document.getElementById("canton");
-        let direccion = document.getElementById("direccion");
-        let identificacion = document.getElementById("identificacion");
-        let contrasena = document.getElementById("contrasena");
+        let nombreCompleto = $("#nombreCompleto").val();
+        let correo         = $("#correo").val();
+        let telefono       = $("#telefono").val();
+        let canton         = $("#canton").val();
+        let direccion      = $("#direccion").val();
+        let identificacion = $("#identificacion").val();
+        let contrasena     = $("#contrasena").val();
 
-        if (nombreCompleto.value == "") {
-            mensaje.innerHTML = "El nombre completo es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
+        if (nombreCompleto == "") { mensaje.html("El nombre completo es obligatorio").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
+        if (correo == "")         { mensaje.html("El correo electrónico es obligatorio").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
+        if (!correo.includes("@") || !correo.includes(".")) { mensaje.html("El correo no tiene un formato válido").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
+        if (telefono == "")       { mensaje.html("El teléfono es obligatorio").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
+        if (canton == "")         { mensaje.html("El cantón es obligatorio").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
+        if (direccion == "")      { mensaje.html("La dirección exacta es obligatoria").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
+        if (identificacion == "") { mensaje.html("La identificación es obligatoria").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
 
-        if (correo.value == "") {
-            mensaje.innerHTML = "El correo electrónico es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (!correo.value.includes("@") || !correo.value.includes(".")) {
-            mensaje.innerHTML = "El correo no tiene un formato válido";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (telefono.value == "") {
-            mensaje.innerHTML = "El teléfono es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (canton.value == "") {
-            mensaje.innerHTML = "El cantón es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (direccion.value == "") {
-            mensaje.innerHTML = "La dirección exacta es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (identificacion.value == "") {
-            mensaje.innerHTML = "La identificación es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        // Validar contraseña solo si se quiere cambiar
-        if (contrasena.value != "") {
-
-            if (contrasena.value.length < 8) {
-                mensaje.innerHTML = "La contraseña debe tener al menos 8 caracteres";
-                mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                mensaje.style.display = "block";
-                return;
-            }
-
-            if (contrasena.value == contrasena.value.toLowerCase()) {
-                mensaje.innerHTML = "La contraseña debe tener al menos una letra mayúscula";
-                mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                mensaje.style.display = "block";
-                return;
-            }
+        if (contrasena != "") {
+            if (contrasena.length < 8) { mensaje.html("La contraseña debe tener al menos 8 caracteres").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
+            if (contrasena == contrasena.toLowerCase()) { mensaje.html("La contraseña debe tener al menos una letra mayúscula").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
 
             let tieneNumero = false;
-
-            for (let i = 0; i < contrasena.value.length; i++) {
-                if (contrasena.value[i] >= "0" && contrasena.value[i] <= "9") {
-                    tieneNumero = true;
-                }
+            for (let i = 0; i < contrasena.length; i++) {
+                if (contrasena[i] >= "0" && contrasena[i] <= "9") { tieneNumero = true; }
             }
-
-            if (tieneNumero == false) {
-                mensaje.innerHTML = "La contraseña debe tener al menos un número";
-                mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                mensaje.style.display = "block";
-                return;
-            }
+            if (!tieneNumero) { mensaje.html("La contraseña debe tener al menos un número").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
         }
 
-        mensaje.innerHTML = "Perfil actualizado correctamente";
-        mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-        mensaje.style.display = "block";
-
-        setTimeout(function () {
-            mensaje.style.display = "none";
-        }, 5000);
+        mensaje.html("Perfil actualizado correctamente").css("background-color", "rgba(65, 201, 7, 0.8)").show();
+        setTimeout(function () { mensaje.hide(); }, 5000);
     });
-
 });
 
 // Detalle de donacion - boton reservar
-document.addEventListener("DOMContentLoaded", function () {
+$(function () {
+    let btnReservar = $("#btnReservar");
+    if (!btnReservar.length) { return; }
 
-    let btnReservar = document.getElementById("btnReservar");
-    if (!btnReservar) { return; }
+    let mensaje = $("#mensaje");
+    mensaje.hide();
 
-    let mensaje = document.getElementById("mensaje");
-    mensaje.style.display = "none";
+    btnReservar.on("click", function () {
+        let id_donacion = $(this).data("id");
 
-    btnReservar.addEventListener("click", function () {
-        mensaje.innerHTML = "¡Reserva exitosa! Tu código es ALM-2026-001-01. Preséntalo al retirar la donación.";
-        mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-        mensaje.style.display = "block";
+        $.post(URL_BASE,
+            { option: "reservar", id_donacion: id_donacion },
+            function (data) {
+                data = JSON.parse(data);
+                if (data.response == "00") {
+                    mensaje.html(data.message).css("background-color", "rgba(65, 201, 7, 0.8)").show();
+                    btnReservar.prop("disabled", true).html("Reservado");
+                } else {
+                    mensaje.html(data.message).css("background-color", "rgba(149, 24, 24, 0.758)").show();
+                }
+            }
+        );
     });
-
 });
 
-// Mis reservas - tabs y botones
-document.addEventListener("DOMContentLoaded", function () {
+// Mis reservas - tabs
+$(function () {
+    let tabActivas = $("#tabActivas");
+    if (!tabActivas.length) { return; }
 
-    let tabActivas = document.getElementById("tabActivas");
-    if (!tabActivas) { return; }
+    let tabConfirmadas  = $("#tabConfirmadas");
+    let tabCanceladas   = $("#tabCanceladas");
+    let seccionActivas  = $("#seccionActivas");
+    let seccionConfirmadas = $("#seccionConfirmadas");
+    let seccionCanceladas  = $("#seccionCanceladas");
+    let mensaje = $("#mensaje");
+    mensaje.hide();
 
-    let tabConfirmadas = document.getElementById("tabConfirmadas");
-    let tabCanceladas = document.getElementById("tabCanceladas");
-    let seccionActivas = document.getElementById("seccionActivas");
-    let seccionConfirmadas = document.getElementById("seccionConfirmadas");
-    let seccionCanceladas = document.getElementById("seccionCanceladas");
-    let mensaje = document.getElementById("mensaje");
-    mensaje.style.display = "none";
+    seccionConfirmadas.hide();
+    seccionCanceladas.hide();
+    tabActivas.addClass("activo");
 
-    // Ver las que estan activas primero
-    seccionConfirmadas.style.display = "none";
-    seccionCanceladas.style.display = "none";
-    tabActivas.classList.add("activo");
-
-    tabActivas.addEventListener("click", function () {
-        seccionActivas.style.display = "block";
-        seccionConfirmadas.style.display = "none";
-        seccionCanceladas.style.display = "none";
-        tabActivas.classList.add("activo");
-        tabConfirmadas.classList.remove("activo");
-        tabCanceladas.classList.remove("activo");
+    tabActivas.on("click", function () {
+        seccionActivas.show();
+        seccionConfirmadas.hide();
+        seccionCanceladas.hide();
+        tabActivas.addClass("activo");
+        tabConfirmadas.removeClass("activo");
+        tabCanceladas.removeClass("activo");
     });
 
-    tabConfirmadas.addEventListener("click", function () {
-        seccionActivas.style.display = "none";
-        seccionConfirmadas.style.display = "block";
-        seccionCanceladas.style.display = "none";
-        tabActivas.classList.remove("activo");
-        tabConfirmadas.classList.add("activo");
-        tabCanceladas.classList.remove("activo");
+    tabConfirmadas.on("click", function () {
+        seccionActivas.hide();
+        seccionConfirmadas.show();
+        seccionCanceladas.hide();
+        tabActivas.removeClass("activo");
+        tabConfirmadas.addClass("activo");
+        tabCanceladas.removeClass("activo");
     });
 
-    tabCanceladas.addEventListener("click", function () {
-        seccionActivas.style.display = "none";
-        seccionConfirmadas.style.display = "none";
-        seccionCanceladas.style.display = "block";
-        tabActivas.classList.remove("activo");
-        tabConfirmadas.classList.remove("activo");
-        tabCanceladas.classList.add("activo");
+    tabCanceladas.on("click", function () {
+        seccionActivas.hide();
+        seccionConfirmadas.hide();
+        seccionCanceladas.show();
+        tabActivas.removeClass("activo");
+        tabConfirmadas.removeClass("activo");
+        tabCanceladas.addClass("activo");
     });
 
-    // Botones para confirmar
-    let btnConfirmar1 = document.getElementById("btnConfirmar1");
-    let btnConfirmar2 = document.getElementById("btnConfirmar2");
+    // Botones confirmar y cancelar
+    $(document).on("click", ".btnConfirmar", function () {
+        let nombre = $(this).data("nombre");
+        $.post(URL_BASE,
+            { option: "confirmar_reserva", id_reserva: $(this).data("id") },
+            function (data) {
+                data = JSON.parse(data);
+                if (data.response == "00") {
+                    mensaje.html("Retiro de \"" + nombre + "\" confirmado. ¡Gracias por usar AlimenTICO!").css("background-color", "rgba(65, 201, 7, 0.8)").show();
+                } else {
+                    mensaje.html(data.message).css("background-color", "rgba(149, 24, 24, 0.758)").show();
+                }
+            }
+        );
+    });
 
-    if (btnConfirmar1) {
-        btnConfirmar1.addEventListener("click", function () {
-            mensaje.innerHTML = "Retiro de \"Arroz con pollo\" confirmado. ¡Gracias por usar AlimenTICO!";
-            mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-            mensaje.style.display = "block";
-        });
-    }
-
-    if (btnConfirmar2) {
-        btnConfirmar2.addEventListener("click", function () {
-            mensaje.innerHTML = "Retiro de \"Ensalada de frutas\" confirmado. ¡Gracias por usar AlimenTICO!";
-            mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-            mensaje.style.display = "block";
-        });
-    }
-
-    // Botones para cancelar
-    let btnCancelar1 = document.getElementById("btnCancelar1");
-    let btnCancelar2 = document.getElementById("btnCancelar2");
-
-    if (btnCancelar1) {
-        btnCancelar1.addEventListener("click", function () {
-            mensaje.innerHTML = "Reserva \"Arroz con pollo\" cancelada.";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-        });
-    }
-
-    if (btnCancelar2) {
-        btnCancelar2.addEventListener("click", function () {
-            mensaje.innerHTML = "Reserva \"Ensalada de frutas\" cancelada.";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-        });
-    }
-
+    $(document).on("click", ".btnCancelar", function () {
+        let nombre = $(this).data("nombre");
+        $.post(URL_BASE,
+            { option: "cancelar_reserva", id_reserva: $(this).data("id") },
+            function (data) {
+                data = JSON.parse(data);
+                if (data.response == "00") {
+                    mensaje.html("Reserva \"" + nombre + "\" cancelada.").css("background-color", "rgba(149, 24, 24, 0.758)").show();
+                } else {
+                    mensaje.html(data.message).css("background-color", "rgba(149, 24, 24, 0.758)").show();
+                }
+            }
+        );
+    });
 });
 
-// Panel - paginacion del grid de donaciones
-document.addEventListener("DOMContentLoaded", function () {
+// Panel - busqueda, filtros y paginacion
+$(function () {
+    let grid = $("#donacionesGrid");
+    if (!grid.length) { return; }
 
-    let grid = document.getElementById("donacionesGrid");
-    if (!grid) { return; }
-
-    let todasLasTarjetas = grid.getElementsByClassName("donacion-card");
     let paginaActual = 1;
     let porPagina = 6;
-    let totalPaginas = 0;
-    let contado = 0;
 
-    for (let i = 0; i < todasLasTarjetas.length; i++) {
-        contado = contado + 1;
-        if (contado == porPagina) {
-            totalPaginas = totalPaginas + 1;
-            contado = 0;
-        }
-    }
-    if (contado > 0) {
-        totalPaginas = totalPaginas + 1;
+    function getCardsFiltradas() {
+        let textoBuscar    = $("#inputBuscar").val().toLowerCase().trim();
+        let tipoFiltro     = $("#filtroTipo").val();
+        let provinciaFiltro = $("#filtroProvincia").val();
+
+        let filtradas = [];
+        $(".donacion-card").each(function () {
+            let nombre   = $(this).find(".donacion-nombre").text().toLowerCase();
+            let tipo     = $(this).data("tipo");
+            let provincia = $(this).data("provincia");
+
+            let coincideTexto     = textoBuscar === "" || nombre.includes(textoBuscar);
+            let coincideTipo      = tipoFiltro === "" || tipo === tipoFiltro;
+            let coincideProvincia = provinciaFiltro === "" || provincia === provinciaFiltro;
+
+            if (coincideTexto && coincideTipo && coincideProvincia) {
+                filtradas.push(this);
+            }
+        });
+        return filtradas;
     }
 
     function mostrarPagina(pagina) {
-        let desde = (pagina - 1) * porPagina;
-        let hasta = desde + porPagina;
+        let filtradas    = getCardsFiltradas();
+        let totalPaginas = Math.ceil(filtradas.length / porPagina);
+        if (totalPaginas === 0) { totalPaginas = 1; }
 
-        for (let i = 0; i < todasLasTarjetas.length; i++) {
-            if (i >= desde && i < hasta) {
-                todasLasTarjetas[i].style.display = "flex";
-            } else {
-                todasLasTarjetas[i].style.display = "none";
-            }
+        $(".donacion-card").hide();
+
+        let desde = (pagina - 1) * porPagina;
+        let hasta  = desde + porPagina;
+        for (let i = desde; i < hasta && i < filtradas.length; i++) {
+            $(filtradas[i]).show();
         }
 
-        // Botones
         let botonesHTML = "<button class='btn-pagina' id='btnAnterior'><i class='bi bi-arrow-left-square-fill'></i></button>";
         for (let p = 1; p <= totalPaginas; p++) {
-            if (p == pagina) {
-                botonesHTML += "<button class='btn-pagina activo' id='btnPagina" + p + "'>" + p + "</button>";
-            } else {
-                botonesHTML += "<button class='btn-pagina' id='btnPagina" + p + "'>" + p + "</button>";
-            }
+            let claseActivo = p === pagina ? " activo" : "";
+            botonesHTML += "<button class='btn-pagina" + claseActivo + "' id='btnPagina" + p + "'>" + p + "</button>";
         }
         botonesHTML += "<button class='btn-pagina' id='btnSiguiente'><i class='bi bi-arrow-right-square-fill'></i></button>";
-        document.getElementById("contenedorBotones").innerHTML = botonesHTML;
+        $("#contenedorBotones").html(botonesHTML);
+
+        $("#btnAnterior").on("click", function () {
+            if (paginaActual > 1) { paginaActual--; mostrarPagina(paginaActual); }
+        });
+
+        $("#btnSiguiente").on("click", function () {
+            if (paginaActual < totalPaginas) { paginaActual++; mostrarPagina(paginaActual); }
+        });
 
         for (let p = 1; p <= totalPaginas; p++) {
-            document.getElementById("btnPagina" + p).addEventListener("click", function () {
-                paginaActual = Number(this.innerHTML);
+            $("#btnPagina" + p).on("click", function () {
+                paginaActual = Number($(this).text());
                 mostrarPagina(paginaActual);
             });
         }
 
-        document.getElementById("btnAnterior").addEventListener("click", function () {
-            if (paginaActual > 1) {
-                paginaActual = paginaActual - 1;
-                mostrarPagina(paginaActual);
-            }
-        });
-
-        document.getElementById("btnSiguiente").addEventListener("click", function () {
-            if (paginaActual < totalPaginas) {
-                paginaActual = paginaActual + 1;
-                mostrarPagina(paginaActual);
-            }
-        });
+        $("#paginacionInfo").html("Mostrando " + filtradas.length + " donaciones disponibles");
     }
 
-    mostrarPagina(1);
+    $("#inputBuscar").on("input", function () { paginaActual = 1; mostrarPagina(paginaActual); });
+    $("#filtroTipo").on("change", function () { paginaActual = 1; mostrarPagina(paginaActual); });
+    $("#filtroProvincia").on("change", function () { paginaActual = 1; mostrarPagina(paginaActual); });
 
+    mostrarPagina(1);
 });

@@ -62,6 +62,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if ($option === 'reservar') {
+        verificarSesion('beneficiario');
+        $ctrl = new BeneficiarioController();
+        $ctrl->reservar();
+        exit;
+}
+
 }
 
 // RUTAS GET / VISTAS
@@ -109,11 +116,35 @@ switch ($page) {
         $ctrl = new SesionController();
         $ctrl->showNuevaContrasena();
         break;
+    
+    case 'beneficiario_panel':
+        verificarSesion('beneficiario');
+        $ctrl = new BeneficiarioController();
+        $ctrl->showPanel();
+        break;
+
+    case 'beneficiario_detalle':
+        verificarSesion('beneficiario');
+        $ctrl = new BeneficiarioController();
+        $ctrl->showDetalle();
+        break;
+
+    case 'beneficiario_reservas':
+        verificarSesion('beneficiario');
+        $ctrl = new BeneficiarioController();
+        $ctrl->showReservas();
+        break;
+
+    case 'beneficiario_perfil':
+        verificarSesion('beneficiario');
+        $ctrl = new BeneficiarioController();
+        $ctrl->showPerfil();
+        break;
 
     case 'login':
     default:
         $ctrl = new SesionController();
         $ctrl->showLogin();
-        break;
+        break;       
 
 }

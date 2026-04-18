@@ -55,6 +55,13 @@ class SesionController {
             $_SESSION['correo']     = $usuario['correo'];
             $_SESSION['rol']        = $usuario['rol'];
 
+            if ($usuario['rol'] === 'beneficiario') {
+                $beneficiario = $this->modelBeneficiario->getByIdUsuario($usuario['id_usuario']);
+                if ($beneficiario) {
+                    $_SESSION['id_beneficiario'] = $beneficiario['id_beneficiario'];
+                }
+            }
+
             echo json_encode([
                 'response' => '00',
                 'rol'      => $usuario['rol'],
