@@ -13,14 +13,14 @@
 
     <header>
         <div class="header-logo">
-            <img src="../img/donacion-de-alimentos.png" alt="logo" class="img-logo">
+            <img src="/sc502-ln-proyecto-grupo4-ln-2026/public/img/donacion-de-alimentos.png" alt="logo" class="img-logo">
             <span class="logo-texto">Alimen<span class="logo-tico">TICO</span></span>
         </div>
         <nav>
             <a href="#inicio">Inicio</a>
             <a href="#nosotros">Sobre Nosotros</a>
         </nav>
-        <a href="login.html" class="btn-header">Iniciar Sesión</a>
+        <a href="index.php?page=login" class="btn-header">Iniciar Sesión</a>
     </header>
 
     <main>
@@ -32,23 +32,21 @@
                     <p class="subtitulo">La plataforma tica que conecta restaurantes con personas que necesitan alimentos. Porque compartir es de ticos.</p>
                     <p>Únete a la comunidad que está combatiendo el hambre y el desperdicio de alimentos en Costa Rica.</p>
                     <div class="botones">
-                        <a href="login.html" class="btn">Necesito Alimentos</a>
-                        <a href="login.html" class="btn">Soy Restaurante</a>
+                        <a href="index.php?page=registro_beneficiario" class="btn">Necesito Alimentos</a>
+                        <a href="index.php?page=registro_restaurante" class="btn">Soy Restaurante</a>
                     </div>
-
                 </div>
-                
+
                 <div class="img-contenedor">
-                    <img src="../img/donacion-de-alimentos (1).png" alt="donacion de alimentos" class="img-seccion">
+                    <img src="/sc502-ln-proyecto-grupo4-ln-2026/public/img/donacion-de-alimentos (1).png" alt="donacion de alimentos" class="img-seccion">
                 </div>
             </div>
         </section>
 
         <section id="nosotros">
             <div class="contenedor">
-
                 <div class="img-contenedor">
-                    <img src="../img/donacion-de-alimentos.png" alt="nosotros" class="img-seccion">
+                    <img src="/sc502-ln-proyecto-grupo4-ln-2026/public/img/donacion-de-alimentos.png" alt="nosotros" class="img-seccion">
                 </div>
                 <div class="texto-contenedor">
                     <h2>Sobre Nosotros</h2>
@@ -63,14 +61,13 @@
 
     </main>
 
-
     <footer>
         <div class="footer-contenedor">
             <div class="footer-bloque">
                 <p class="footer-titulo">Enlaces Útiles:</p>
-                <a href="login.html">Iniciar Sesión</a>
-                <a href="registro-restaurante.html">Registrar Restaurante</a>
-                <a href="registro-beneficiario.html">Registrar Beneficiario</a>
+                <a href="index.php?page=login">Iniciar Sesión</a>
+                <a href="index.php?page=registro_restaurante">Registrar Restaurante</a>
+                <a href="index.php?page=registro_beneficiario">Registrar Beneficiario</a>
             </div>
             <div class="footer-bloque">
                 <p class="footer-titulo">Contacto:</p>

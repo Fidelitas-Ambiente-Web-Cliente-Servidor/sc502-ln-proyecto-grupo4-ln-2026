@@ -67,12 +67,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ctrl = new BeneficiarioController();
         $ctrl->reservar();
         exit;
-}
+    }
 
+    if ($option === 'confirmar_reserva') {
+        verificarSesion('beneficiario');
+        $ctrl = new BeneficiarioController();
+        $ctrl->confirmarReserva();
+        exit;
+    }
+
+    if ($option === 'cancelar_reserva') {
+        verificarSesion('beneficiario');
+        $ctrl = new BeneficiarioController();
+        $ctrl->cancelarReserva();
+        exit;
+    }
+
+    if ($option === 'guardar_perfil_beneficiario') {
+        verificarSesion('beneficiario');
+        $ctrl = new BeneficiarioController();
+        $ctrl->guardarPerfil();
+        exit;
+    }
+
+    if ($option === 'eliminar_cuenta') {
+        verificarSesion('beneficiario');
+        $ctrl = new BeneficiarioController();
+        $ctrl->eliminarCuenta();
+        exit;
+    }
 }
 
 // RUTAS GET / VISTAS
 switch ($page) {
+
+    case 'inicio':
+        require __DIR__ . '/app/views/sesion/index.php';
+        break;
 
     case 'registro_beneficiario':
         $ctrl = new SesionController();
@@ -115,12 +146,6 @@ switch ($page) {
     case 'nueva_contrasena':
         $ctrl = new SesionController();
         $ctrl->showNuevaContrasena();
-        break;
-    
-    case 'beneficiario_panel':
-        verificarSesion('beneficiario');
-        $ctrl = new BeneficiarioController();
-        $ctrl->showPanel();
         break;
 
     case 'beneficiario_detalle':

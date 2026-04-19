@@ -105,10 +105,14 @@ class SesionController {
         $ok = $this->modelBeneficiario->crear($id_usuario, $datos);
 
         if ($ok) {
+            
+            $beneficiario = $this->modelBeneficiario->getByIdUsuario($id_usuario);
+
             // Iniciar sesion automaticamente despues de registrarse
             $_SESSION['id_usuario'] = $id_usuario;
             $_SESSION['correo']     = $correo;
             $_SESSION['rol']        = 'beneficiario';
+            $_SESSION['id_beneficiario'] = $beneficiario['id_beneficiario'];
             echo json_encode(['response' => '00', 'message' => 'Registro exitoso']);
         } else {
             echo json_encode(['response' => '01', 'message' => 'Error al guardar el perfil de beneficiario']);
