@@ -15,7 +15,7 @@
 <body>
 
     <header class="header">
-        <a href="restaurante-donaciones.html" class="btn-volver">Volver</a>
+        <a href="index.php?page=donaciones" class="btn-volver">Volver</a>
         <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo-alimentico" height="50px"></h2>
     </header>
 
@@ -29,47 +29,55 @@
 
                 <div class="col-md-6">
                     <h5 class="seccion-titulo">INFORMACIÓN DEL ALIMENTO</h5>
-
+                    <?php if (!empty($donacion)) {?>
                     <div class="campo">
                         <span class="label-campo">Tipo de Alimento</span>
-                        <div class="campo-input">Comida Preparada</div>
+                        <div class="campo-input"><?= $donacion['tipoAlimento'] ?></div>
                     </div>
 
                     <div class="campo">
                         <span class="label-campo">Nombre/Descripción del Alimento</span>
-                        <div class="campo-input">Pollo Frito con papas</div>
+                        <div class="campo-input"><?= $donacion['nombre'] ?></div>
                     </div>
 
                     <div class="campo">
                         <span class="label-campo">Cantidad</span>
-                        <div class="campo-input">3 porciones</div>
+                        <div class="campo-input"><?= $donacion['cantidad'] ?></div>
                     </div>
 
                     <div class="campo">
                         <span class="label-campo">Descripción Adicional</span>
-                        <div class="campo-input campo-texto">Menos de 1 hora de cocinado, excelente estado, sobro del día</div>
+                        <div class="campo-input campo-texto"><?= $donacion['descripcionAdicional'] ?></div>
                     </div>
 
                     <div class="campo">
                         <span class="label-campo">Estado</span>
-                        <div class="campo-input">Apartado</div>
+                        <div class="campo-input"><?= $donacion['estado'] ?></div>
                     </div>
 
-                    <h5 class="seccion-titulo seccion-titulo-mt">INFORMACIÓN DEL BENEFICIARIO</h5>
+                    <h5 class="seccion-titulo seccion-titulo-mt">INFORMACIÓN DEL RESTAURANTE</h5>
 
                     <div class="campo">
                         <span class="label-campo">Nombre</span>
-                        <div class="campo-input">Juan Pérez</div>
+                        <div class="campo-input"><?= $donacion['restaurante'] ?></div>
                     </div>
 
                     <div class="campo">
-                        <span class="label-campo">Teléfono</span>
-                        <div class="campo-input">8928-2902</div>
+                        <span class="label-campo">Provincia</span>
+                        <div class="campo-input"><?= $donacion['provincia'] ?></div>
                     </div>
 
                     <div class="campo">
-                        <span class="label-campo">Código de confirmación</span>
-                        <div class="campo-input">8339</div>
+                        <span class="label-campo">Cantón</span>
+                        <div class="campo-input"><?= $donacion['canton'] ?></div>
+                    </div>
+                    <div class="campo">
+                        <span class="label-campo">Distrito</span>
+                        <div class="campo-input"><?= $donacion['distrito'] ?></div>
+                    </div>
+                    <div class="campo">
+                        <span class="label-campo">Direccion</span>
+                        <div class="campo-input campo-texto"><?= $donacion['direccion'] ?></div>
                     </div>
 
                 </div>
@@ -79,19 +87,19 @@
 
                     <div class="campo">
                         <span class="label-campo">Fecha de Disponibilidad</span>
-                        <div class="campo-input">19/03/2026</div>
+                        <div class="campo-input"><?= $donacion['fechaDisponible'] ?></div>
                     </div>
 
                     <div class="campo">
                         <span class="label-campo">Hora Límite de Recogida</span>
-                        <div class="campo-input">7:00pm</div>
+                        <div class="campo-input"><?= $donacion['horaLimite'] ?></div>
                     </div>
 
                     <h5 class="seccion-titulo">INFORMACIÓN ADICIONAL</h5>
                     <span class="label-campo">Importante:</span>
 
                     <div class="campo">
-                        <div class="campo-input campo-texto">No requiere refrigeración y no es apto para vegetarianos </div>
+                        <div class="campo-input campo-texto"><?= $donacion['informacionImportante'] ?></div>
                     </div>
 
                     <h5 class="seccion-titulo">ACCIONES</h5>
@@ -99,17 +107,29 @@
                     <div class="campo">
                         <span class="label-campo">El beneficiario ya recogió la donación?</span>
                         <div class="boton-accion">
-                            <button class="btn-accion">Entregado</button>
+                            <form action="/sc502-ln-proyecto-grupo4-ln-2026/index.php" method="POST">
+                                <input type="hidden" name="option" value="cambiarEstado">
+                                <input type="hidden" name="estado" value="reservado">
+                                <input type="hidden" name="idDonacion" value="<?= $donacion['idDonacion'] ?>">
+                                <button type="submit" class="btn-accion">Entregado</button>
+                            </form>
+                            
+                            
                         </div>
                     </div>
 
                     <div class="campo">
                         <span class="label-campo">Si el beneficiario no llegó: </span>
                         <div class="boton-accion">
-                            <button class="btn-accion">Cancelar</button>
+                            <form action="/sc502-ln-proyecto-grupo4-ln-2026/index.php" method="POST">
+                                <input type="hidden" name="option" value="cambiarEstado">
+                                <input type="hidden" name="estado" value="agotado">
+                                <input type="hidden" name="idDonacion" value="<?= $donacion['idDonacion'] ?>">
+                                <button type="submit" class="btn-accion">Cancelar</button>
+                            </form>
                         </div>
                     </div>
-
+                    <?php } ?>
 
                 </div>
             </div>

@@ -25,6 +25,17 @@ class DonacionesController {
         require __DIR__ . '/../views/restaurante/restaurante-nueva-donacion.php';
     }
 
+    public function showDonaciones() {
+        $donaciones=$this->modelDonacion->getDonacionesDisponiblesRestaurante();
+        require __DIR__ . '/../views/restaurante/restaurante-donaciones.php';
+    }
+
+    public function verDonacion($id) {
+       
+        $donacion=$this->modelDonacion->getDetalleDonacion($id);
+        require __DIR__ . '/../views/restaurante/restaurante-detalle-donacion.php';
+    }
+
     public function nuevaDonacion()
     {
         $restauranteId= $_SESSION['id_usuario'] ;
@@ -45,6 +56,18 @@ class DonacionesController {
         }
 
         echo json_encode(['response' => '00', 'message' => 'Ingreso de donacion exitoso']);
+        
+    }
+
+    public function cambiarEstado(){
+        $idDonacion= $_POST['idDonacion'];
+        $estado = $_POST['estado'];
+        $actualizacion=$this->modelDonacion->cambiarEstado($idDonacion,$estado);
+        if($actualizacion){
+            header("Location: index.php?page=donaciones");
+            exit;
+        }
+        header("Location: index.php?page=restaurante_panel");
         
     }
 }

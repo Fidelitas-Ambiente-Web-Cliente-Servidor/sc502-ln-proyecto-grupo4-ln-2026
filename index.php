@@ -104,6 +104,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ctrl->nuevaDonacion();
         exit;
     }
+
+    if ($option === 'cambiarEstado') {
+        verificarSesion('restaurante');
+        $ctrl = new DonacionesController();
+        $ctrl->cambiarEstado();
+        exit;
+    }
 }
 
 // RUTAS GET / VISTAS
@@ -178,6 +185,18 @@ switch ($page) {
         verificarSesion('restaurante');
         $ctrl = new DonacionesController();
         $ctrl->showNuevaDonacion();
+        break;
+
+    case 'donaciones' :
+        verificarSesion('restaurante');
+        $ctrl = new DonacionesController();
+        $ctrl->showDonaciones();
+        break;
+
+    case 'verDonacion' :
+        verificarSesion('restaurante');
+        $ctrl = new DonacionesController();
+        $ctrl->verDonacion($_GET['id'] ?? '');
         break;
 
     case 'login':

@@ -13,7 +13,7 @@
 
 <body>
     <header class="header">
-        <a href="restaurante-panel.html" class="btn-volver">Volver</a>
+        <a href="index.php?page=restaurante_panel" class="btn-volver">Volver</a>
         <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo-alimentico" height="50px"></h2>
     </header>
 

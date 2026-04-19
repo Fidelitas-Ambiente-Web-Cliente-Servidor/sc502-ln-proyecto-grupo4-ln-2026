@@ -36,7 +36,7 @@
 
             <h1 class="titulo-panel">Mis Donaciones</h1>
 
-            <a href="restaurante-nueva-donacion.html" class="btn-volver">+ Donar</a>
+            <a href="index.php?page=nuevaDonacion" class="btn-volver">+ Donar</a>
 
             <h5 class="seccion-titulo seccion-titulo-mt">ADMINISTRA TUS PUBLICACIONES:</h5>
 
@@ -99,136 +99,26 @@
                     </tr>
                 </thead>
                 <tbody id="cuerpoTabla">
-                    <tr>
-                        <td>Pizza</td>
-                        <td>6 porciones</td>
-                        <td>8:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Pan Dulce</td>
-                        <td>10 Unidades</td>
-                        <td>7:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Ensalada</td>
-                        <td>8 unidades</td>
-                        <td>7:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Pollo</td>
-                        <td>4 kg</td>
-                        <td>9:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Arroz con Pollo</td>
-                        <td>5 porciones</td>
-                        <td>6:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Sopa</td>
-                        <td>3 litros</td>
-                        <td>5:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Tamales</td>
-                        <td>12 unidades</td>
-                        <td>8:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Gallo Pinto</td>
-                        <td>8 porciones</td>
-                        <td>9:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Casado</td>
-                        <td>6 porciones</td>
-                        <td>7:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Empanadas</td>
-                        <td>20 unidades</td>
-                        <td>6:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Pasta</td>
-                        <td>4 porciones</td>
-                        <td>8:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Torta</td>
-                        <td>1 unidad</td>
-                        <td>5:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Galletas</td>
-                        <td>3 paquetes</td>
-                        <td>9:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
+                      <?php if (!empty($donaciones)) {
+                        foreach ($donaciones as $d): ?>
+
+                            <tr>
+                                <td hidden><?= $d['idDonacion'] ?></td>
+                                <td><?= $d['nombre'] ?></td>
+                                <td><?= $d['cantidad'] ?></td>
+                                <td><?= $d['horaLimite'] ?></td>
+                                <td><?= $d['fechaDisponible'] ?></td>
+                                <td class="celda-estado"><?= $d['estado'] ?>
+                                    <a href="index.php?page=verDonacion&id=<?= $d['idDonacion'] ?>" 
+                                    class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
+                                    class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
+                                    class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
+                                </td>
+                            </tr>
+
+                    <?php endforeach;
+                    } ?>
+                   
                 </tbody>
             </table>
 

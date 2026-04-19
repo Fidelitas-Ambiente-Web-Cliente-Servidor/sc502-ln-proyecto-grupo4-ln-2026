@@ -26,7 +26,7 @@
             </div>
             <nav class="sidebar-nav">
                 <a href="restaurante-panel.html" class="sidebar-link activo">Panel Principal</a>
-                <a href="restaurante-donaciones.html" class="sidebar-link">Donaciones</a>
+                <a href="index.php?page=donaciones" class="sidebar-link">Donaciones</a>
                 <a href="restaurante-perfil.html" class="sidebar-link">Perfil</a>
                 <a href="index.php?page=logout" class="sidebar-link">Cerrar Sesión</a>
             </nav>
