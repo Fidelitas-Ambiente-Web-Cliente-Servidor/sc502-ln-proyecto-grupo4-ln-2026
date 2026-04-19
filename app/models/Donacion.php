@@ -1,5 +1,6 @@
 <?php
-class Donacion {
+class Donacion 
+{
     private $conn;
 
     public function __construct($db) {
@@ -35,5 +36,22 @@ class Donacion {
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc();
+    }
+
+    //Crea una nueva donacion
+    public function nuevaDonacion($restauranteId,$tipoAlimento, $nombreDescripcion, $cantidad, $descripcionAdicional,$informacionImportante,
+    $fechaDisponible,$horaLimite,$estado)
+    {
+        $query="INSERT INTO donacionProyecto
+            (id_restaurante,tipo_alimento,nombre_descripcion,cantidad,descripcion_adicional,informacion_importante,fecha_disponible,hora_limite,estado)
+            VALUES (?,?,?,?,?,?,?,?,?)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("issssssss", $restauranteId,$tipoAlimento, $nombreDescripcion, $cantidad, $descripcionAdicional,$informacionImportante,
+        $fechaDisponible,$horaLimite,$estado);
+        $stmt->execute();
+         if ($stmt->affected_rows > 0) {
+            return $stmt->insert_id;
+        }
+        return false;
     }
 }

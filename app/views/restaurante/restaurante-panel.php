@@ -39,7 +39,7 @@
 
             <h1 class="titulo-panel">Resumen de tus donaciones</h1>
 
-            <a href="restaurante-nueva-donacion.html" class="btn-volver">+ Donar</a>
+            <a href="index.php?page=nuevaDonacion" class="btn-volver">+ Donar</a>
 
 
 

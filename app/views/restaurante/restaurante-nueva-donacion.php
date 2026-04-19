@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/sc502-ln-proyecto-grupo4-ln-2026/public/css/restaurante.css">
-    <script src="public/js/restaurante.js"></script>
+    <script src="public/js/donacion.js"></script>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
         <h1 class="titulo-pagina">AÑADIR DONACIÓN</h1>
         <p class="subtitulo-pagina">COMPLETA LA INFORMACIÓN DE LOS ALIMENTOS DISPONIBLES:</p>
 
-        <form>
+        <form id="nuevaDonacion">
             <div class="formulario-card">
                 <div class="row">
 
@@ -30,13 +30,21 @@
                         <h5 class="seccion-titulo">INFORMACIÓN DEL ALIMENTO</h5>
 
                         <div class="campo">
-                            <label for="tipoAlimento" class="label-campo">Tipo de Alimento</label>
-                            <input type="text" class="campo-input" id="tipoAlimento" name="tipoAlimento" placeholder="Ej: Comida Preparada">
+                            <label for="tipoAlimento" class="label-campo">Tipo Alimento</label>
+                            <select class="campo-input" id="tipoAlimento" name="tipoAlimento">
+                                <option value="" selected></option>
+                                <option value="Comida Preparada" >Comida Preparada</option>
+                                <option value="Panaderia">Panaderia</option>
+                                <option value="Frutas">Frutas</option>
+                                <option value="Verduras">Verduras</option>
+                                <option value="Lacteos">Lacteos</option>
+                                <option value="Otro">Otro</option>
+                            </select>
                         </div>
 
                         <div class="campo">
-                            <label for="nombreAlimento" class="label-campo">Nombre o Descripción del Alimento</label>
-                            <input type="text" class="campo-input" id="nombreAlimento" name="nombreAlimento" placeholder="Ej: Pollo Frito con papas">
+                            <label for="nombreDescripcion" class="label-campo">Nombre o Descripción del Alimento</label>
+                            <input type="text" class="campo-input" id="nombreDescripcion" name="nombreDescripcion" placeholder="Ej: Pollo Frito con papas">
                         </div>
 
                         <div class="campo">
@@ -45,16 +53,16 @@
                         </div>
 
                         <div class="campo">
-                            <label for="descripcion" class="label-campo">Descripción Adicional</label>
-                            <textarea class="campo-input" id="descripcion" name="descripcion" rows="3" placeholder="Ej: Menos de 1 hora de cocinado..."></textarea>
+                            <label for="descripcionAdicional" class="label-campo">Descripción Adicional</label>
+                            <textarea class="campo-input" id="descripcionAdicional" name="descripcionAdicional" rows="3" placeholder="Ej: Menos de 1 hora de cocinado..."></textarea>
                         </div>
 
                         <div class="campo">
                             <label for="estado" class="label-campo">Estado</label>
                             <select class="campo-input" id="estado" name="estado">
-                                <option value="Disponible">Disponible</option>
-                                <option value="Reservado">Reservado</option>
-                                <option value="Agotado">Agotado</option>
+                                <option value="disponible" selected>Disponible</option>
+                                <option value="reservado">Reservado</option>
+                                <option value="agotado">Agotado</option>
                             </select>
                         </div>
                     </div>
@@ -64,7 +72,7 @@
 
                         <div class="campo">
                             <label for="fechaDisponibilidad" class="label-campo">Fecha de Disponibilidad</label>
-                            <input type="date" class="campo-input" id="fechaDisponibilidad" name="fechaDisponibilidad">
+                            <input type="date" class="campo-input" id="fechaDisponible" name="fechaDisponibilidad">
                         </div>
 
                         <div class="campo">
@@ -76,8 +84,10 @@
                         <p class="label-campo">Importante:</p>
 
                         <div class="campo">
-                            <textarea class="campo-input" id="importante" name="importante" rows="3" placeholder="Ej: No requiere refrigeración..."></textarea>
+                            <textarea class="campo-input" id="informacionImportante" name="informacionImportante" rows="3" placeholder="Ej: No requiere refrigeración..."></textarea>
                         </div>
+
+                        <div id="mensaje"></div>
 
                         <div class="botones">
                             <button type="reset" class="btn-accion">Cancelar</button>

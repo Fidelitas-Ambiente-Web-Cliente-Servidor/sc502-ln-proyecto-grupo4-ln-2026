@@ -5,6 +5,7 @@ require_once __DIR__ . '/app/controllers/SesionController.php';
 require_once __DIR__ . '/app/controllers/RestauranteController.php';
 require_once __DIR__ . '/app/controllers/BeneficiarioController.php';
 require_once __DIR__ . '/app/controllers/AdminController.php';
+require_once __DIR__ . '/app/controllers/DonacionesController.php';
 
 // Protección de rutas
 function verificarSesion($rolRequerido = null) {
@@ -96,6 +97,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ctrl->eliminarCuenta();
         exit;
     }
+
+    if ($option === 'nueva-donacion') {
+        verificarSesion('restaurante');
+        $ctrl = new DonacionesController();
+        $ctrl->nuevaDonacion();
+        exit;
+    }
 }
 
 // RUTAS GET / VISTAS
@@ -164,6 +172,12 @@ switch ($page) {
         verificarSesion('beneficiario');
         $ctrl = new BeneficiarioController();
         $ctrl->showPerfil();
+        break;
+
+    case 'nuevaDonacion' :
+        verificarSesion('restaurante');
+        $ctrl = new DonacionesController();
+        $ctrl->showNuevaDonacion();
         break;
 
     case 'login':
