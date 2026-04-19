@@ -13,8 +13,8 @@ class CorreoService {
         $this->mail->isSMTP();
         $this->mail->Host       = 'smtp.gmail.com';
         $this->mail->SMTPAuth   = true;
-        $this->mail->Username   = '...';
-        $this->mail->Password   = '...';
+        $this->mail->Username   = 'alimentico.cr@gmail.com';
+        $this->mail->Password   = 'txxn jltu cgmb zyqa';
         $this->mail->SMTPSecure = 'tls';
         $this->mail->Port       = 587;
         $this->mail->CharSet    = 'UTF-8';
