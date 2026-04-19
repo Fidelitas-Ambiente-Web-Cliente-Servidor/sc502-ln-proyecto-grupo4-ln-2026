@@ -1,114 +1,5 @@
-console.log("Bienvenidos a AlimentTICO");
-
+console.log("Bienvenidos a AlimentTICO - Restaurante");
 document.addEventListener("DOMContentLoaded", function () {
-
-    let formulario = document.querySelector("form");
-    let mensaje = document.getElementById("mensaje");
-    mensaje.style.display = "none";
-
-    formulario.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        let tipoAlimento = document.getElementById("tipoAlimento");
-        let nombreAlimento = document.getElementById("nombreAlimento");
-        let cantidad = document.getElementById("cantidad");
-        let fechaDisponibilidad = document.getElementById("fechaDisponibilidad");
-        let horaLimite = document.getElementById("horaLimite");
-        let importante = document.getElementById("importante");
-
-        if (tipoAlimento.value == "") {
-            mensaje.innerHTML = "El tipo de alimento es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (nombreAlimento.value == "") {
-            mensaje.innerHTML = "El nombre del alimento es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (cantidad.value == "") {
-            mensaje.innerHTML = "La cantidad es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (fechaDisponibilidad.value == "") {
-            mensaje.innerHTML = "La fecha de disponibilidad es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        let fechaHoy = new Date();
-        let año = fechaHoy.getFullYear();
-        let mes = fechaHoy.getMonth() + 1;
-        let dia = fechaHoy.getDate();
-
-        if (mes < 10) { mes = "0" + mes; }
-        if (dia < 10) { dia = "0" + dia; }
-
-        let fechaHoyStr = año + "-" + mes + "-" + dia;
-        let fechaActualMostrar = dia + "-" + mes + "-" + año;
-
-        if (fechaDisponibilidad.value < fechaHoyStr) {
-            mensaje.innerHTML = "La fecha no puede ser anterior a hoy " + fechaActualMostrar;
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (horaLimite.value == "") {
-            mensaje.innerHTML = "La hora limite de recogida es obligatoria";
-            mensaje.style.backgroundColor ="rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (fechaDisponibilidad.value == fechaHoyStr) {
-            let horaActual = fechaHoy.getHours();
-            let minutosActual = fechaHoy.getMinutes();
-            if (minutosActual < 10) { minutosActual = "0" + minutosActual; }
-            let horaActualStr = horaActual + ":" + minutosActual;
-
-            if (horaLimite.value < horaActualStr) {
-                mensaje.innerHTML = "La hora de recogida no puede ser anterior a la hora actual";
-                mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                mensaje.style.display = "block";
-                return;
-            }
-        }
-
-        if (importante.value == "") {
-            mensaje.innerHTML = "La informacion adicional es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-        
-        mensaje.innerHTML = "Donación agregada correctamente";
-        mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-        mensaje.style.display = "block";
-        console.log("Donación agregada correctamente");
-
-        setTimeout(function () {
-            mensaje.style.display = "none";
-        }, 5000);
-    });
-
-    let botonCancelar = document.getElementById("btnCancelar");
-
-    botonCancelar.addEventListener("click", function () {
-        mensaje.style.display = "none";
-    });
-
-});
-
- document.addEventListener("DOMContentLoaded", function () {
     let btnSidebar = document.getElementById("btnSidebar");
     let btnCerrar = document.getElementById("btnCerrarSidebar");
     let sidebar = document.getElementById("sidebar");
@@ -126,225 +17,224 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// Perfil del restaurante
-document.addEventListener("DOMContentLoaded", function () {
-
-    let formPerfil = document.getElementById("formPerfil");
-    if (!formPerfil) { return; }
-
-    let mensaje = document.getElementById("mensaje");
-    mensaje.style.display = "none";
-
-    // Switches para activar y desactivar las horas
-    let switches = document.querySelectorAll(".switch-dia");
-
-    for (let i = 0; i < switches.length; i++) {
-        let horarioCambioSwitch = switches[i];
-        horarioCambioSwitch.addEventListener("change", function () {
-            let dia = horarioCambioSwitch.id.replace("switch", "");
-            let inputAbre = document.getElementById("abre" + dia);
-            let inputCierra = document.getElementById("cierra" + dia);
-            let labelEstado = document.getElementById("estado" + dia);
-
-            if (horarioCambioSwitch.checked) {
-                inputAbre.disabled = false;
-                inputCierra.disabled = false;
-                labelEstado.innerHTML = "Abierto";
-            } else {
-                inputAbre.disabled = true;
-                inputAbre.value = "";
-                inputCierra.disabled = true;
-                inputCierra.value = "";
-                labelEstado.innerHTML = "Cerrado";
+$(document).ready(function() {
+    let formNuevaDonacion = $('#formNuevaDonacion');
+    if (formNuevaDonacion.length) {
+        formNuevaDonacion.on('submit', function(e) {
+            e.preventDefault();
+            
+            let data = {
+                option: 'crear_donacion',
+                tipo_alimento: $('#tipo_alimento').val(),
+                nombre_descripcion: $('#nombre_descripcion').val(),
+                cantidad: $('#cantidad').val(),
+                descripcion_adicional: $('#descripcion_adicional').val(),
+                informacion_importante: $('#informacion_importante').val(),
+                fecha_disponible: $('#fecha_disponible').val(),
+                hora_limite: $('#hora_limite').val()
+            };
+            
+            $.post('index.php', data, function(response) {
+                let mensaje = $('#mensaje');
+                if (response.response === '00') {
+                    mensaje.html(response.message).css('background-color', 'rgba(65, 201, 7, 0.8)').show();
+                    setTimeout(function() {
+                        window.location.href = 'index.php?page=restaurante_donaciones';
+                    }, 1500);
+                } else {
+                    mensaje.html(response.message).css('background-color', 'rgba(149, 24, 24, 0.758)').show();
+                }
+            }, 'json');
+        });
+    }
+    
+    let formEditarDonacion = $('#formEditarDonacion');
+    if (formEditarDonacion.length) {
+        formEditarDonacion.on('submit', function(e) {
+            e.preventDefault();
+            
+            let data = {
+                option: 'editar_donacion',
+                id_donacion: $('#id_donacion').val(),
+                tipo_alimento: $('#tipo_alimento').val(),
+                nombre_descripcion: $('#nombre_descripcion').val(),
+                cantidad: $('#cantidad').val(),
+                descripcion_adicional: $('#descripcion_adicional').val(),
+                informacion_importante: $('#informacion_importante').val(),
+                fecha_disponible: $('#fecha_disponible').val(),
+                hora_limite: $('#hora_limite').val(),
+                estado: $('#estado').val()
+            };
+            
+            $.post('index.php', data, function(response) {
+                let mensaje = $('#mensaje');
+                if (response.response === '00') {
+                    mensaje.html(response.message).css('background-color', 'rgba(65, 201, 7, 0.8)').show();
+                    setTimeout(function() {
+                        window.location.href = 'index.php?page=restaurante_donaciones';
+                    }, 1500);
+                } else {
+                    mensaje.html(response.message).css('background-color', 'rgba(149, 24, 24, 0.758)').show();
+                }
+            }, 'json');
+        });
+    }
+    
+    let btnConfirmarEntrega = $('#btnConfirmarEntrega');
+    if (btnConfirmarEntrega.length) {
+        btnConfirmarEntrega.on('click', function() {
+            let id_reserva = $(this).data('id');
+            let nombre = $(this).data('nombre');
+            
+            if (confirm('¿Confirmar que ' + nombre + ' fue entregado al beneficiario?')) {
+                $.post('index.php', {
+                    option: 'confirmar_entrega',
+                    id_reserva: id_reserva
+                }, function(response) {
+                    let mensaje = $('#mensaje');
+                    if (response.response === '00') {
+                        mensaje.html(response.message).css('background-color', 'rgba(65, 201, 7, 0.8)').show();
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+                    } else {
+                        mensaje.html(response.message).css('background-color', 'rgba(149, 24, 24, 0.758)').show();
+                    }
+                }, 'json');
             }
         });
     }
-
-    // Validaciones del formulario del información del perfil
-    formPerfil.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        let nombreNegocio = document.getElementById("nombreNegocio");
-        let cedulaJuridica = document.getElementById("cedulaJuridica");
-        let telefono = document.getElementById("telefono");
-        let canton = document.getElementById("canton");
-        let distrito = document.getElementById("distrito");
-        let direccion = document.getElementById("direccion");
-        let correo = document.getElementById("correo");
-        let contrasena = document.getElementById("contrasena");
-
-        if (nombreNegocio.value == "") {
-            mensaje.innerHTML = "El nombre del negocio es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (cedulaJuridica.value == "") {
-            mensaje.innerHTML = "La cédula jurídica es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (telefono.value == "") {
-            mensaje.innerHTML = "El teléfono es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (canton.value == "") {
-            mensaje.innerHTML = "El cantón es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (distrito.value == "") {
-            mensaje.innerHTML = "El distrito es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (direccion.value == "") {
-            mensaje.innerHTML = "La dirección exacta es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (correo.value == "") {
-            mensaje.innerHTML = "El correo electrónico es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (!correo.value.includes("@") || !correo.value.includes(".")) {
-            mensaje.innerHTML = "El correo no tiene un formato válido";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        // Validar contraseña solo si se quiere cambiar
-        if (contrasena.value != "") {
-
-            if (contrasena.value.length < 8) {
-                mensaje.innerHTML = "La contraseña debe tener al menos 8 caracteres";
-                mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                mensaje.style.display = "block";
-                return;
-            }
-
-            if (contrasena.value == contrasena.value.toLowerCase()) {
-                mensaje.innerHTML = "La contraseña debe tener al menos una letra mayuscula";
-                mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                mensaje.style.display = "block";
-                return;
-            }
-
-            let tieneNumero = false;
-
-            for (let i = 0; i < contrasena.value.length; i++) {
-                if (contrasena.value[i] >= "0" && contrasena.value[i] <= "9") {
-                    tieneNumero = true;
-                }
-            }
-
-            if (tieneNumero == false) {
-                mensaje.innerHTML = "La contraseña debe tener al menos un número";
-                mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                mensaje.style.display = "block";
-                return;
-            }
-        }
-
-        // Validar que la hora de entrada no sea despues de la hora de salida
-        let diasSwitches = document.querySelectorAll(".switch-dia");
-
-        for (let i = 0; i < diasSwitches.length; i++) {
-            let sw = diasSwitches[i];
-            let dia = sw.id.replace("switch", "");
-            let inputAbre = document.getElementById("abre" + dia);
-            let inputCierra = document.getElementById("cierra" + dia);
-
-            if (sw.checked && inputAbre.value != "" && inputCierra.value != "") {
-                if (inputAbre.value >= inputCierra.value) {
-                    mensaje.innerHTML = "El horario de " + dia + " no es válido, la hora de entrada debe ser antes que la de salida";
-                    mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                    mensaje.style.display = "block";
-                    return;
-                }
-            }
-        }
-
-        mensaje.innerHTML = "Perfil actualizado correctamente";
-        mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-        mensaje.style.display = "block";
-        console.log("Perfil actualizado correctamente");
-
-        setTimeout(function () {
-            mensaje.style.display = "none";
-        }, 5000);
-    });
-
-});
-
-// Maximo de donaciones para mostrar
-document.addEventListener("DOMContentLoaded", function () {
-
-    let cuerpoTabla = document.getElementById("cuerpoTabla");
-    if (!cuerpoTabla) { 
-        return;
-     }
-
-    let todasLasFilas = cuerpoTabla.querySelectorAll("tr");
-    let paginaActual = 1;
-
-    function mostrarPagina(pagina) {
-        paginaActual = pagina;
-
-        for (let i = 0; i < todasLasFilas.length; i++) {
-            if (i >= 0 && i <= 9 && paginaActual == 1) {
-                todasLasFilas[i].style.display = "";
-            } else if (i >= 10 && paginaActual == 2) {
-                todasLasFilas[i].style.display = "";
+    
+    let formPerfilRestaurante = $('#formPerfilRestaurante');
+    if (formPerfilRestaurante.length) {
+        
+        $('.switch-dia').on('change', function() {
+            let dia = $(this).attr('id').replace('switch', '');
+            let inputAbre = $('#abre' + dia);
+            let inputCierra = $('#cierra' + dia);
+            let labelEstado = $('#estado' + dia);
+            
+            if ($(this).is(':checked')) {
+                inputAbre.prop('disabled', false);
+                inputCierra.prop('disabled', false);
+                labelEstado.html('Abierto');
             } else {
-                todasLasFilas[i].style.display = "none";
+                inputAbre.prop('disabled', true).val('');
+                inputCierra.prop('disabled', true).val('');
+                labelEstado.html('Cerrado');
             }
-        }
-
-        if (paginaActual == 1) {
-            document.getElementById("paginacionInfo").innerHTML = "Mostrando 1-10 de " + todasLasFilas.length + " donaciones";
-        }
-        if (paginaActual == 2) {
-            document.getElementById("paginacionInfo").innerHTML = "Mostrando 11-" + todasLasFilas.length + " de " + todasLasFilas.length + " donaciones";
-        }
+        });
+        
+        formPerfilRestaurante.on('submit', function(e) {
+            e.preventDefault();
+            
+            let data = {
+                option: 'guardar_perfil_restaurante',
+                nombre_negocio: $('#nombre_negocio').val(),
+                tipo_establecimiento: $('#tipo_establecimiento').val(),
+                cedula_juridica: $('#cedula_juridica').val(),
+                telefono: $('#telefono').val(),
+                provincia: $('#provincia').val(),
+                canton: $('#canton').val(),
+                distrito: $('#distrito').val(),
+                direccion_exacta: $('#direccion_exacta').val(),
+                link_maps: $('#link_maps').val(),
+                correo: $('#correo').val(),
+                contrasena: $('#contrasena').val()
+            };
+            
+            // Agregar horarios
+            let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+            for (let i = 0; i < dias.length; i++) {
+                let dia = dias[i];
+                let sw = $('#switch' + dia);
+                if (sw.length && sw.is(':checked')) {
+                    data['switch' + dia] = 'on';
+                    data['abre' + dia] = $('#abre' + dia).val();
+                    data['cierra' + dia] = $('#cierra' + dia).val();
+                }
+            }
+            
+            $.post('index.php', data, function(response) {
+                let mensaje = $('#mensaje');
+                if (response.response === '00') {
+                    mensaje.html(response.message).css('background-color', 'rgba(65, 201, 7, 0.8)').show();
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    mensaje.html(response.message).css('background-color', 'rgba(149, 24, 24, 0.758)').show();
+                }
+            }, 'json');
+        });
     }
-
-    mostrarPagina(1);
-
-    document.getElementById("btnAnterior").addEventListener("click", function () {
-        if (paginaActual > 1) {
-            mostrarPagina(paginaActual - 1);
+    
+    let btnEliminarPerfil = $('#btnEliminarPerfil');
+    if (btnEliminarPerfil.length) {
+        btnEliminarPerfil.on('click', function() {
+            if (confirm('¿Estás completamente seguro de eliminar tu cuenta? Esta acción NO se puede deshacer y perderás todas tus donaciones y datos.')) {
+                $.post('index.php', {
+                    option: 'eliminar_cuenta_restaurante'
+                }, function(response) {
+                    if (response.response === '00') {
+                        alert('Tu cuenta ha sido eliminada. Gracias por haber sido parte de AlimenTICO.');
+                        window.location.href = 'index.php?page=login';
+                    } else {
+                        alert(response.message);
+                    }
+                }, 'json');
+            }
+        });
+    }
+    
+    $(document).on('click', '.btn-eliminar-donacion', function() {
+        let id = $(this).data('id');
+        let nombre = $(this).data('nombre');
+        
+        if (confirm('¿Estás seguro de eliminar la donación "' + nombre + '"? Esta acción no se puede deshacer.')) {
+            $.post('index.php', {
+                option: 'eliminar_donacion',
+                id_donacion: id
+            }, function(response) {
+                let mensaje = $('#mensaje');
+                if (response.response === '00') {
+                    mensaje.html(response.message).css('background-color', 'rgba(65, 201, 7, 0.8)').show();
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+                } else {
+                    mensaje.html(response.message).css('background-color', 'rgba(149, 24, 24, 0.758)').show();
+                }
+            }, 'json');
         }
     });
-
-    document.getElementById("btnSiguiente").addEventListener("click", function () {
-        if (paginaActual < 2) {
-            mostrarPagina(paginaActual + 1);
-        }
-    });
-
-    document.getElementById("btn1").addEventListener("click", function () {
-        mostrarPagina(1);
-    });
-
-    document.getElementById("btn2").addEventListener("click", function () {
-        mostrarPagina(2);
-    });
-
+    
+    let filtroEstado = $('#filtroEstado');
+    if (filtroEstado.length) {
+        filtroEstado.on('change', function() {
+            let estado = $(this).val();
+            $('#cuerpoTabla tr').each(function() {
+                if (estado === '' || $(this).data('estado') === estado) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    }
+    
+    let inputBuscar = $('#inputBuscar');
+    if (inputBuscar.length) {
+        inputBuscar.on('keyup', function() {
+            let texto = $(this).val().toLowerCase();
+            $('#cuerpoTabla tr').each(function() {
+                let nombre = $(this).find('td:first').text().toLowerCase();
+                if (nombre.includes(texto)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    }
 });

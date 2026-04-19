@@ -1,250 +1,189 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlimentTICO - Mis Donaciones</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>AlimenTICO - Mis Donaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/sc502-ln-proyecto-grupo4-ln-2026/public/css/restaurante.css">
-    <script src="public/js/restaurante.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/sc502-ln-proyecto-grupo4-ln-2026/public/js/restaurante.js" defer></script>
 </head>
-
 <body>
 
-    <button class="btn-sidebar" id="btnSidebar">☰</button>
+<button class="btn-sidebar" id="btnSidebar">☰</button>
 
-    <div class="layout">
+<div class="layout">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top">
+            <h2 class="logo-texto">AlimenTICO <img src="/sc502-ln-proyecto-grupo4-ln-2026/public/img/donacion-de-alimentos.png" alt="logo" height="40px"></h2>
+            <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.php?page=restaurante_panel" class="sidebar-link">Panel Principal</a>
+            <a href="index.php?page=restaurante_donaciones" class="sidebar-link activo">Donaciones</a>
+            <a href="index.php?page=restaurante_perfil" class="sidebar-link">Perfil</a>
+            <a href="index.php?page=logout" class="sidebar-link">Cerrar Sesión</a>
+        </nav>
+    </aside>
 
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-top">
-                <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px">
-                </h2>
-                <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
+    <main class="panel-contenido">
+        <h1 class="titulo-panel">Mis Donaciones</h1>
+        <a href="index.php?page=restaurante_nueva_donacion" class="btn-volver">+ Donar</a>
+
+        <h5 class="seccion-titulo seccion-titulo-mt">ADMINISTRA TUS PUBLICACIONES:</h5>
+
+        <div class="estadisticas">
+            <div class="estadistica-card">
+                <p>Disponibles</p>
+                <strong><?= $estadisticas['disponibles'] ?? 0 ?></strong>
             </div>
-            <nav class="sidebar-nav">
-                <a href="restaurante-panel.html" class="sidebar-link">Panel Principal</a>
-                <a href="restaurante-donaciones.html" class="sidebar-link activo">Donaciones</a>
-                <a href="restaurante-perfil.html" class="sidebar-link">Perfil</a>
-                <a href="../html/login.html" class="sidebar-link">Cerrar Sesión</a>
-            </nav>
-        </aside>
-
-        <main class="panel-contenido">
-
-            <h1 class="titulo-panel">Mis Donaciones</h1>
-
-            <a href="restaurante-nueva-donacion.html" class="btn-volver">+ Donar</a>
-
-            <h5 class="seccion-titulo seccion-titulo-mt">ADMINISTRA TUS PUBLICACIONES:</h5>
-
-            <div class="estadisticas">
-                <div class="estadistica-card">
-                    <p>Disponibles</p>
-                    <strong>45</strong>
-                </div>
-                <div class="estadistica-card">
-                    <p>Reservadas</p>
-                    <strong>15</strong>
-                </div>
-                <div class="estadistica-card">
-                    <p>Historial</p>
-                    <strong>225</strong>
-                </div>
+            <div class="estadistica-card">
+                <p>Reservadas</p>
+                <strong><?= $estadisticas['reservados'] ?? 0 ?></strong>
             </div>
+            <div class="estadistica-card">
+                <p>Completadas</p>
+                <strong><?= $estadisticas['agotados'] ?? 0 ?></strong>
+            </div>
+            <div class="estadistica-card">
+                <p>Total</p>
+                <strong><?= $estadisticas['total'] ?? 0 ?></strong>
+            </div>
+        </div>
 
-            <div class="donaciones-filtros">
-                <div class="donaciones-buscar">
-                    <label class="label-campo">Buscar:</label>
-                    <div class="buscar-input-contenedor">
-                        <input type="text" class="campo-input buscar-input" id="inputBuscar"
-                            placeholder="Buscar donación...">
-                        <span class="buscar-icono"><i class="bi bi-search"></i></span>
-                    </div>
-                </div>
-                <div class="donaciones-filtrar">
-                    <label class="label-campo">Filtrar:</label>
-                    <div>
-                        <select class="campo-input filtro-select" id="filtroTipo">
-                            <option value="">Tipo de alimento</option>
-                            <option value="Comida Preparada">Comida Preparada</option>
-                            <option value="Panadería">Panadería</option>
-                            <option value="Frutas">Frutas</option>
-                            <option value="Verduras">Verduras</option>
-                            <option value="Lácteos">Lácteos</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                        <select class="campo-input filtro-select" id="filtroEstado">
-                            <option value="">Estado</option>
-                            <option value="Disponible">Disponible</option>
-                            <option value="Reservado">Reservado</option>
-                            <option value="Agotado">Agotado</option>
-                        </select>
-                    </div>
+        <div class="donaciones-filtros">
+            <div class="donaciones-buscar">
+                <label class="label-campo">Buscar:</label>
+                <div class="buscar-input-contenedor">
+                    <input type="text" class="campo-input buscar-input" id="inputBuscar" placeholder="Buscar donación...">
+                    <span class="buscar-icono"><i class="bi bi-search"></i></span>
                 </div>
             </div>
-
-            <h5 class="seccion-titulo">TABLA DE DONACIONES:</h5>
-
-            <table class="table table-bordered tabla-panel" id="tablaDonaciones">
-                <thead>
-                    <tr>
-                        <th>Alimento</th>
-                        <th>Cantidad</th>
-                        <th>Hora Límite</th>
-                        <th>Fecha</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody id="cuerpoTabla">
-                    <tr>
-                        <td>Pizza</td>
-                        <td>6 porciones</td>
-                        <td>8:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Pan Dulce</td>
-                        <td>10 Unidades</td>
-                        <td>7:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Ensalada</td>
-                        <td>8 unidades</td>
-                        <td>7:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Pollo</td>
-                        <td>4 kg</td>
-                        <td>9:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Arroz con Pollo</td>
-                        <td>5 porciones</td>
-                        <td>6:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Sopa</td>
-                        <td>3 litros</td>
-                        <td>5:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Tamales</td>
-                        <td>12 unidades</td>
-                        <td>8:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Gallo Pinto</td>
-                        <td>8 porciones</td>
-                        <td>9:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Casado</td>
-                        <td>6 porciones</td>
-                        <td>7:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Empanadas</td>
-                        <td>20 unidades</td>
-                        <td>6:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Pasta</td>
-                        <td>4 porciones</td>
-                        <td>8:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Torta</td>
-                        <td>1 unidad</td>
-                        <td>5:30 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                    <tr>
-                        <td>Galletas</td>
-                        <td>3 paquetes</td>
-                        <td>9:00 PM</td>
-                        <td>29/10/2026</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html" 
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <a href="restaurante-editar-donacion.html"
-                                class="btn-tabla"><i class="bi bi-pencil-square"></i></a><button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="paginacion" id="paginacion">
-                <p class="paginacion-info" id="paginacionInfo"></p>
+            <div class="donaciones-filtrar">
+                <label class="label-campo">Filtrar:</label>
                 <div>
-                    <button class="btn-pagina" id="btnAnterior"><i class="bi bi-arrow-left-square-fill"></i></button>
-                    <button class="btn-pagina" id="btn1">1</button>
-                    <button class="btn-pagina" id="btn2">2</button>
-                    <button class="btn-pagina" id="btnSiguiente"><i class="bi bi-arrow-right-square-fill"></i></button>
+                    <select class="campo-input filtro-select" id="filtroEstado">
+                        <option value="">Todos los estados</option>
+                        <option value="disponible">Disponible</option>
+                        <option value="reservado">Reservado</option>
+                        <option value="agotado">Agotado</option>
+                    </select>
                 </div>
             </div>
+        </div>
 
-        </main>
-    </div>
+        <h5 class="seccion-titulo">TABLA DE DONACIONES:</h5>
+
+        <table class="table table-bordered tabla-panel" id="tablaDonaciones">
+            <thead>
+                <tr>
+                    <th>Alimento</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                    <th>Hora Límite</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla">
+                <?php if (empty($donaciones)): ?>
+                    <tr><td colspan="6" class="text-center">No hay donaciones registradas</td></tr>
+                <?php else: ?>
+                    <?php foreach ($donaciones as $d): ?>
+                    <tr data-estado="<?= $d['estado'] ?>">
+                        <td><?= htmlspecialchars($d['nombre_descripcion']) ?></td>
+                        <td><?= htmlspecialchars($d['cantidad']) ?></td>
+                        <td><?= date('d/m/Y', strtotime($d['fecha_disponible'])) ?></td>
+                        <td><?= date('g:i A', strtotime($d['hora_limite'])) ?></td>
+                        <td class="celda-estado">
+                            <?php if ($d['estado'] == 'disponible'): ?>
+                                <span class="badge bg-success">Disponible</span>
+                            <?php elseif ($d['estado'] == 'reservado'): ?>
+                                <span class="badge bg-warning">Reservado</span>
+                            <?php else: ?>
+                                <span class="badge bg-secondary">Agotado</span>
+                            <?php endif; ?>
+                        </td>
+                        <td class="celda-estado">
+                            <a href="index.php?page=restaurante_detalle_donacion&id=<?= $d['id_donacion'] ?>" class="btn-tabla" title="Ver detalle">
+                                <i class="bi bi-info-square-fill"></i>
+                            </a>
+                            <?php if ($d['estado'] != 'reservado'): ?>
+                                <a href="index.php?page=restaurante_editar_donacion&id=<?= $d['id_donacion'] ?>" class="btn-tabla" title="Editar">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <button class="btn-tabla btn-eliminar-donacion" data-id="<?= $d['id_donacion'] ?>" data-nombre="<?= htmlspecialchars($d['nombre_descripcion']) ?>" title="Eliminar">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            <?php else: ?>
+                                <button class="btn-tabla" disabled title="No se puede editar/eliminar (está reservado)">
+                                    <i class="bi bi-pencil-square" style="opacity:0.5"></i>
+                                </button>
+                                <button class="btn-tabla" disabled title="No se puede eliminar (está reservado)">
+                                    <i class="bi bi-trash-fill" style="opacity:0.5"></i>
+                                </button>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+
+        <div id="mensaje" style="display:none;"></div>
+    </main>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#filtroEstado').on('change', function() {
+        var estado = $(this).val();
+        $('#cuerpoTabla tr').each(function() {
+            if (estado === '' || $(this).data('estado') === estado) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
+    $('#inputBuscar').on('keyup', function() {
+        var texto = $(this).val().toLowerCase();
+        $('#cuerpoTabla tr').each(function() {
+            var nombre = $(this).find('td:first').text().toLowerCase();
+            if (nombre.includes(texto)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
+    // Eliminar donación
+    $('.btn-eliminar-donacion').on('click', function() {
+        var id = $(this).data('id');
+        var nombre = $(this).data('nombre');
+        
+        if (confirm('¿Estás seguro de eliminar la donación "' + nombre + '"? Esta acción no se puede deshacer.')) {
+            $.post('index.php', {
+                option: 'eliminar_donacion',
+                id_donacion: id
+            }, function(data) {
+                if (data.response === '00') {
+                    $('#mensaje').html(data.message).css('background-color', 'rgba(65, 201, 7, 0.8)').show();
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+                } else {
+                    $('#mensaje').html(data.message).css('background-color', 'rgba(149, 24, 24, 0.758)').show();
+                }
+            }, 'json');
+        }
+    });
+});
+</script>
 
 </body>
-
 </html>

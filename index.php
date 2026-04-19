@@ -18,10 +18,8 @@ function verificarSesion($rolRequerido = null) {
     }
 }
 
-
 $page = $_GET['page'] ?? 'login';
 
-// RUTAS POST 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $option = $_POST['option'] ?? '';
@@ -96,13 +94,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ctrl->eliminarCuenta();
         exit;
     }
+
+    if ($option === 'crear_donacion') {
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->crearDonacion();
+        exit;
+    }
+
+    if ($option === 'editar_donacion') {
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->editarDonacion();
+        exit;
+    }
+
+    if ($option === 'eliminar_donacion') {
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->eliminarDonacion();
+        exit;
+    }
+
+    if ($option === 'confirmar_entrega') {
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->confirmarEntrega();
+        exit;
+    }
+
+    if ($option === 'guardar_perfil_restaurante') {
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->guardarPerfil();
+        exit;
+    }
+
+    if ($option === 'eliminar_cuenta_restaurante') {
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->eliminarCuenta();
+        exit;
+    }
 }
 
-// RUTAS GET / VISTAS
-switch ($page) {
+ switch ($page) {
+  case 'inicio':
+         require __DIR__ . '/app/views/sesion/index.php';
+         break;
 
-    case 'inicio':
-        require __DIR__ . '/app/views/sesion/index.php';
+    case 'login':
+        $ctrl = new SesionController();
+        $ctrl->showLogin();
         break;
 
     case 'registro_beneficiario':
@@ -120,9 +163,20 @@ switch ($page) {
         $ctrl->showRecuperar();
         break;
 
+    case 'nueva_contrasena':
+        $ctrl = new SesionController();
+        $ctrl->showNuevaContrasena();
+        break;
+
     case 'logout':
         $ctrl = new SesionController();
         $ctrl->logout();
+        break;
+
+    case 'admin_panel':
+        verificarSesion('admin');
+        $ctrl = new AdminController();
+        $ctrl->showPanel();
         break;
 
     case 'restaurante_panel':
@@ -131,21 +185,40 @@ switch ($page) {
         $ctrl->showPanel();
         break;
 
+    case 'restaurante_donaciones':
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->showDonaciones();
+        break;
+
+    case 'restaurante_nueva_donacion':
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->showNuevaDonacion();
+        break;
+
+    case 'restaurante_editar_donacion':
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->showEditarDonacion();
+        break;
+
+    case 'restaurante_detalle_donacion':
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->showDetalleDonacion();
+        break;
+
+    case 'restaurante_perfil':
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->showPerfil();
+        break;
+
     case 'beneficiario_panel':
         verificarSesion('beneficiario');
         $ctrl = new BeneficiarioController();
         $ctrl->showPanel();
-        break;
-
-    case 'admin_panel':
-        verificarSesion('admin');
-        $ctrl = new AdminController();
-        $ctrl->showPanel();
-        break;
-    
-    case 'nueva_contrasena':
-        $ctrl = new SesionController();
-        $ctrl->showNuevaContrasena();
         break;
 
     case 'beneficiario_detalle':
@@ -166,10 +239,9 @@ switch ($page) {
         $ctrl->showPerfil();
         break;
 
-    case 'login':
     default:
         $ctrl = new SesionController();
         $ctrl->showLogin();
-        break;       
-
+        break;
 }
+?>
