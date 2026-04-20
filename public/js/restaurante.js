@@ -238,3 +238,38 @@ $(document).ready(function() {
         });
     }
 });
+
+$(document).on('click', '.btn-completar-donacion', function() {
+    let id     = $(this).data('id');
+    let nombre = $(this).data('nombre');
+    let fila   = $(this).closest('tr');
+
+    if (confirm('¿Marcar "' + nombre + '" como completada?')) {
+        fetch('/sc502-ln-proyecto-grupo4-ln-2026/index.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ option: 'completar_donacion', id_donacion: id }).toString(),
+            credentials: 'include'
+        })
+        .then(r => r.json())
+        .then(function(response) {
+            let mensaje = $('#mensaje');
+            if (response.response === '00') {
+                fila.attr('data-estado', 'completado');
+                fila.find('.badge').removeClass('bg-warning').addClass('bg-primary').html('Completado');
+                fila.find('.btn-completar-donacion').closest('td').html(
+                    '<a href="index.php?page=restaurante_detalle_donacion&id=' + id + '" class="btn-tabla"><i class="bi bi-info-square-fill"></i></a>' +
+                    '<button class="btn-tabla" disabled><i class="bi bi-pencil-square" style="opacity:0.5"></i></button>' +
+                    '<button class="btn-tabla" disabled><i class="bi bi-trash-fill" style="opacity:0.5"></i></button>'
+                );
+                mensaje.html(response.message).css('background-color', 'rgba(65, 201, 7, 0.8)').show();
+                setTimeout(function() { mensaje.hide(); }, 3000);
+            } else {
+                mensaje.html(response.message).css('background-color', 'rgba(149, 24, 24, 0.758)').show();
+            }
+        })
+        .catch(function() {
+            $('#mensaje').html('Error de conexión').css('background-color', 'rgba(149, 24, 24, 0.758)').show();
+        });
+    }
+});

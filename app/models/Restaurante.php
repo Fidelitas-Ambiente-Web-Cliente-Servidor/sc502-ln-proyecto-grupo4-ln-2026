@@ -232,12 +232,13 @@ class Restaurante
     public function getEstadisticas($id_restaurante)
     {
         $query = "SELECT 
-                    SUM(CASE WHEN estado = 'disponible' THEN 1 ELSE 0 END) as disponibles,
-                    SUM(CASE WHEN estado = 'reservado' THEN 1 ELSE 0 END) as reservados,
-                    SUM(CASE WHEN estado = 'agotado' THEN 1 ELSE 0 END) as agotados,
-                    COUNT(*) as total
-                  FROM donacionProyecto 
-                  WHERE id_restaurante = ?";
+                SUM(CASE WHEN estado = 'disponible' THEN 1 ELSE 0 END) as disponibles,
+                SUM(CASE WHEN estado = 'reservado' THEN 1 ELSE 0 END) as reservados,
+                SUM(CASE WHEN estado = 'agotado' THEN 1 ELSE 0 END) as agotados,
+                SUM(CASE WHEN estado = 'completado' THEN 1 ELSE 0 END) as completados,
+                COUNT(*) as total
+              FROM donacionProyecto 
+              WHERE id_restaurante = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("i", $id_restaurante);
         $stmt->execute();
@@ -248,8 +249,20 @@ class Restaurante
             'disponibles' => $stats['disponibles'] ?? 0,
             'reservados' => $stats['reservados'] ?? 0,
             'agotados' => $stats['agotados'] ?? 0,
+            'completados' => $stats['completados'] ?? 0,
             'total' => $stats['total'] ?? 0
         ];
+    }
+
+    public function completarDonacion($id_donacion, $id_restaurante)
+    {
+        $query = "UPDATE donacionProyecto SET estado = 'completado'
+              WHERE id_donacion = ? AND id_restaurante = ? 
+              AND estado IN ('reservado', 'agotado')";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $id_donacion, $id_restaurante);
+        $stmt->execute();
+        return $stmt->affected_rows > 0;
     }
 
     public function getReservasByRestaurante($id_restaurante)

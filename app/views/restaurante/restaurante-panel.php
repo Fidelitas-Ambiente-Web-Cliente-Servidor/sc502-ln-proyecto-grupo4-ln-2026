@@ -43,8 +43,8 @@
                 <strong><?= $estadisticas['reservados'] ?? 0 ?></strong>
             </div>
             <div class="estadistica-card">
-                <p>Donaciones Completadas</p>
-                <strong><?= $estadisticas['agotados'] ?? 0 ?></strong>
+                <p>Completadas</p>
+                <strong><?= $estadisticas['completados'] ?? 0 ?></strong>
             </div>
             <div class="estadistica-card">
                 <p>Total Donaciones</p>
@@ -82,8 +82,10 @@
                                     <span class="badge bg-success">Disponible</span>
                                 <?php elseif ($d['estado'] == 'reservado'): ?>
                                     <span class="badge bg-warning">Reservado</span>
-                                <?php else: ?>
+                                <?php elseif ($d['estado'] == 'agotado'): ?>
                                     <span class="badge bg-secondary">Agotado</span>
+                                <?php else: ?>
+                                    <span class="badge bg-primary">Completado</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -99,8 +101,8 @@
             <?php else: ?>
                 <?php foreach ($reservasRecientes as $r): ?>
                 <div class="actividad-item">
-                    <i class="bi bi-person"></i> <strong><?= htmlspecialchars($r['nombre_completo']) ?></strong> 
-                    reservó "<?= htmlspecialchars($r['nombre_descripcion']) ?>" 
+                    <i class="bi bi-person"></i> <strong><?= htmlspecialchars($r['nombre_completo']) ?></strong>
+                    reservó "<?= htmlspecialchars($r['nombre_descripcion']) ?>"
                     - <?= date('d/m/Y H:i', strtotime($r['fecha_reserva'])) ?>
                 </div>
                 <?php endforeach; ?>

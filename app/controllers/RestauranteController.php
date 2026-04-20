@@ -4,20 +4,22 @@ require_once __DIR__ . '/../models/Restaurante.php';
 require_once __DIR__ . '/../models/Usuario.php';
 require_once __DIR__ . '/../models/Donacion.php';
 
-class RestauranteController {
+class RestauranteController
+{
     private $modelRestaurante;
     private $modelUsuario;
     private $modelDonacion;
     private $id_restaurante;
     private $id_usuario;
 
-    public function __construct() {
+    public function __construct()
+    {
         $database = new Database();
         $db = $database->connect();
         $this->modelRestaurante = new Restaurante($db);
         $this->modelUsuario = new Usuario($db);
         $this->modelDonacion = new Donacion($db);
-        
+
         if (isset($_SESSION['id_usuario'])) {
             $this->id_usuario = $_SESSION['id_usuario'];
             $perfil = $this->modelRestaurante->getPerfilByIdUsuario($this->id_usuario);
@@ -26,48 +28,53 @@ class RestauranteController {
         }
     }
 
-    
-     public function showPanel() {
+
+    public function showPanel()
+    {
         $estadisticas = $this->modelRestaurante->getEstadisticas($this->id_restaurante);
         $donacionesRecientes = $this->modelRestaurante->getDonacionesByRestaurante($this->id_restaurante);
         $donacionesRecientes = array_slice($donacionesRecientes, 0, 5);
         $reservasRecientes = $this->modelRestaurante->getReservasByRestaurante($this->id_restaurante);
         $reservasRecientes = array_slice($reservasRecientes, 0, 5);
-        
-         require __DIR__ . '/../views/restaurante/restaurante-panel.php';
-     }
-    
-    public function showDonaciones() {
+
+        require __DIR__ . '/../views/restaurante/restaurante-panel.php';
+    }
+
+    public function showDonaciones()
+    {
         $donaciones = $this->modelRestaurante->getDonacionesByRestaurante($this->id_restaurante);
         $estadisticas = $this->modelRestaurante->getEstadisticas($this->id_restaurante);
         require __DIR__ . '/../views/restaurante/restaurante-donaciones.php';
     }
-    
-    public function showNuevaDonacion() {
+
+    public function showNuevaDonacion()
+    {
         require __DIR__ . '/../views/restaurante/restaurante-nueva-donacion.php';
     }
-    
-    public function showEditarDonacion() {
+
+    public function showEditarDonacion()
+    {
         $id_donacion = $_GET['id'] ?? 0;
         $donacion = $this->modelRestaurante->getDonacionById($id_donacion, $this->id_restaurante);
-        
+
         if (!$donacion) {
             header('Location: index.php?page=restaurante_donaciones');
             exit;
         }
-        
+
         require __DIR__ . '/../views/restaurante/restaurante-editar-donacion.php';
     }
-    
-    public function showDetalleDonacion() {
+
+    public function showDetalleDonacion()
+    {
         $id_donacion = $_GET['id'] ?? 0;
         $donacion = $this->modelRestaurante->getDonacionById($id_donacion, $this->id_restaurante);
-        
+
         if (!$donacion) {
             header('Location: index.php?page=restaurante_donaciones');
             exit;
         }
-        
+
         $reserva = null;
         if ($donacion['estado'] === 'reservado') {
             $reservas = $this->modelRestaurante->getReservasByRestaurante($this->id_restaurante);
@@ -78,25 +85,27 @@ class RestauranteController {
                 }
             }
         }
-        
+
         require __DIR__ . '/../views/restaurante/restaurante-detalle-donacion.php';
     }
-    
-    public function showPerfil() {
+
+    public function showPerfil()
+    {
         $perfil = $this->modelRestaurante->getPerfilByIdUsuario($this->id_usuario);
         $horarios = $this->modelRestaurante->getHorarios($this->id_restaurante);
-        
+
         $horariosPorDia = [];
         foreach ($horarios as $h) {
             $horariosPorDia[$h['dia']] = $h;
         }
-        
+
         require __DIR__ . '/../views/restaurante/restaurante-perfil.php';
     }
-        
-    public function crearDonacion() {
+
+    public function crearDonacion()
+    {
         header('Content-Type: application/json');
-        
+
         $datos = [
             'tipo_alimento' => $_POST['tipo_alimento'] ?? '',
             'nombre_descripcion' => $_POST['nombre_descripcion'] ?? '',
@@ -106,34 +115,37 @@ class RestauranteController {
             'fecha_disponible' => $_POST['fecha_disponible'] ?? '',
             'hora_limite' => $_POST['hora_limite'] ?? ''
         ];
-        
-        if (empty($datos['tipo_alimento']) || empty($datos['nombre_descripcion']) || 
-            empty($datos['cantidad']) || empty($datos['fecha_disponible']) || 
-            empty($datos['hora_limite'])) {
+
+        if (
+            empty($datos['tipo_alimento']) || empty($datos['nombre_descripcion']) ||
+            empty($datos['cantidad']) || empty($datos['fecha_disponible']) ||
+            empty($datos['hora_limite'])
+        ) {
             echo json_encode(['response' => '01', 'message' => 'Todos los campos obligatorios deben estar llenos']);
             return;
         }
-        
+
         $hoy = date('Y-m-d');
         if ($datos['fecha_disponible'] < $hoy) {
             echo json_encode(['response' => '01', 'message' => 'La fecha no puede ser anterior a hoy']);
             return;
         }
-        
+
         $ok = $this->modelRestaurante->crearDonacion($this->id_restaurante, $datos);
-        
+
         if ($ok) {
             echo json_encode(['response' => '00', 'message' => 'Donación creada exitosamente']);
         } else {
             echo json_encode(['response' => '01', 'message' => 'Error al crear la donación']);
         }
     }
-    
-    public function editarDonacion() {
+
+    public function editarDonacion()
+    {
         header('Content-Type: application/json');
-        
+
         $id_donacion = $_POST['id_donacion'] ?? 0;
-        
+
         $datos = [
             'tipo_alimento' => $_POST['tipo_alimento'] ?? '',
             'nombre_descripcion' => $_POST['nombre_descripcion'] ?? '',
@@ -144,54 +156,59 @@ class RestauranteController {
             'hora_limite' => $_POST['hora_limite'] ?? '',
             'estado' => $_POST['estado'] ?? 'disponible'
         ];
-        
-        if (empty($datos['tipo_alimento']) || empty($datos['nombre_descripcion']) || 
-            empty($datos['cantidad']) || empty($datos['fecha_disponible']) || 
-            empty($datos['hora_limite'])) {
+
+        if (
+            empty($datos['tipo_alimento']) || empty($datos['nombre_descripcion']) ||
+            empty($datos['cantidad']) || empty($datos['fecha_disponible']) ||
+            empty($datos['hora_limite'])
+        ) {
             echo json_encode(['response' => '01', 'message' => 'Todos los campos obligatorios deben estar llenos']);
             return;
         }
-        
+
         $ok = $this->modelRestaurante->actualizarDonacion($id_donacion, $this->id_restaurante, $datos);
-        
+
         if ($ok) {
             echo json_encode(['response' => '00', 'message' => 'Donación actualizada exitosamente']);
         } else {
             echo json_encode(['response' => '01', 'message' => 'Error al actualizar la donación']);
         }
     }
-    
-    public function eliminarDonacion() {
+
+    public function eliminarDonacion()
+    {
         header('Content-Type: application/json');
-        
+
         $id_donacion = $_POST['id_donacion'] ?? 0;
-        
+
         $ok = $this->modelRestaurante->eliminarDonacion($id_donacion, $this->id_restaurante);
-        
+
         if ($ok) {
             echo json_encode(['response' => '00', 'message' => 'Donación eliminada exitosamente']);
         } else {
             echo json_encode(['response' => '01', 'message' => 'No se puede eliminar esta donación (puede estar reservada)']);
         }
     }
-    
-    public function confirmarEntrega() {
+
+    public function confirmarEntrega()
+    {
         header('Content-Type: application/json');
-        
+
         $id_reserva = $_POST['id_reserva'] ?? 0;
-        
+
         $ok = $this->modelRestaurante->confirmarEntrega($id_reserva, $this->id_restaurante);
-        
+
         if ($ok) {
             echo json_encode(['response' => '00', 'message' => 'Entrega confirmada exitosamente']);
         } else {
             echo json_encode(['response' => '01', 'message' => 'Error al confirmar la entrega']);
         }
     }
-    
-    public function guardarPerfil() {
+
+    public function guardarPerfil()
+    {
         header('Content-Type: application/json');
-        
+
         $datos = [
             'nombre_negocio' => $_POST['nombre_negocio'] ?? '',
             'tipo_establecimiento' => $_POST['tipo_establecimiento'] ?? '',
@@ -203,16 +220,18 @@ class RestauranteController {
             'direccion_exacta' => $_POST['direccion_exacta'] ?? '',
             'link_maps' => $_POST['link_maps'] ?? ''
         ];
-        
-        if (empty($datos['nombre_negocio']) || empty($datos['cedula_juridica']) || 
-            empty($datos['telefono']) || empty($datos['canton']) || 
-            empty($datos['distrito']) || empty($datos['direccion_exacta'])) {
+
+        if (
+            empty($datos['nombre_negocio']) || empty($datos['cedula_juridica']) ||
+            empty($datos['telefono']) || empty($datos['canton']) ||
+            empty($datos['distrito']) || empty($datos['direccion_exacta'])
+        ) {
             echo json_encode(['response' => '01', 'message' => 'Todos los campos obligatorios deben estar llenos']);
             return;
         }
-        
+
         $ok = $this->modelRestaurante->actualizarPerfil($this->id_restaurante, $datos);
-        
+
         $dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
         $horarios = [];
         foreach ($dias as $dia) {
@@ -225,29 +244,42 @@ class RestauranteController {
             ];
         }
         $this->modelRestaurante->actualizarHorarios($this->id_restaurante, $horarios);
-        
+
         $correo = $_POST['correo'] ?? '';
         if ($correo != '') {
             $this->modelUsuario->actualizarCorreo($this->id_usuario, $correo);
             $_SESSION['correo'] = $correo;
         }
-        
+
         $contrasena = $_POST['contrasena'] ?? '';
         if ($contrasena != '') {
             $hash = password_hash($contrasena, PASSWORD_DEFAULT);
             $this->modelUsuario->actualizarContrasena($this->id_usuario, $hash);
         }
-        
+
         echo json_encode(['response' => '00', 'message' => 'Perfil actualizado correctamente']);
     }
-    
-    public function eliminarCuenta() {
+
+    public function eliminarCuenta()
+    {
         header('Content-Type: application/json');
-        
+
         $this->modelRestaurante->eliminarCuenta($this->id_restaurante, $this->id_usuario);
         $this->modelUsuario->eliminar($this->id_usuario);
-        
+
         session_destroy();
         echo json_encode(['response' => '00', 'message' => 'Cuenta eliminada correctamente']);
+    }
+
+    public function completarDonacion()
+    {
+        header('Content-Type: application/json');
+        $id_donacion = $_POST['id_donacion'] ?? 0;
+        $ok = $this->modelRestaurante->completarDonacion($id_donacion, $this->id_restaurante);
+        if ($ok) {
+            echo json_encode(['response' => '00', 'message' => 'Donación marcada como completada']);
+        } else {
+            echo json_encode(['response' => '01', 'message' => 'No se pudo completar la donación']);
+        }
     }
 }

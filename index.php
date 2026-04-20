@@ -166,6 +166,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ctrl->eliminarRestauranteAdmin();
         exit;
     }
+
+    if ($option === 'completar_donacion') {
+        verificarSesion('restaurante');
+        $ctrl = new RestauranteController();
+        $ctrl->completarDonacion();
+        exit;
+    }
 }
 
 switch ($page) {

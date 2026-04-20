@@ -95,7 +95,6 @@ INSERT INTO rolProyecto (id_rol, nombre) VALUES
 (1, 'admin'),
 (2, 'restaurante'),
 (3, 'beneficiario');
-
 -- (password: 12345)
 INSERT INTO usuarioProyecto (id_usuario, id_rol, correo, contrasena) VALUES
 (1, 1, 'admin@alimentico.com', '$2y$10$0wkl2VjqQFNw2X5e.f3Lj.fliI7Etwk8r7bNW.OkqtGi31E8M6nRC'),
@@ -180,3 +179,7 @@ INSERT INTO notificacionProyecto (id_usuario, mensaje, fecha) VALUES
 (6, 'Tu reserva RES-003-2025 está activa. Retira en La Casita de Heredia antes de las 21:00.', NOW()),
 (7, 'Tu reserva RES-002-2025 fue confirmada por el restaurante. ¡Ya puedes pasar a retirar!', NOW()),
 (1, 'Resumen del día: 3 donaciones activas, 4 reservas generadas, 0 incidencias reportadas.', NOW());
+
+
+ALTER TABLE donacionProyecto 
+MODIFY COLUMN estado ENUM('disponible','reservado','agotado','completado') DEFAULT 'disponible';
