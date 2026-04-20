@@ -20,7 +20,8 @@ function postData(body) {
     return fetch(URL_BASE, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(body).toString()
+        body: new URLSearchParams(body).toString(),
+        credentials: "include"
     }).then(function (r) { return r.json(); });
 }
 

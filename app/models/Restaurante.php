@@ -371,5 +371,48 @@ class Restaurante {
         
         return true;
     }
+
+    public function contar() {
+    $sql = "SELECT COUNT(*) as total FROM restauranteProyecto";
+    $result = $this->conn->query($sql);
+    return $result->fetch_assoc();
+    }
+
+    public function contarActivos() {
+    $sql = "SELECT COUNT(DISTINCT r.id_restaurante) as total
+            FROM restauranteProyecto r
+            INNER JOIN donacionProyecto d 
+                ON r.id_restaurante = d.id_restaurante";
+
+    $result = $this->conn->query($sql);
+    return $result->fetch_assoc();
+    }
+
+    public function contarInactivos() {
+    $sql = "SELECT COUNT(*) as total
+            FROM restauranteProyecto r
+            LEFT JOIN donacionProyecto d 
+                ON r.id_restaurante = d.id_restaurante
+            WHERE d.id_donacion IS NULL";
+
+    $result = $this->conn->query($sql);
+    return $result->fetch_assoc();
+    }
+
+    public function obtenerTodos() {
+    $sql = "SELECT 
+                r.id_restaurante,
+                r.nombre_negocio,
+                r.tipo_establecimiento,
+                CONCAT(r.provincia, ', ', r.canton) AS ubicacion,
+                COUNT(d.id_donacion) AS total_donaciones
+            FROM restauranteProyecto r
+            LEFT JOIN donacionProyecto d 
+                ON r.id_restaurante = d.id_restaurante
+            GROUP BY r.id_restaurante";
+
+    $result = $this->conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 ?>

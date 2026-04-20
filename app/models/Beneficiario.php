@@ -70,4 +70,46 @@ class Beneficiario
         $stmt->execute();
         return $stmt->affected_rows > 0;
     }
+
+    public function contar() {
+    $sql = "SELECT COUNT(*) as total FROM beneficiarioProyecto";
+    $result = $this->conn->query($sql);
+    return $result->fetch_assoc();
+    }
+
+    public function obtenerTodos() {
+    $query = "SELECT b.*, u.correo,
+              COUNT(r.id_reserva) as total_reservas
+              FROM beneficiarioProyecto b
+              INNER JOIN usuarioProyecto u 
+              ON b.id_usuario = u.id_usuario
+              LEFT JOIN reservaProyecto r 
+              ON b.id_beneficiario = r.id_beneficiario
+              GROUP BY b.id_beneficiario";
+
+    $result = $this->conn->query($query);
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function contarActivos() {
+    $sql = "SELECT COUNT(DISTINCT b.id_beneficiario) as total
+            FROM beneficiarioProyecto b
+            INNER JOIN reservaProyecto r 
+                ON b.id_beneficiario = r.id_beneficiario";
+
+    $result = $this->conn->query($sql);
+    return $result->fetch_assoc();
+    }
+
+    public function contarInactivos() {
+    $sql = "SELECT COUNT(*) as total
+            FROM beneficiarioProyecto b
+            LEFT JOIN reservaProyecto r 
+                ON b.id_beneficiario = r.id_beneficiario
+            WHERE r.id_reserva IS NULL";
+
+    $result = $this->conn->query($sql);
+    return $result->fetch_assoc();
+    }
 }

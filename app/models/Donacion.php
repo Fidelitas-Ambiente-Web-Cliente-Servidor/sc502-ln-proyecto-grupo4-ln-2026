@@ -36,4 +36,10 @@ class Donacion {
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+    public function contar() {
+    $sql = "SELECT COUNT(*) as total FROM donacionProyecto";
+    $result = $this->conn->query($sql);
+    return $result->fetch_assoc();
+    }
 }

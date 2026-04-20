@@ -136,6 +136,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ctrl->eliminarCuenta();
         exit;
     }
+
+    if ($option === 'guardar_perfil_admin') {
+    verificarSesion('admin');
+    $ctrl = new AdminController();
+    $ctrl->actualizarPerfil();
+    exit;
+    }
+
+    if ($option === 'eliminar_admin') {
+    verificarSesion('admin');
+    $ctrl = new AdminController();
+    $ctrl->eliminarPerfil();
+    exit;
+    }
 }
 
  switch ($page) {
@@ -178,6 +192,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ctrl = new AdminController();
         $ctrl->showPanel();
         break;
+
+    case 'admin_beneficiarios':
+        verificarSesion('admin');
+        $ctrl = new AdminController();
+        $ctrl->showBeneficiarios();
+        break;
+
+    case 'admin_restaurantes':
+        verificarSesion('admin');
+        $ctrl = new AdminController();
+        $ctrl->showRestaurantes();
+        break;
+
+    case 'admin_perfil':
+        verificarSesion('admin');
+        $ctrl = new AdminController();
+        $ctrl->showPerfil();
+        break;
+        
 
     case 'restaurante_panel':
         verificarSesion('restaurante');

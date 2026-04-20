@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="sc502-ln-proyecto-grupo4-ln-2026/public/css/restaurante.css">
-    <script src="public/js/admin.js"></script>
+    <link rel="stylesheet" href="/sc502-ln-proyecto-grupo4-ln-2026/public/css/admin.css">
+    <script src="/sc502-ln-proyecto-grupo4-ln-2026/public/js/admin.js" defer></script>
 </head>
 
 <body>
@@ -27,11 +27,11 @@
                 <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
             </div>
             <nav class="sidebar-nav">
-                <a href="admin-panel.html" class="sidebar-link">Panel Principal</a>
-                <a href="admin-beneficiarios.html" class="sidebar-link activo">Donaciones</a>
-                <a href="admin-restaurantes.html" class="sidebar-link">Restaurantes</a>
-                <a href="admin-perfil.html" class="sidebar-link">Perfil</a>
-                <a href="../login.html" class="sidebar-link">Cerrar Sesión</a>
+                <a href="index.php?page=admin_panel" class="sidebar-link activo">Panel Principal</a>
+                <a href="index.php?page=admin_beneficiarios" class="sidebar-link">Beneficiarios</a>
+                <a href="index.php?page=admin_restaurantes" class="sidebar-link">Restaurantes</a>
+                <a href="index.php?page=admin_perfil" class="sidebar-link">Perfil</a>
+                <a href="index.php?page=logout" class="sidebar-link">Cerrar Sesión</a>
             </nav>
         </aside>
 
@@ -44,15 +44,15 @@
             <div class="estadisticas">
                 <div class="estadistica-card">
                     <p>Beneficiarios Totales</p>
-                    <strong>343</strong>
+                    <strong><?= $totalBeneficiarios['total'] ?></strong>
                 </div>
                 <div class="estadistica-card">
                     <p>Beneficiarios Activos</p>
-                    <strong>310</strong>
+                    <strong><?= $totalActivos['total'] ?></strong>
                 </div>
                 <div class="estadistica-card">
                     <p>Beneficiarios Inactivos</p>
-                    <strong>33</strong>
+                    <strong><?= $totalInactivos['total'] ?></strong>
                 </div>
             </div>
 
@@ -63,17 +63,6 @@
                         <input type="text" class="campo-input buscar-input" id="inputBuscar"
                             placeholder="Buscar Beneficiario...">
                         <span class="buscar-icono"><i class="bi bi-search"></i></span>
-                    </div>
-                </div>
-
-                <div class="beneficiarios-filtrar">
-                    <label class="label-campo">Filtrar:</label>
-                    <div>
-                        <select class="campo-input filtro-select" id="filtroTipo">
-                            <option value="">Estado</option>
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
-                        </select>
                     </div>
                 </div>
             </div>
@@ -92,37 +81,19 @@
                 </thead>
 
                 <tbody id="cuerpoTabla">
+                <?php foreach ($beneficiarios as $b): ?>
                     <tr>
-                        <td>Juan Pérez</td>
-                        <td>2822821889</td>
-                        <td>juan@gmail.com</td>
-                        <td>34</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html"
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button></td>
+                        <td><?= $b['nombre_completo'] ?></td>
+                        <td><?= $b['cedula_identidad'] ?></td>
+                        <td><?= $b['correo'] ?></td>
+                        <td><?= $b['total_reservas'] ?></td>
+                        <td class="celda-estado">
+                            <?= $b['estado'] ?? 'Activo' ?>
+                            <button class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
+                        </td>
                     </tr>
-
-                    <tr>
-                        <td>Sofia Vargas</td>
-                        <td>8291281912</td>
-                        <td>sofia@gmail.com</td>
-                        <td>22</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html"
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button></td>
-                    </tr>
-
-                    <tr>
-                        <td>Dayana Vásquez</td>
-                        <td>1129228319</td>
-                        <td>dayana@gmail.com</td>
-                        <td>12</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html"
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button></td>
-                    </tr>
-
-                    </tbody>
+                <?php endforeach; ?>   
+                </tbody>
             </table>
 
             <div class="paginacion" id="paginacion">

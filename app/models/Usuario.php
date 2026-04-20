@@ -101,4 +101,15 @@ class Usuario
         return $stmt->affected_rows;
     }
 
+    public function obtenerPorId($id_usuario) {
+    $sql = "SELECT u.correo, b.nombre_completo, b.cedula_identidad, b.telefono
+            FROM usuarioProyecto u
+            LEFT JOIN beneficiarioProyecto b 
+                ON u.id_usuario = b.id_usuario
+            WHERE u.id_usuario = $id_usuario";
+
+    $result = $this->conn->query($sql);
+    return $result->fetch_assoc();
+}
+
 }

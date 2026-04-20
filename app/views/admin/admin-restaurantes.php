@@ -9,7 +9,7 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/sc502-ln-proyecto-grupo4-ln-2026/public/css/restaurante.css">
-    <script src="public/js/admin.js"></script>
+    <script src="/sc502-ln-proyecto-grupo4-ln-2026/public/js/admin.js" defer></script>
 </head>
 
 <body>
@@ -22,16 +22,16 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-top">
-                <h2 class="logo-texto">AlimenTICO <img src="../img/donacion-de-alimentos.png" alt="logo" height="40px">
+                <h2 class="logo-texto">AlimenTICO <img src="/sc502-ln-proyecto-grupo4-ln-2026/public/img/donacion-de-alimentos.png" alt="logo" height="40px"></h2>
                 </h2>
                 <button class="btn-cerrar-sidebar" id="btnCerrarSidebar">✕</button>
             </div>
             <nav class="sidebar-nav">
-                <a href="admin-panel.html" class="sidebar-link">Panel Principal</a>
-                <a href="admin-beneficiarios.html" class="sidebar-link">Donaciones</a>
-                <a href="admin-restaurantes.html" class="sidebar-link activo">Restaurantes</a>
-                <a href="admin-perfil.html" class="sidebar-link">Perfil</a>
-                <a href="../html/login.html" class="sidebar-link">Cerrar Sesión</a>
+                <a href="index.php?page=admin_panel" class="sidebar-link activo">Panel Principal</a>
+                <a href="index.php?page=admin_beneficiarios" class="sidebar-link">Beneficiarios</a>
+                <a href="index.php?page=admin_restaurantes" class="sidebar-link">Restaurantes</a>
+                <a href="index.php?page=admin_perfil" class="sidebar-link">Perfil</a>
+                <a href="index.php?page=logout" class="sidebar-link">Cerrar Sesión</a>
             </nav>
         </aside>
 
@@ -43,16 +43,16 @@
 
             <div class="estadisticas">
                 <div class="estadistica-card">
-                    <p>Beneficiarios Totales</p>
-                    <strong>56</strong>
+                    <p>Restaurantes Totales</p>
+                    <strong><?= $totalRestaurantes['total'] ?></strong>
                 </div>
                 <div class="estadistica-card">
-                    <p>Beneficiarios Activos</p>
-                    <strong>50</strong>
+                    <p>Restaurantes Activos</p>
+                    <strong><?= $totalActivos['total'] ?></strong>
                 </div>
                 <div class="estadistica-card">
-                    <p>Beneficiarios Inactivos</p>
-                    <strong>6</strong>
+                    <p>Restaurantes Inactivos</p>
+                    <strong><?= $totalInactivos['total'] ?></strong>
                 </div>
             </div>
 
@@ -61,30 +61,8 @@
                     <label class="label-campo">Buscar:</label>
                     <div class="buscar-input-contenedor">
                         <input type="text" class="campo-input buscar-input" id="inputBuscar"
-                            placeholder="Buscar Beneficiario...">
+                            placeholder="Buscar Restaurante...">
                         <span class="buscar-icono"><i class="bi bi-search"></i></span>
-                    </div>
-                </div>
-
-                <div class="beneficiarios-filtrar">
-                    <label class="label-campo">Filtrar:</label>
-                    <div>
-                        <select class="campo-input filtro-select" id="filtroUbicacion">
-                            <option value="">Ubicación</option>
-                            <option value="San José">San José</option>
-                            <option value="Alajuela">Alajuela</option>
-                            <option value="Cartago">Cartago</option>
-                            <option value="Heredia">Heredia</option>
-                            <option value="Guanacaste">Guanacaste</option>
-                            <option value="Puntarenas">Puntarenas</option>
-                            <option value="Limon">Limón</option>
-                            </select>
-
-                            <select class="campo-input filtro-select" id="filtroEstado">
-                                <option value="">Estado</option>
-                                <option value="Activo">Activo</option>
-                                <option value="Inactivo">Inactivo</option>
-                            </select>
                     </div>
                 </div>
             </div>
@@ -103,36 +81,18 @@
                 </thead>
 
                 <tbody id="cuerpoTabla">
+                <?php foreach ($restaurantes as $r): ?>
                     <tr>
-                        <td>La Esquina</td>
-                        <td>Restaurante</td>
-                        <td>Heredia, Centro</td>
-                        <td>123</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html"
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button></td>
+                        <td><?= $r['nombre_negocio'] ?></td>
+                        <td><?= $r['tipo_establecimiento'] ?></td>
+                        <td><?= $r['ubicacion'] ?></td>
+                        <td><?= $r['total_donaciones'] ?></td>
+                        <td class="celda-estado">
+                            <?= $r['total_donaciones'] > 0 ? 'Activo' : 'Inactivo' ?>
+                            <button class="btn-tabla"><i class="bi bi-trash-fill"></i></button>
+                        </td>
                     </tr>
-
-                    <tr>
-                        <td>La Tica</td>
-                        <td>Panadería</td>
-                        <td>San José, Escazú</td>
-                        <td>312</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html"
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button></td>
-                    </tr>
-
-                    <tr>
-                        <td>El Roble</td>
-                        <td>Restaurante</td>
-                        <td>San José, Hatillo</td>
-                        <td>142</td>
-                        <td class="celda-estado">Disponible <a href="restaurante-detalle-donacion.html"
-                                class="btn-tabla"><i class="bi bi-info-square-fill"></i></a> <button
-                                class="btn-tabla"><i class="bi bi-trash-fill"></i></button></td>
-                    </tr>
-
+                <?php endforeach; ?>
                 </tbody>
             </table>
 
