@@ -71,45 +71,58 @@ class Beneficiario
         return $stmt->affected_rows > 0;
     }
 
-    public function contar() {
-    $sql = "SELECT COUNT(*) as total FROM beneficiarioProyecto";
-    $result = $this->conn->query($sql);
-    return $result->fetch_assoc();
+    public function contar()
+    {
+        $sql = "SELECT COUNT(*) as total FROM beneficiarioProyecto";
+        $result = $this->conn->query($sql);
+        return $result->fetch_assoc();
     }
 
-    public function obtenerTodos() {
-    $query = "SELECT b.*, u.correo,
-              COUNT(r.id_reserva) as total_reservas
+    public function obtenerTodos()
+    {
+        $query = "SELECT b.*, u.correo,
+              COUNT(CASE WHEN r.estado = 'activa' THEN 1 END) as reservas_activas
               FROM beneficiarioProyecto b
               INNER JOIN usuarioProyecto u 
               ON b.id_usuario = u.id_usuario
               LEFT JOIN reservaProyecto r 
               ON b.id_beneficiario = r.id_beneficiario
               GROUP BY b.id_beneficiario";
-
-    $result = $this->conn->query($query);
-
-    return $result->fetch_all(MYSQLI_ASSOC);
+        $result = $this->conn->query($query);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function contarActivos() {
-    $sql = "SELECT COUNT(DISTINCT b.id_beneficiario) as total
+    public function contarActivos()
+    {
+        $sql = "SELECT COUNT(DISTINCT b.id_beneficiario) as total
             FROM beneficiarioProyecto b
             INNER JOIN reservaProyecto r 
-                ON b.id_beneficiario = r.id_beneficiario";
-
-    $result = $this->conn->query($sql);
-    return $result->fetch_assoc();
+                ON b.id_beneficiario = r.id_beneficiario
+            WHERE r.estado = 'activa'";
+        $result = $this->conn->query($sql);
+        return $result->fetch_assoc();
     }
 
-    public function contarInactivos() {
-    $sql = "SELECT COUNT(*) as total
+    public function contarInactivos()
+    {
+        $sql = "SELECT COUNT(DISTINCT b.id_beneficiario) as total
             FROM beneficiarioProyecto b
-            LEFT JOIN reservaProyecto r 
-                ON b.id_beneficiario = r.id_beneficiario
-            WHERE r.id_reserva IS NULL";
+            WHERE b.id_beneficiario NOT IN (
+                SELECT DISTINCT id_beneficiario 
+                FROM reservaProyecto 
+                WHERE estado = 'activa'
+            )";
+        $result = $this->conn->query($sql);
+        return $result->fetch_assoc();
+    }
 
-    $result = $this->conn->query($sql);
-    return $result->fetch_assoc();
+    public function getById($id_beneficiario)
+    {
+        $query = "SELECT * FROM beneficiarioProyecto WHERE id_beneficiario = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $id_beneficiario);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 }

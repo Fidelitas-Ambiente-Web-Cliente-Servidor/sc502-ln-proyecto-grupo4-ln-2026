@@ -1,4 +1,4 @@
-console.log("Bienvenidos a AlimentTICO");
+const URL_BASE = "/sc502-ln-proyecto-grupo4-ln-2026/index.php";
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -29,131 +29,75 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Perfil del Administrador
-document.addEventListener("DOMContentLoaded", function () {
+$(function () {
+    let formPerfil = $("#formPerfil");
+    if (!formPerfil.length) { return; }
 
-    let formPerfil = document.getElementById("formPerfil");
-    if (!formPerfil) { return; }
+    let mensaje = $("#mensaje");
+    mensaje.hide();
 
-    let mensaje = document.getElementById("mensaje");
-    mensaje.style.display = "none";
-
-    // Validaciones del formulario del información del perfil
-    formPerfil.addEventListener("submit", function (event) {
+    formPerfil.on("submit", function (event) {
         event.preventDefault();
 
-        let nombreCompleto = document.getElementById("nombreCompleto");
-        let cedulaIdentidad = document.getElementById("cedulaIdentidad");
-        let telefono = document.getElementById("telefono");
-        let correo = document.getElementById("correo");
-        let contrasena = document.getElementById("contrasena");
+        let correo     = $("#correo").val();
+        let contrasena = $("#contrasena").val();
 
-        if (nombreCompleto.value == "") {
-            mensaje.innerHTML = "El nombre completo es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
+        if (correo == "") { mensaje.html("El correo electrónico es obligatorio").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
+        if (!correo.includes("@") || !correo.includes(".")) { mensaje.html("El correo no tiene un formato válido").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
 
-        if (cedulaIdentidad.value == "") {
-            mensaje.innerHTML = "La cédula de identidad es obligatoria";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (telefono.value == "") {
-            mensaje.innerHTML = "El teléfono es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (correo.value == "") {
-            mensaje.innerHTML = "El correo electrónico es obligatorio";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        if (!correo.value.includes("@") || !correo.value.includes(".")) {
-            mensaje.innerHTML = "El correo no tiene un formato válido";
-            mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-            mensaje.style.display = "block";
-            return;
-        }
-
-        // Validar contraseña solo si se quiere cambiar
-        if (contrasena.value != "") {
-
-            if (contrasena.value.length < 8) {
-                mensaje.innerHTML = "La contraseña debe tener al menos 8 caracteres";
-                mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                mensaje.style.display = "block";
-                return;
-            }
-
-            if (contrasena.value == contrasena.value.toLowerCase()) {
-                mensaje.innerHTML = "La contraseña debe tener al menos una letra mayuscula";
-                mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                mensaje.style.display = "block";
-                return;
-            }
+        if (contrasena != "") {
+            if (contrasena.length < 8) { mensaje.html("La contraseña debe tener al menos 8 caracteres").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
+            if (contrasena == contrasena.toLowerCase()) { mensaje.html("La contraseña debe tener al menos una letra mayúscula").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
 
             let tieneNumero = false;
-
-            for (let i = 0; i < contrasena.value.length; i++) {
-                if (contrasena.value[i] >= "0" && contrasena.value[i] <= "9") {
-                    tieneNumero = true;
-                }
+            for (let i = 0; i < contrasena.length; i++) {
+                if (contrasena[i] >= "0" && contrasena[i] <= "9") { tieneNumero = true; }
             }
-
-            if (tieneNumero == false) {
-                mensaje.innerHTML = "La contraseña debe tener al menos un número";
-                mensaje.style.backgroundColor = "rgba(149, 24, 24, 0.758)";
-                mensaje.style.display = "block";
-                return;
-            }
+            if (!tieneNumero) { mensaje.html("La contraseña debe tener al menos un número").css("background-color", "rgba(149, 24, 24, 0.758)").show(); return; }
         }
 
-        mensaje.innerHTML = "Perfil actualizado correctamente";
-        mensaje.style.backgroundColor = "rgba(65, 201, 7, 0.8)";
-        mensaje.style.display = "block";
-        console.log("Perfil actualizado correctamente");
-
-        setTimeout(function () {
-            mensaje.style.display = "none";
-        }, 5000);
+        $.post(URL_BASE,
+            {
+                option:     "guardar_perfil_admin",
+                correo:     correo,
+                contrasena: contrasena
+            },
+            function (data) {
+                if (data.response == "00") {
+                    mensaje.html(data.message).css("background-color", "rgba(65, 201, 7, 0.8)").show();
+                } else {
+                    mensaje.html(data.message).css("background-color", "rgba(149, 24, 24, 0.758)").show();
+                }
+            }, "json"
+        );
     });
-
 });
 
 // Filtro
 document.addEventListener("DOMContentLoaded", function () {
 
-    const inputBuscar = document.getElementById("inputBuscar");
-    const tabla = document.getElementById("tablaBeneficiarios");
+    const inputBuscar  = document.getElementById("inputBuscar");
+    const filtroEstado = document.getElementById("filtroEstado");
+    const tabla        = document.getElementById("tablaBeneficiarios");
 
     if (!inputBuscar || !tabla) return;
 
-    inputBuscar.addEventListener("keyup", function () {
-
-        const texto = inputBuscar.value.toLowerCase();
-        const filas = tabla.querySelectorAll("tbody tr");
+    function filtrar() {
+        const texto  = inputBuscar.value.toLowerCase();
+        const estado = filtroEstado ? filtroEstado.value : "";
+        const filas  = tabla.querySelectorAll("tbody tr");
 
         filas.forEach(fila => {
+            const contenido     = fila.textContent.toLowerCase();
+            const coincideTexto = contenido.includes(texto);
+            const coincideEstado = estado === "" || fila.dataset.estado === estado;
 
-            const contenido = fila.textContent.toLowerCase();
-
-            if (contenido.includes(texto)) {
-                fila.style.display = "";
-            } else {
-                fila.style.display = "none";
-            }
-
+            fila.style.display = (coincideTexto && coincideEstado) ? "" : "none";
         });
+    }
 
-    });
-
+    inputBuscar.addEventListener("keyup", filtrar);
+    if (filtroEstado) filtroEstado.addEventListener("change", filtrar);
 });
 
 
@@ -211,4 +155,60 @@ document.addEventListener("DOMContentLoaded", function () {
         mostrarPagina(2);
     });
 
+});
+
+// Eliminar beneficiario (admin)
+$(document).on("click", ".btn-eliminar-beneficiario", function () {
+    let id     = $(this).data("id");
+    let nombre = $(this).data("nombre");
+    let fila   = $(this).closest("tr");
+
+    if (!confirm('¿Eliminar a "' + nombre + '"? Se cancelarán sus reservas activas y se borrará su cuenta.')) return;
+
+    fetch(URL_BASE, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ option: "eliminar_beneficiario", id_beneficiario: id }).toString(),
+        credentials: "include"
+    })
+    .then(r => r.json())
+    .then(function (data) {
+        let mensaje = $("#mensaje");
+        if (data.response === "00") {
+            fila.remove();
+            mensaje.html(data.message).css("background-color", "rgba(65, 201, 7, 0.8)").show();
+            setTimeout(function () { mensaje.hide(); }, 4000);
+        } else {
+            mensaje.html(data.message).css("background-color", "rgba(149, 24, 24, 0.758)").show();
+        }
+    })
+    .catch(function () { $("#mensaje").html("Error de conexión").show(); });
+});
+
+// Eliminar restaurante (admin)
+$(document).on("click", ".btn-eliminar-restaurante", function () {
+    let id     = $(this).data("id");
+    let nombre = $(this).data("nombre");
+    let fila   = $(this).closest("tr");
+
+    if (!confirm('¿Eliminar "' + nombre + '"? Se eliminaran sus donaciones, reservas y cuenta.')) return;
+
+    fetch(URL_BASE, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ option: "eliminar_restaurante_admin", id_restaurante: id }).toString(),
+        credentials: "include"
+    })
+    .then(r => r.json())
+    .then(function (data) {
+        let mensaje = $("#mensaje");
+        if (data.response === "00") {
+            fila.remove();
+            mensaje.html(data.message).css("background-color", "rgba(65, 201, 7, 0.8)").show();
+            setTimeout(function () { mensaje.hide(); }, 4000);
+        } else {
+            mensaje.html(data.message).css("background-color", "rgba(149, 24, 24, 0.758)").show();
+        }
+    })
+    .catch(function () { $("#mensaje").html("Error de conexión").show(); });
 });

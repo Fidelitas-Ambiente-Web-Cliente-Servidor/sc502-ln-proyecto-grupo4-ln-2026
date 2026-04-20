@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 require_once __DIR__ . '/app/controllers/SesionController.php';
@@ -7,7 +8,8 @@ require_once __DIR__ . '/app/controllers/BeneficiarioController.php';
 require_once __DIR__ . '/app/controllers/AdminController.php';
 
 // Protección de rutas
-function verificarSesion($rolRequerido = null) {
+function verificarSesion($rolRequerido = null)
+{
     if (!isset($_SESSION['id_usuario'])) {
         header('Location: index.php?page=login');
         exit;
@@ -138,24 +140,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($option === 'guardar_perfil_admin') {
-    verificarSesion('admin');
-    $ctrl = new AdminController();
-    $ctrl->actualizarPerfil();
-    exit;
+        verificarSesion('admin');
+        $ctrl = new AdminController();
+        $ctrl->actualizarPerfil();
+        exit;
     }
 
     if ($option === 'eliminar_admin') {
-    verificarSesion('admin');
-    $ctrl = new AdminController();
-    $ctrl->eliminarPerfil();
-    exit;
+        verificarSesion('admin');
+        $ctrl = new AdminController();
+        $ctrl->eliminarPerfil();
+        exit;
+    }
+
+    if ($option === 'eliminar_beneficiario') {
+        verificarSesion('admin');
+        $ctrl = new AdminController();
+        $ctrl->eliminarBeneficiario();
+        exit;
+    }
+
+    if ($option === 'eliminar_restaurante_admin') {
+        verificarSesion('admin');
+        $ctrl = new AdminController();
+        $ctrl->eliminarRestauranteAdmin();
+        exit;
     }
 }
 
- switch ($page) {
-  case 'inicio':
-         require __DIR__ . '/app/views/sesion/index.php';
-         break;
+switch ($page) {
+    case 'inicio':
+        require __DIR__ . '/app/views/sesion/index.php';
+        break;
 
     case 'login':
         $ctrl = new SesionController();
@@ -210,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ctrl = new AdminController();
         $ctrl->showPerfil();
         break;
-        
+
 
     case 'restaurante_panel':
         verificarSesion('restaurante');

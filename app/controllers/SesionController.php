@@ -45,6 +45,7 @@ class SesionController {
     // Acciones POST
 
     public function login() {
+        header('Content-Type: application/json');
         $correo    = $_POST['correo']    ?? '';
         $contrasena = $_POST['contrasena'] ?? '';
 
@@ -105,7 +106,7 @@ class SesionController {
         $ok = $this->modelBeneficiario->crear($id_usuario, $datos);
 
         if ($ok) {
-            
+
             $beneficiario = $this->modelBeneficiario->getByIdUsuario($id_usuario);
 
             // Iniciar sesion automaticamente despues de registrarse
